@@ -1,0 +1,9 @@
+schema {
+    query: Query
+}
+
+# 查询接口
+type Query {
+    # 系统时间
+    systemTime: String!
+}

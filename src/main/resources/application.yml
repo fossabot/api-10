@@ -1,0 +1,8 @@
+server:
+  port: 20000
+graphql:
+  servlet:
+    mapping: /graphql
+# /com/oembedler/moon/graphiql/boot/GraphiQLController.java:17
+graphiql:
+  mapping: /
