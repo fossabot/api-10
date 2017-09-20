@@ -3,3 +3,6 @@ server:
 graphql:
   servlet:
     mapping: /graphql
+spring:
+  application:
+    name: dongfg-api
