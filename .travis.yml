@@ -11,3 +11,6 @@ deploy:
 - provider: script
   skip_cleanup: true
   script: rsync -avzrtopg --delete -e 'ssh -o StrictHostKeyChecking=no -i deploy_key -p ${DEPLOY_PORT}' target/*.jar ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}
+- provider: script
+  skip_cleanup: true
+  script: ssh -o StrictHostKeyChecking=no -i deploy_key -p ${DEPLOY_PORT} ${DEPLOY_USER}@${DEPLOY_HOST} '${PUBLISH_SCRIPT}'
