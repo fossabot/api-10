@@ -1,3 +1,5 @@
+scalar Date
+
 schema {
     query: Query
 }
@@ -6,4 +8,12 @@ schema {
 type Query {
     # 系统时间
     systemTime: String!
+    sslCert(domain: String!): SSLCertificate
+}
+
+
+# SSL 证书信息
+type SSLCertificate {
+    domain: String!
+    expireAt: Date
 }
