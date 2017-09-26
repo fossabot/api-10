@@ -4,6 +4,8 @@ jdk:
 before_install:
 - openssl aes-256-cbc -K $encrypted_96cca6b14f03_key -iv $encrypted_96cca6b14f03_iv -in deploy_key.enc -out deploy_key -d
 script:
+- curl -o $HOME/.m2/settings.xml
+  https://gist.githubusercontent.com/dongfg/482a81e426f0f7ccccaf790be4668ae5/raw/8f58e9563b443137faca56c3019fd15d99f572c1/settings.xml
 - mvn clean package -DskipTests
 after_success:
 - chmod 600 deploy_key
