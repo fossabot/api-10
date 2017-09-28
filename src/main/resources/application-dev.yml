@@ -1,0 +1,13 @@
+server:
+  port: 20000
+spring:
+  application:
+    name: dongfg-api
+  data:
+    mongodb:
+      host: 10.64.90.5
+      port: 27017
+      database: apidb
+graphql:
+  servlet:
+    mapping: /graphql

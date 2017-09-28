@@ -1,8 +1,0 @@
-server:
-  port: 20000
-graphql:
-  servlet:
-    mapping: /graphql
-spring:
-  application:
-    name: dongfg-api
