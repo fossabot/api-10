@@ -1,7 +1,8 @@
 package com.dongfg.project.api.graphql.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.dongfg.project.api.service.MongoService;
+import com.dongfg.project.api.graphql.type.Sms;
+import com.dongfg.project.api.repository.SmsRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +12,13 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class MongoQueryResolver implements GraphQLQueryResolver {
+public class SmsQueryResolver implements GraphQLQueryResolver {
 
     @NonNull
-    private MongoService mongoService;
+    private SmsRepository smsRepository;
 
-    public List<String> collectionNames() {
-        return mongoService.getCollections();
-    }
-
-    public List<String> collectionData(String collectionName) {
-        return mongoService.getCollectionData(collectionName);
+    public List<Sms> getSmsList() {
+        return smsRepository.findAll();
     }
 
 }

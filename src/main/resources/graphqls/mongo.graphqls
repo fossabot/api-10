@@ -1,4 +1,0 @@
-extend type Query {
-    collectionNames: [String]
-    collectionData(collectionName: String!): [String]
-}

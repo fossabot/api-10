@@ -1,0 +1,26 @@
+extend type Query {
+    # 查看所有短信
+    getSmsList: [Sms]
+}
+
+extend type Mutation {
+    # 发送短信
+    sendSms(sms: SmsInput!): Sms!
+}
+
+# 短信
+type Sms {
+    id: String!
+    # 手机号
+    mobile: String!
+    # 内容
+    content: String!
+    createTime: Date!
+}
+
+input SmsInput {
+    # 手机号
+    mobile: String!
+    # 内容
+    content: String!
+}
