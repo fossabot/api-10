@@ -2,6 +2,10 @@ package com.dongfg.project.api.graphql.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.graphql.type.SSLCertificate;
+import com.dongfg.project.api.service.MongoService;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -11,9 +15,15 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class Query implements GraphQLQueryResolver {
+
+    @NonNull
+    private MongoService mongoService;
+
     public String systemTime() {
         return LocalDateTime.now().toString();
     }
@@ -33,5 +43,13 @@ public class Query implements GraphQLQueryResolver {
             }
         }
         return sslCert;
+    }
+
+    public List<String> collectionNames(){
+        return mongoService.getCollections();
+    }
+
+    public List<String> collectionData(String collectionName){
+        return mongoService.getCollectionData(collectionName);
     }
 }
