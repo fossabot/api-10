@@ -1,0 +1,6 @@
+scalar Date
+
+# 查询接口
+type Query {
+    version: String!
+}
