@@ -5,7 +5,7 @@ spring:
     name: dongfg-api
   data:
     mongodb:
-      host: 10.64.90.5
+      host: 127.0.0.1
       port: 27017
       database: apidb
 graphql:
