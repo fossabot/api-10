@@ -1,6 +1,6 @@
-package com.dongfg.project.api.graphql.resolver.query;
+package com.dongfg.project.api.graphql.resolver.mutation;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.dongfg.project.api.graphql.type.Comment;
 import com.dongfg.project.api.repository.CommentRepository;
 import lombok.NonNull;
@@ -8,17 +8,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Date;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class CommonQueryResolver implements GraphQLQueryResolver {
+public class CommonMutationResolver implements GraphQLMutationResolver {
 
     @NonNull
     private CommentRepository commentRepository;
 
-    public List<Comment> getCommentList() {
-        return commentRepository.findAll();
+    public Comment addComment(Comment input) {
+        input.setCreateTime(new Date());
+        return commentRepository.save(input);
     }
-
 }

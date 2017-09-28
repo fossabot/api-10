@@ -2,5 +2,35 @@ scalar Date
 
 # 查询接口
 type Query {
-    version: String!
+    # 查看所有评论
+    getCommentList: [Comment]
+}
+
+# 修改接口
+type Mutation {
+    # 添加评论
+    addComment(comment: CommentInput!):Comment
+}
+
+# 评论
+type Comment {
+    # id
+    id: String!
+    # 评论内容
+    comment: String!
+    # 昵称
+    name: String!
+    # 邮件地址
+    email: String
+    # 创建时间
+    createTime: Date!
+}
+
+input CommentInput {
+    # 评论内容
+    comment: String!
+    # 昵称
+    name: String!
+    # 邮件地址
+    email: String
 }
