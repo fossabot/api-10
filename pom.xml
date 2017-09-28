@@ -68,6 +68,12 @@
             <groupId>com.zhokhov.graphql</groupId>
             <artifactId>graphql-datetime-spring-boot-starter</artifactId>
             <version>LATEST</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.graphql-java</groupId>
+                    <artifactId>graphql-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- quartz -->
