@@ -17,7 +17,7 @@ public class SmsMutationResolver implements GraphQLMutationResolver {
     @NonNull
     private SmsRepository smsRepository;
 
-    public Sms sendSms(Sms input) {
+    public Sms sendSms(String token, Sms input) {
         input.setCreateTime(new Date());
         return smsRepository.save(input);
     }

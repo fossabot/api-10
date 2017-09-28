@@ -76,10 +76,10 @@
             </exclusions>
         </dependency>
 
-        <!-- quartz -->
+        <!-- sdk list -->
         <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
+            <groupId>com.yunpian.sdk</groupId>
+            <artifactId>yunpian-java-sdk</artifactId>
             <version>LATEST</version>
         </dependency>
 
