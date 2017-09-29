@@ -11,5 +11,6 @@ public class Sms {
     private String id;
     private String mobile;
     private String content;
+    private String result;
     private Date createTime;
 }
