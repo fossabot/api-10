@@ -15,5 +15,6 @@ public class Comment {
     private String comment;
     private String name;
     private String email;
+    private String clientIp;
     private Date createTime;
 }
