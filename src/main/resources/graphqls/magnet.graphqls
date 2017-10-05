@@ -1,0 +1,9 @@
+extend type Query {
+    # Magnet & Torrent search
+    btSearch(keyWords: [String]!): [BtInfo]
+}
+
+type BtInfo {
+    keyWords: String!
+    magnet: String
+}

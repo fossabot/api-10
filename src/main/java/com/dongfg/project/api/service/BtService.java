@@ -1,0 +1,96 @@
+package com.dongfg.project.api.service;
+
+import com.dongfg.project.api.graphql.type.BtInfo;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
+public class BtService {
+
+    public List<BtInfo> btSearch(List<String> keyWords) {
+        return keyWords.parallelStream().map(this::btSearch).collect(Collectors.toList());
+    }
+
+    private BtInfo btSearch(String keyWords) {
+        BtInfo btInfo = null;
+
+
+        String encodeKeyWords = null;
+        try {
+            encodeKeyWords = URLEncoder.encode(keyWords, StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            // ignore
+        }
+
+        String url = String.format("http://btdb.to/q/%s/", encodeKeyWords);
+        try {
+            Document doc = Jsoup.connect(url).get();
+            Elements resultItems = doc.select(".search-ret-item");
+            List<BtInfo> btInfos = new ArrayList<>();
+            resultItems.stream().limit(5).forEach(item -> {
+                BtInfo info = new BtInfo();
+                info.setTitle(item.select(".item-title > a").first().attr("title"));
+                info.setMagnet(item.select(".item-meta-info > a").first().attr("href"));
+                info.setSize(item.select(".item-meta-info-value").first().text());
+
+                info.setFiles(item.select(".item-file-list").first().select(".file-name").stream().map(Element::text).collect(Collectors.toList()));
+                btInfos.add(info);
+            });
+            btInfo = choose(btInfos);
+            btInfo.setKeyWords(keyWords);
+        } catch (IOException e) {
+            log.error("Jsoup.connect exception", e);
+        }
+        return btInfo;
+    }
+
+    private BtInfo choose(List<BtInfo> btInfos) {
+        if (btInfos.isEmpty()) {
+            return new BtInfo();
+        }
+
+        btInfos.forEach(i -> {
+            if (i.getSize().contains("GB")) {
+                i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]) * 1000);
+            } else {
+                i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]));
+            }
+        });
+
+        Optional<BtInfo> result = btInfos.stream().sorted(Comparator.comparing(info -> Double.valueOf(info.getSize()), Comparator.reverseOrder())).
+                filter(btInfo -> {
+                    boolean filter = true;
+                    // exclude iso format
+                    for (String f : btInfo.getFiles()) {
+                        if (f.endsWith(".iso") || f.endsWith(".ISO")) {
+                            filter = false;
+                            break;
+                        }
+                    }
+                    // exclude size too big
+                    if (Double.valueOf(btInfo.getSize()) > 5 * 1024) {
+                        filter = false;
+                    }
+                    return filter;
+                }).findFirst();
+        return result.orElse(new BtInfo());
+    }
+}
