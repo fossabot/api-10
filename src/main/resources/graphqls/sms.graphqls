@@ -1,6 +1,7 @@
 extend type Query {
     # 查看所有短信
     getSmsList: [Sms]
+    getSmsTplList: [String]
 }
 
 extend type Mutation {
@@ -15,6 +16,8 @@ type Sms {
     mobile: String!
     # 内容
     content: String!
+    # 结果
+    result: String
     createTime: Date!
 }
 
