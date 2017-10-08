@@ -10,6 +10,7 @@ public class BtInfo {
     private String magnet;
 
     private String title;
+    private String infoUrl;
     private List<String> files;
     private String size;
 }

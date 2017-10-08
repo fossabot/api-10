@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,10 +47,20 @@ public class BtService {
             resultItems.stream().limit(5).forEach(item -> {
                 BtInfo info = new BtInfo();
                 info.setTitle(item.select(".item-title > a").first().attr("title"));
+                info.setInfoUrl("http://btdb.to" + item.select(".item-title > a").first().attr("href"));
                 info.setMagnet(item.select(".item-meta-info > a").first().attr("href"));
                 info.setSize(item.select(".item-meta-info-value").first().text());
 
-                info.setFiles(item.select(".item-file-list").first().select(".file-name").stream().map(Element::text).collect(Collectors.toList()));
+                // fetch from infoUrl
+                try {
+                    Document btInfoDetail = Jsoup.connect(info.getInfoUrl()).get();
+                    Elements fileListTable = btInfoDetail.select(".torrent-file-list");
+                    Elements fileListElements = fileListTable.select("tr");
+                    info.setFiles(fileListElements.stream().map(tr -> tr.select("td").get(1).text()).collect(Collectors.toList()));
+                } catch (IOException e) {
+                    // ignore
+                }
+
                 btInfos.add(info);
             });
             btInfo = choose(btInfos);

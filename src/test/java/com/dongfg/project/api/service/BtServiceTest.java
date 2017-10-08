@@ -23,8 +23,7 @@ public class BtServiceTest {
     @Test
     public void btSearch() throws Exception {
         List<String> keyWords = new ArrayList<>();
-        keyWords.add("WANZ-651");
-        keyWords.add("MDB-803");
+        keyWords.add("k1");
 
         List<BtInfo> btInfos = btService.btSearch(keyWords);
         System.out.println("=====" + btInfos.size() + "=====");
