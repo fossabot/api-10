@@ -41,7 +41,7 @@ public class BtService {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements resultItems = doc.select(".search-ret-item");
-            List<BtInfo> btInfos = new ArrayList<>();
+            List<BtInfo> btInfoList = new ArrayList<>();
             resultItems.stream().limit(5).forEach(item -> {
                 BtInfo info = new BtInfo();
                 info.setTitle(item.select(".item-title > a").first().attr("title"));
@@ -59,9 +59,9 @@ public class BtService {
                     // ignore
                 }
 
-                btInfos.add(info);
+                btInfoList.add(info);
             });
-            btInfo = choose(btInfos);
+            btInfo = choose(btInfoList);
             btInfo.setKeyWords(keyWords);
         } catch (IOException e) {
             log.error("Jsoup.connect exception", e);
@@ -69,12 +69,12 @@ public class BtService {
         return btInfo;
     }
 
-    private BtInfo choose(List<BtInfo> btInfos) {
-        if (btInfos.isEmpty()) {
+    private BtInfo choose(List<BtInfo> btInfoList) {
+        if (btInfoList.isEmpty()) {
             return new BtInfo();
         }
 
-        btInfos.forEach(i -> {
+        btInfoList.forEach(i -> {
             if (i.getSize().contains("GB")) {
                 i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]) * 1000);
             } else {
@@ -82,7 +82,7 @@ public class BtService {
             }
         });
 
-        Optional<BtInfo> result = btInfos.stream().sorted(Comparator.comparing(info -> Double.valueOf(info.getSize()), Comparator.reverseOrder())).
+        Optional<BtInfo> result = btInfoList.stream().sorted(Comparator.comparing(info -> Double.valueOf(info.getSize()), Comparator.reverseOrder())).
                 filter(btInfo -> {
                     boolean filter = true;
                     // exclude iso format

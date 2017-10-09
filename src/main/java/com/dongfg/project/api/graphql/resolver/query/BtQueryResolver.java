@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -17,7 +18,9 @@ public class BtQueryResolver implements GraphQLQueryResolver {
     @NonNull
     private BtService btService;
 
-    public List<BtInfo> btSearch(List<String> keyWords) {
-        return btService.btSearch(keyWords);
+    public List<BtInfo> btSearch(List<String> keyWordsList) {
+        return keyWordsList.parallelStream()
+                .map(keyWords -> btService.btSearch(keyWords))
+                .collect(Collectors.toList());
     }
 }
