@@ -7,6 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,11 +25,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class BtService {
 
-    public List<BtInfo> btSearch(List<String> keyWords) {
-        return keyWords.parallelStream().map(this::btSearch).collect(Collectors.toList());
-    }
-
-    private BtInfo btSearch(String keyWords) {
+    @Cacheable("btSearch")
+    public BtInfo btSearch(String keyWords) {
         BtInfo btInfo = null;
 
 
