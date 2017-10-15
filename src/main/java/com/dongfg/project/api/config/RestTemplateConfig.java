@@ -14,6 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import javax.net.ssl.SSLContext;
 import java.security.cert.X509Certificate;
 
+/**
+ * @author dongfg
+ * @date 2017/10/15
+ */
 @Configuration
 @Slf4j
 public class RestTemplateConfig {

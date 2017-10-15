@@ -11,6 +11,10 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author dongfg
+ * @date 2017/10/15
+ */
 @Component
 public class CustomGraphQLErrorHandler extends DefaultGraphQLErrorHandler {
     @Override

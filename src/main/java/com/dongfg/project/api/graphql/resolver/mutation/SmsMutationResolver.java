@@ -10,6 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author dongfg
+ * @date 2017/10/15
+ */
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SmsMutationResolver implements GraphQLMutationResolver {

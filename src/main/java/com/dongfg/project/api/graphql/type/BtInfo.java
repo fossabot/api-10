@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author dongfg
+ * @date 2017/10/15
+ */
 @Data
 public class BtInfo {
     private String keyWords;

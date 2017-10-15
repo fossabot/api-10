@@ -19,10 +19,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * @author dongfg
+ * @date 2017/10/15
+ */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class BtService {
+
+    private static final int MAX_SIZE = 5 * 1024;
+    private static final String SIZE_UNIT_BG = "GB";
 
     public List<BtInfo> btSearch(List<String> keyWords) {
         return keyWords.parallelStream().map(this::btSearch).collect(Collectors.toList());
@@ -77,7 +84,7 @@ public class BtService {
         }
 
         btInfos.forEach(i -> {
-            if (i.getSize().contains("GB")) {
+            if (i.getSize().contains(SIZE_UNIT_BG)) {
                 i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]) * 1000);
             } else {
                 i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]));
@@ -95,7 +102,7 @@ public class BtService {
                         }
                     }
                     // exclude size too big
-                    if (Double.valueOf(btInfo.getSize()) > 5 * 1024) {
+                    if (Double.valueOf(btInfo.getSize()) > MAX_SIZE) {
                         filter = false;
                     }
                     return filter;

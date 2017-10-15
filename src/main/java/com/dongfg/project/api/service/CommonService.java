@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * @author dongfg
+ * @date 2017/10/15
+ */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CommonService {
