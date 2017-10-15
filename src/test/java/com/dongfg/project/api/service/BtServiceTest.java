@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
@@ -25,7 +26,7 @@ public class BtServiceTest {
         List<String> keyWords = new ArrayList<>();
         keyWords.add("k1");
 
-        List<BtInfo> btInfos = btService.btSearch(keyWords);
+        List<BtInfo> btInfos = keyWords.parallelStream().map(k -> btService.btSearch(k)).collect(Collectors.toList());
         System.out.println("=====" + btInfos.size() + "=====");
         btInfos.forEach(System.out::println);
     }

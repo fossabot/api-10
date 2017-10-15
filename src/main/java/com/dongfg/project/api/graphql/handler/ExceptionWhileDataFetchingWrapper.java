@@ -8,6 +8,7 @@ import graphql.language.SourceLocation;
 
 import java.util.Map;
 
+@SuppressWarnings("EmptyMethod")
 class ExceptionWhileDataFetchingWrapper extends ExceptionWhileDataFetching {
     ExceptionWhileDataFetchingWrapper(ExecutionPath path, Throwable exception, SourceLocation sourceLocation) {
         super(path, exception, sourceLocation);

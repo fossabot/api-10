@@ -7,6 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,23 +20,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * @author dongfg
- * @date 2017/10/15
- */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class BtService {
 
-    private static final int MAX_SIZE = 5 * 1024;
-    private static final String SIZE_UNIT_BG = "GB";
-
-    public List<BtInfo> btSearch(List<String> keyWords) {
-        return keyWords.parallelStream().map(this::btSearch).collect(Collectors.toList());
-    }
-
-    private BtInfo btSearch(String keyWords) {
+    @Cacheable("btSearch")
+    public BtInfo btSearch(String keyWords) {
         BtInfo btInfo = null;
 
 
@@ -50,7 +41,7 @@ public class BtService {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements resultItems = doc.select(".search-ret-item");
-            List<BtInfo> btInfos = new ArrayList<>();
+            List<BtInfo> btInfoList = new ArrayList<>();
             resultItems.stream().limit(5).forEach(item -> {
                 BtInfo info = new BtInfo();
                 info.setTitle(item.select(".item-title > a").first().attr("title"));
@@ -68,9 +59,9 @@ public class BtService {
                     // ignore
                 }
 
-                btInfos.add(info);
+                btInfoList.add(info);
             });
-            btInfo = choose(btInfos);
+            btInfo = choose(btInfoList);
             btInfo.setKeyWords(keyWords);
         } catch (IOException e) {
             log.error("Jsoup.connect exception", e);
@@ -78,20 +69,20 @@ public class BtService {
         return btInfo;
     }
 
-    private BtInfo choose(List<BtInfo> btInfos) {
-        if (btInfos.isEmpty()) {
+    private BtInfo choose(List<BtInfo> btInfoList) {
+        if (btInfoList.isEmpty()) {
             return new BtInfo();
         }
 
-        btInfos.forEach(i -> {
-            if (i.getSize().contains(SIZE_UNIT_BG)) {
+        btInfoList.forEach(i -> {
+            if (i.getSize().contains("GB")) {
                 i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]) * 1000);
             } else {
                 i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]));
             }
         });
 
-        Optional<BtInfo> result = btInfos.stream().sorted(Comparator.comparing(info -> Double.valueOf(info.getSize()), Comparator.reverseOrder())).
+        Optional<BtInfo> result = btInfoList.stream().sorted(Comparator.comparing(info -> Double.valueOf(info.getSize()), Comparator.reverseOrder())).
                 filter(btInfo -> {
                     boolean filter = true;
                     // exclude iso format
@@ -102,7 +93,7 @@ public class BtService {
                         }
                     }
                     // exclude size too big
-                    if (Double.valueOf(btInfo.getSize()) > MAX_SIZE) {
+                    if (Double.valueOf(btInfo.getSize()) > 5 * 1024) {
                         filter = false;
                     }
                     return filter;
