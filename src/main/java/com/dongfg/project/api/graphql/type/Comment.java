@@ -6,7 +6,8 @@ import org.springframework.data.annotation.Id;
 import java.util.Date;
 
 /**
- * 评论
+ * @author dongfg
+ * @date 2017/10/15
  */
 @Data
 public class Comment {

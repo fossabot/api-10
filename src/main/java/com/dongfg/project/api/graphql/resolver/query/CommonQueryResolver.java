@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * @author dongfg
+ * @date 2017/10/15
+ */
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CommonQueryResolver implements GraphQLQueryResolver {
