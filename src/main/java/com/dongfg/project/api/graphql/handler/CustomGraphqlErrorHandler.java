@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * @date 2017/10/15
  */
 @Component
-public class CustomGraphQLErrorHandler extends DefaultGraphQLErrorHandler {
+public class CustomGraphqlErrorHandler extends DefaultGraphQLErrorHandler {
     @Override
     protected List<GraphQLError> filterGraphQLErrors(List<GraphQLError> errors) {
         return errors.stream()
