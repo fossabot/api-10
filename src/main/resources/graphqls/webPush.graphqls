@@ -1,0 +1,25 @@
+extend type Mutation {
+    # 保存订阅信息
+    savePushSubscription(subscription:PushSubscriptionInput!):String
+    # 推送消息
+    webPush(pushPayload:PushPayloadInput!):PushResult
+}
+
+# 订阅信息
+input PushSubscriptionInput {
+    endpoint: String!
+    p256dh: String!
+    auth: String!
+}
+
+# 消息内容
+input PushPayloadInput {
+    title: String!
+    message: String!
+}
+
+# 推送结果
+type PushResult {
+    successNum: Int
+    failNum: Int
+}
