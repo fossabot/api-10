@@ -102,6 +102,13 @@
             <version>RELEASE</version>
         </dependency>
 
+        <!-- web push -->
+        <dependency>
+            <groupId>nl.martijndwars</groupId>
+            <artifactId>web-push</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
         <!-- utils -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -113,6 +120,12 @@
             <artifactId>guava</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.39</version>
+        </dependency>
+
         <!-- kotlin support -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
