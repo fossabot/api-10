@@ -49,7 +49,7 @@ function updateSubscriptionOnServer(subscription) {
         var p256dh = subscriptionJson.keys.p256dh;
         var auth = subscriptionJson.keys.auth;
         $.post({
-            url: 'http://localhost:20000/graphql',
+            url: 'https://api.dongfg.com/graphql',
             data: JSON.stringify({"query":"mutation { savePushSubscription(subscription: {endpoint: \""+endpoint+"\", p256dh: \""+p256dh+"\", auth: \""+auth+"\"}) }","variables":null}),
             contentType: 'application/json'
         }).done(function(response) {
