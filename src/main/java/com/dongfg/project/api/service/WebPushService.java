@@ -55,8 +55,6 @@ public class WebPushService {
 
         try {
             // set https proxy property
-            System.setProperty("https.proxyHost", "127.0.0.1");
-            System.setProperty("https.proxyPort", "8118");
             HttpResponse httpResponse = pushService.send(notification);
             log.info(IOUtils.toString(httpResponse.getEntity().getContent(), StandardCharsets.UTF_8.name()));
         } catch (Exception e) {
