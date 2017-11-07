@@ -23,7 +23,7 @@
 
 /* eslint-disable max-len */
 
-const applicationServerPublicKey = 'BE-sh6-cF0mCIRJ5or-ojx6x-hWPv-15mhnUJhNx2BEWW75VKQOOj0nW-argmSBqhpnVCXLm8isl6OKbCobI_8A';
+const applicationServerPublicKey = 'BLrIdg4o5HbVvDA7BkNqo4iXUaj0cYr9RU8/MLmPf/czBhfSElMN5LHQKeLlHBPYI77RX2nE0B56UUn92PgnnqY=';
 
 /* eslint-enable max-len */
 
@@ -43,40 +43,21 @@ function urlB64ToUint8Array(base64String) {
 }
 
 self.addEventListener('push', function(event) {
-  console.log('[Service Worker] Push Received.');
-  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+  let payload = JSON.parse(event.data.text());
 
-  const title = 'Push Codelab';
+  const title = payload.title;
   const options = {
-    body: 'Yay it works.',
-    icon: 'images/icon.png',
-    badge: 'images/badge.png'
+    body: payload.message,
+    icon: '/images/icon.png',
+    badge: '/images/badge.png'
   };
 
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
 self.addEventListener('notificationclick', function(event) {
-  console.log('[Service Worker] Notification click Received.');
-
   event.notification.close();
-
   event.waitUntil(
-    clients.openWindow('https://developers.google.com/web/')
-  );
-});
-
-self.addEventListener('pushsubscriptionchange', function(event) {
-  console.log('[Service Worker]: \'pushsubscriptionchange\' event fired.');
-  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
-  event.waitUntil(
-    self.registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: applicationServerKey
-    })
-    .then(function(newSubscription) {
-      // TODO: Send to application server
-      console.log('[Service Worker] New subscription: ', newSubscription);
-    })
+    clients.openWindow('https://api.dongfg.com')
   );
 });

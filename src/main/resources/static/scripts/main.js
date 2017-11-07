@@ -21,7 +21,7 @@
 
 'use strict';
 
-const applicationServerPublicKey = 'BE-sh6-cF0mCIRJ5or-ojx6x-hWPv-15mhnUJhNx2BEWW75VKQOOj0nW-argmSBqhpnVCXLm8isl6OKbCobI_8A';
+const applicationServerPublicKey = 'BLrIdg4o5HbVvDA7BkNqo4iXUaj0cYr9RU8/MLmPf/czBhfSElMN5LHQKeLlHBPYI77RX2nE0B56UUn92PgnnqY=';
 
 let isSubscribed = false;
 let swRegistration = null;
@@ -43,7 +43,18 @@ function urlB64ToUint8Array(base64String) {
 
 function updateSubscriptionOnServer(subscription) {
     if (subscription) {
-        console.log(JSON.stringify(subscription))
+        console.log(JSON.stringify(subscription));
+        var subscriptionJson = JSON.parse(JSON.stringify(subscription));
+        var endpoint = subscriptionJson.endpoint;
+        var p256dh = subscriptionJson.keys.p256dh;
+        var auth = subscriptionJson.keys.auth;
+        $.post({
+            url: 'http://localhost:20000/graphql',
+            data: JSON.stringify({"query":"mutation { savePushSubscription(subscription: {endpoint: \""+endpoint+"\", p256dh: \""+p256dh+"\", auth: \""+auth+"\"}) }","variables":null}),
+            contentType: 'application/json'
+        }).done(function(response) {
+            console.log('SavePushSubscription:', response.data.savePushSubscription);
+        });
     }
 }
 
@@ -68,7 +79,7 @@ function subscribeUser() {
 if ('serviceWorker' in navigator && 'PushManager' in window) {
     console.log('Service Worker and Push is supported');
 
-    navigator.serviceWorker.register('sw.js')
+    navigator.serviceWorker.register('/scripts/sw.js')
         .then(function (swReg) {
             console.log('Service Worker is registered', swReg);
 
@@ -84,6 +95,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
                         console.log('User IS subscribed.');
                     } else {
                         console.log('User is NOT subscribed.');
+                        subscribeUser();
                     }
                 });
         })
