@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class HttpProxyExecutor {
 
-    @Value("${https.proxyHost}")
+    @Value("${https.proxyHost:}")
     private String httpsProxyHost;
 
-    @Value("${https.proxyPort}")
+    @Value("${https.proxyPort:}")
     private String httpsProxyPort;
 
     public void executeWithProxy(Runnable function) {
