@@ -24,12 +24,12 @@ public class SmsMutationResolver implements GraphQLMutationResolver {
     @NonNull
     private CommonService commonService;
 
-    public Sms sendSms(String token, Sms input) {
+    public Sms sendSms(int otpCode, Sms input) {
         if (!RamRateLimiter.acquire(RamRateLimiter.LIMIT_KEY_SMS)) {
             throw new RuntimeException("access rate limit exceeded");
         }
-        if (!commonService.validateToken(token)) {
-            throw new RuntimeException("invalid token");
+        if (!commonService.validateOtpCode(otpCode)) {
+            throw new RuntimeException("invalid otp code");
         }
         return smsService.sendSms(input);
     }
