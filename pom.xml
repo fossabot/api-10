@@ -109,6 +109,13 @@
             <version>3.0.1</version>
         </dependency>
 
+        <!-- GoogleAuth -->
+        <dependency>
+            <groupId>com.warrenstrange</groupId>
+            <artifactId>googleauth</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
         <!-- utils -->
         <dependency>
             <groupId>org.projectlombok</groupId>
