@@ -14,13 +14,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class TotpMutationResolver implements GraphQLMutationResolver {
 
-    private static GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
-
     private static final String OTP_AUTH_FORMAT = "otpauth://totp/%s:@%s?secret=%s";
+    private static GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
 
     public SecretKey createSecretKey(String site, String username) {
         String secret = googleAuthenticator.createCredentials().getKey();
-        String otpAuthString = String.format(OTP_AUTH_FORMAT, site,username, secret);
+        String otpAuthString = String.format(OTP_AUTH_FORMAT, site, username, secret);
         return SecretKey.builder()
                 .secret(secret)
                 .qrCodeUrl(String.format("http://qr.liantu.com/api.php?w=400&text=%s", otpAuthString)).build();

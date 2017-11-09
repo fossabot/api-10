@@ -19,12 +19,12 @@ public class RamRateLimiter {
         RATE_LIMITER_MAP.put(LIMIT_KEY_SMS, RateLimiter.create(0.1));
     }
 
+    private RamRateLimiter() {
+
+    }
+
     public static boolean acquire(String limitKey) {
         RateLimiter rateLimiter = RATE_LIMITER_MAP.get(limitKey);
         return rateLimiter.tryAcquire();
-    }
-
-    private RamRateLimiter() {
-
     }
 }
