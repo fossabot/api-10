@@ -6,7 +6,7 @@ extend type Query {
 
 extend type Mutation {
     # 发送短信
-    sendSms(token: String!, sms: SmsInput!): Sms!
+    sendSms(otpCode: Int!, sms: SmsInput!): Sms!
 }
 
 # 短信
