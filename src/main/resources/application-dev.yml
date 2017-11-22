@@ -15,3 +15,5 @@ api:
   yunpian-apikey: ENC(SdRqyQmZvVTPouBik+ikEgvBfqFplkY+TfnGNlHSGDoq3i4cv7YG4npyRfkMjXlV)
   private-vapid: ENC(1vVV8kAdLuKiY33Ugj1pcHATAK6va505UgwQeCoqqP05m3q2AyzxvPeKPBzo99OOBe5xTB+gy9U=)
   otp-secret: ENC(aPFnyfbqUyNPM8hjmndCpmaL3ByYekieApYKOn3bK9A=)
+  wechat-app-id: ENC(VnefSkX9YEl7sxAGK09JnhzCHPvfkj1pJ7Q7wD4Efac=)
+  wechat-app-secret: ENC(dznMxUcHF379Fi9PQs46SmnRg6/ZXv8nb+KfBS/AIuVlmgKltlDXHYJ89bF3OWgi)
