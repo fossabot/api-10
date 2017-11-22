@@ -1,0 +1,12 @@
+extend type Query {
+    wechatUserInfo(authToken: String!): WechatUserInfo
+}
+
+extend type Mutation {
+    # 微信登录返回auth-token
+    wechatLogin(code: String): String
+}
+
+type WechatUserInfo {
+    openId: String
+}

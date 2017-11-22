@@ -1,0 +1,24 @@
+extend type Query {
+    loadTokens(authToken: String!):[Token]
+}
+
+extend type Mutation {
+    addToken(authToken: String!,token:TokenInput!): Token
+    updateToken(authToken: String!,id: String!,token:TokenInput!): Token
+    removeToken(authToken: String!,id: String!): Token
+}
+
+type Token {
+    id: String
+    openId: String
+    appName: String
+    userName: String
+    secretKey: String
+}
+
+input TokenInput {
+    openId: String
+    appName: String
+    userName: String
+    secretKey: String
+}

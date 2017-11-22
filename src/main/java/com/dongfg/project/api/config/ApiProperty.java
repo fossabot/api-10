@@ -26,4 +26,14 @@ public class ApiProperty {
      * 两步验证KEY
      */
     private String otpSecret;
+
+    /**
+     * 小程序ID
+     */
+    private String wechatAppId;
+
+    /**
+     * 小程序密钥
+     */
+    private String wechatAppSecret;
 }
