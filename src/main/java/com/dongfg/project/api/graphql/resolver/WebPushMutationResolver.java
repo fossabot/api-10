@@ -1,6 +1,7 @@
-package com.dongfg.project.api.graphql.resolver.mutation;
+package com.dongfg.project.api.graphql.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.graphql.type.PushPayload;
 import com.dongfg.project.api.graphql.type.PushResult;
 import com.dongfg.project.api.graphql.type.PushSubscription;
@@ -18,10 +19,10 @@ import java.security.GeneralSecurityException;
  * @author dongfg
  * @date 17-11-7
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Slf4j
-public class WebPushMutationResolver implements GraphQLMutationResolver {
+public class WebPushMutationResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     @NonNull
     private WebPushService webPushService;
