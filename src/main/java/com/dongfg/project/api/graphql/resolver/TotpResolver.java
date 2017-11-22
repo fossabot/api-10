@@ -1,18 +1,22 @@
-package com.dongfg.project.api.graphql.resolver.mutation;
+package com.dongfg.project.api.graphql.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.graphql.type.SecretKey;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
  * @author dongfg
  * @date 17-11-9
  */
-@Component
 @Slf4j
-public class TotpMutationResolver implements GraphQLMutationResolver {
+@Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class TotpResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     private static final String OTP_AUTH_FORMAT = "otpauth://totp/%s:@%s?secret=%s";
     private static GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
