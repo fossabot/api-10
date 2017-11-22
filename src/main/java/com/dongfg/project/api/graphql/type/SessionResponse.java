@@ -7,6 +7,7 @@ import lombok.Data;
  * @date 17-11-22
  */
 @Data
-public class WechatUserInfo {
-    String openId;
+public class SessionResponse {
+    private int code;
+    private String sessionId;
 }
