@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
+ * 非线程安全Http代理执行工具
+ *
  * @author dongfg
  * @date 17-11-8
  */
