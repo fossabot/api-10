@@ -9,7 +9,11 @@ spring:
       port: 27017
       database: apidb
       username: apidb
-      password: apidb@123
+      password: ENC(FpBxTMBgdWavOXrPs7tl+7/kUUJvdvO8)
 graphql:
   servlet:
     mapping: /graphql
+api:
+  yunpian-apikey: ENC(SdRqyQmZvVTPouBik+ikEgvBfqFplkY+TfnGNlHSGDoq3i4cv7YG4npyRfkMjXlV)
+  private-vapid: ENC(1vVV8kAdLuKiY33Ugj1pcHATAK6va505UgwQeCoqqP05m3q2AyzxvPeKPBzo99OOBe5xTB+gy9U=)
+  otp-secret: ENC(aPFnyfbqUyNPM8hjmndCpmaL3ByYekieApYKOn3bK9A=)

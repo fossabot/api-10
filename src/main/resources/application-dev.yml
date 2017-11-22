@@ -11,3 +11,7 @@ spring:
 graphql:
   servlet:
     mapping: /graphql
+api:
+  yunpian-apikey: ENC(SdRqyQmZvVTPouBik+ikEgvBfqFplkY+TfnGNlHSGDoq3i4cv7YG4npyRfkMjXlV)
+  private-vapid: ENC(1vVV8kAdLuKiY33Ugj1pcHATAK6va505UgwQeCoqqP05m3q2AyzxvPeKPBzo99OOBe5xTB+gy9U=)
+  otp-secret: ENC(aPFnyfbqUyNPM8hjmndCpmaL3ByYekieApYKOn3bK9A=)

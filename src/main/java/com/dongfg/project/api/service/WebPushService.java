@@ -1,6 +1,7 @@
 package com.dongfg.project.api.service;
 
 import com.alibaba.fastjson.JSON;
+import com.dongfg.project.api.config.ApiProperty;
 import com.dongfg.project.api.graphql.type.PushPayload;
 import com.dongfg.project.api.graphql.type.PushSubscription;
 import com.dongfg.project.api.util.HttpProxyExecutor;
@@ -32,14 +33,14 @@ public class WebPushService {
 
     private static final String VAPID_PUBLIC_KEY = "BLrIdg4o5HbVvDA7BkNqo4iXUaj0cYr9RU8/MLmPf/czBhfSElMN5LHQKeLlHBPYI77RX2nE0B56UUn92PgnnqY=";
 
-    @Value("${vapid.private:null}")
-    private String vapidPrivateKey;
-
     @Value("${spring.application.name}")
     private String appName;
 
     @NonNull
     private HttpProxyExecutor httpProxyExecutor;
+
+    @NonNull
+    private ApiProperty apiProperty;
 
     /**
      * 推送web消息
@@ -59,7 +60,7 @@ public class WebPushService {
         PushService pushService = new PushService();
         pushService.setSubject(appName);
         pushService.setPublicKey(VAPID_PUBLIC_KEY);
-        pushService.setPrivateKey(vapidPrivateKey);
+        pushService.setPrivateKey(apiProperty.getPrivateVapid());
 
         httpProxyExecutor.executeWithProxy(() -> {
             try {
