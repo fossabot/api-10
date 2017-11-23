@@ -27,7 +27,7 @@ import java.util.Optional;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WechatService {
 
-    private static final SessionIdGenerator sessionIdGenerator = new SecureRandomSessionIdGenerator();
+    private static final SessionIdGenerator SESSION_ID_GENERATOR = new SecureRandomSessionIdGenerator();
 
     @NonNull
     private WechatComponent wechatComponent;
@@ -57,7 +57,7 @@ public class WechatService {
         }
 
         // 生成sessionId返回
-        String sessionId = sessionIdGenerator.createSessionId();
+        String sessionId = SESSION_ID_GENERATOR.createSessionId();
         session.setSessionId(sessionId);
 
         // 保存
