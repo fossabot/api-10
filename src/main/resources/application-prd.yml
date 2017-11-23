@@ -1,15 +1,10 @@
 server:
   port: 20000
 spring:
-  application:
-    name: dongfg-api
   data:
     mongodb:
       host: 127.0.0.1
       port: 27017
       database: apidb
       username: apidb
-      password: apidb@123
-graphql:
-  servlet:
-    mapping: /graphql
+      password: ENC(FpBxTMBgdWavOXrPs7tl+7/kUUJvdvO8)

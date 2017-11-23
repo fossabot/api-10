@@ -1,5 +1,6 @@
 package com.dongfg.project.api.service;
 
+import com.dongfg.project.api.config.property.ApiProperty;
 import com.dongfg.project.api.graphql.type.Sms;
 import com.dongfg.project.api.repository.SmsRepository;
 import com.yunpian.sdk.YunpianClient;
@@ -10,7 +11,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -27,18 +27,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class SmsService {
-
-    @Value("${yunpian.apikey:null}")
-    private String apikey;
-
-    private YunpianClient client;
+    @NonNull
+    private ApiProperty apiProperty;
 
     @NonNull
     private SmsRepository smsRepository;
 
+    private YunpianClient client;
+
     @PostConstruct
     public void init() {
-        client = new YunpianClient(apikey).init();
+        client = new YunpianClient(apiProperty.getYunpianApikey()).init();
     }
 
     public Sms sendSms(Sms input) {

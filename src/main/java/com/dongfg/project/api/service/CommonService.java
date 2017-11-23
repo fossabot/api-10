@@ -1,12 +1,12 @@
 package com.dongfg.project.api.service;
 
+import com.dongfg.project.api.config.property.ApiProperty;
 import com.dongfg.project.api.graphql.type.Comment;
 import com.dongfg.project.api.repository.CommentRepository;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -24,8 +24,8 @@ public class CommonService {
     @NonNull
     private CommentRepository commentRepository;
 
-    @Value("${otp.secret:change}")
-    private String otpSecret;
+    @NonNull
+    private ApiProperty apiProperty;
 
     public Comment addComment(Comment input) {
         input.setCreateTime(new Date());
@@ -33,6 +33,6 @@ public class CommonService {
     }
 
     public boolean validateOtpCode(int otpCode) {
-        return googleAuthenticator.authorize(otpSecret, otpCode);
+        return googleAuthenticator.authorize(apiProperty.getOtpSecret(), otpCode);
     }
 }

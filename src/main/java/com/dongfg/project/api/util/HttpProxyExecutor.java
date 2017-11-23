@@ -4,16 +4,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
+ * 非线程安全Http代理执行工具
+ *
  * @author dongfg
  * @date 17-11-8
  */
 @Component
 public class HttpProxyExecutor {
 
-    @Value("${https.proxyHost:}")
+    @Value("${https.proxyHost:127.0.0.1}")
     private String httpsProxyHost;
 
-    @Value("${https.proxyPort:}")
+    @Value("${https.proxyPort:8118}")
     private String httpsProxyPort;
 
     public void executeWithProxy(Runnable function) {
