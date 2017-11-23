@@ -32,22 +32,38 @@ public class CoolhubResolver implements GraphQLQueryResolver, GraphQLMutationRes
 
     public List<Token> loadTokens(String authToken) {
         checkSession(authToken);
-        return coolhubService.loadTokens();
+        try {
+            return coolhubService.loadTokens();
+        } finally {
+            SecurityContextHolder.removeCurrent();
+        }
     }
 
     public Token addToken(String authToken, Token token) {
         checkSession(authToken);
-        return coolhubService.addToken(token);
+        try {
+            return coolhubService.addToken(token);
+        } finally {
+            SecurityContextHolder.removeCurrent();
+        }
     }
 
     public Token updateToken(String authToken, String id, Token token) {
         checkSession(authToken);
-        return coolhubService.updateToken(id, token);
+        try {
+            return coolhubService.updateToken(id, token);
+        } finally {
+            SecurityContextHolder.removeCurrent();
+        }
     }
 
     public Token removeToken(String authToken, String id) {
         checkSession(authToken);
-        return coolhubService.removeToken(id);
+        try {
+            return coolhubService.removeToken(id);
+        } finally {
+            SecurityContextHolder.removeCurrent();
+        }
     }
 
     private void checkSession(String authToken) {

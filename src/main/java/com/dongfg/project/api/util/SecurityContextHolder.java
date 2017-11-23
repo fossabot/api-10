@@ -24,4 +24,11 @@ public class SecurityContextHolder {
     public static String getCurrent() {
         return CURRENT_USER.get();
     }
+
+    /**
+     * 及时清理
+     */
+    public static void removeCurrent(){
+        CURRENT_USER.remove();
+    }
 }
