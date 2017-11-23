@@ -24,6 +24,8 @@
         </encoder>
     </appender>
 
+    <logger name="org.springframework.core.env" level="INFO" additivity="false"/>
+
     <!-- enable console log only dev profile -->
     <springProfile name="!dev">
         <root level="INFO">
