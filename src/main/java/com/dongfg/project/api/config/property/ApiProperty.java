@@ -1,4 +1,4 @@
-package com.dongfg.project.api.config;
+package com.dongfg.project.api.config.property;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
