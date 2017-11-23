@@ -1,6 +1,6 @@
 package com.dongfg.project.api.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 /**
@@ -12,18 +12,18 @@ import lombok.Data;
 @Data
 public class Code2SessionResponse {
 
-    @JsonProperty("openid")
+    @JSONField(name = "openid")
     private String openId;
 
-    @JsonProperty("session_key")
+    @JSONField(name = "session_key")
     private String sessionKey;
 
-    @JsonProperty("unionid")
+    @JSONField(name = "unionid")
     private String unionId;
 
-    @JsonProperty("errcode")
+    @JSONField(name = "errcode")
     private int errCode;
 
-    @JsonProperty("errmsg")
+    @JSONField(name = "errmsg")
     private String errMsg;
 }

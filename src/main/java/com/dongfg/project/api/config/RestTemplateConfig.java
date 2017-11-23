@@ -1,5 +1,8 @@
 package com.dongfg.project.api.config;
 
+import com.alibaba.fastjson.support.config.FastJsonConfig;
+import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.dongfg.project.api.config.property.FastJsonProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
@@ -25,8 +28,20 @@ import java.security.cert.X509Certificate;
 public class RestTemplateConfig {
 
     @Bean
-    public RestTemplate restTemplate() throws GeneralSecurityException {
-        return new RestTemplate(clientHttpRequestFactory());
+    public RestTemplate restTemplate(FastJsonProperty fastJsonProperty) throws GeneralSecurityException {
+        RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory());
+        FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
+
+        FastJsonConfig config = new FastJsonConfig();
+        config.setDateFormat(fastJsonProperty.getDateFormat());
+        config.setCharset(fastJsonProperty.getCharset());
+        config.setSerializerFeatures(fastJsonProperty.getSerializerFeatures());
+
+        converter.setFastJsonConfig(config);
+
+        restTemplate.getMessageConverters().add(0, converter);
+
+        return restTemplate;
     }
 
     private ClientHttpRequestFactory clientHttpRequestFactory() throws GeneralSecurityException {
