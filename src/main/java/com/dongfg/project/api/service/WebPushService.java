@@ -1,7 +1,7 @@
 package com.dongfg.project.api.service;
 
 import com.alibaba.fastjson.JSON;
-import com.dongfg.project.api.config.ApiProperty;
+import com.dongfg.project.api.config.property.ApiProperty;
 import com.dongfg.project.api.graphql.type.PushPayload;
 import com.dongfg.project.api.graphql.type.PushSubscription;
 import com.dongfg.project.api.util.HttpProxyExecutor;

@@ -1,6 +1,6 @@
 package com.dongfg.project.api.component;
 
-import com.dongfg.project.api.config.ApiProperty;
+import com.dongfg.project.api.config.property.ApiProperty;
 import com.dongfg.project.api.dto.Code2SessionResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.dongfg.project.api.service;
 
-import com.dongfg.project.api.config.ApiProperty;
+import com.dongfg.project.api.config.property.ApiProperty;
 import com.dongfg.project.api.graphql.type.Sms;
 import com.dongfg.project.api.repository.SmsRepository;
 import com.yunpian.sdk.YunpianClient;
