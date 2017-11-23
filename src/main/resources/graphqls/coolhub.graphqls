@@ -17,7 +17,6 @@ type Token {
 }
 
 input TokenInput {
-    openId: String
     appName: String
     userName: String
     secretKey: String
