@@ -1,10 +1,14 @@
 extend type Query {
+    # 加载所有用户token
     loadTokens(authToken: String!):[Token]
 }
 
 extend type Mutation {
+    # 添加token
     addToken(authToken: String!,token:TokenInput!): Token
+    # 更新token
     updateToken(authToken: String!,id: String!,token:TokenInput!): Token
+    # 删除token
     removeToken(authToken: String!,id: String!): Token
 }
 
