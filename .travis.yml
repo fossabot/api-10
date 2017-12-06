@@ -1,16 +1,27 @@
+dist: trusty
 language: java
+python:
+  - "3.6"
+env:
+  - QINIU_AK: ${QINIU_AK}
+  - QINIU_SK: ${QINIU_SK}
 jdk:
 - oraclejdk8
 before_install:
-- openssl aes-256-cbc -K $encrypted_96cca6b14f03_key -iv $encrypted_96cca6b14f03_iv -in deploy_key.enc -out deploy_key -d
+  - openssl aes-256-cbc -K $encrypted_96cca6b14f03_key -iv $encrypted_96cca6b14f03_iv -in deploy_key.enc -out deploy_key -d
+  - sudo apt-get -y install python3-pip python-dev
+  - sudo pip3 install qiniu
+install:
+  - wget https://raw.githubusercontent.com/dongfg/python-script/master/qiniu_rsync.py
 script:
 - mvn clean package -DskipTests
 after_success:
 - chmod 600 deploy_key
+- mkdir deploy && cp target/*.jar deploy/
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -avzrtopg --stats --progress --delete -e 'ssh -o StrictHostKeyChecking=no -i deploy_key -p ${DEPLOY_PORT}' target/*.jar ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}
+  script: python3 qiniu_rsync.py dongfg deploy/
 - provider: script
   skip_cleanup: true
   script: ssh -o StrictHostKeyChecking=no -i deploy_key -p ${DEPLOY_PORT} ${DEPLOY_USER}@${DEPLOY_HOST} '${PUBLISH_SCRIPT}'
