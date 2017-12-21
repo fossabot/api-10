@@ -6,3 +6,11 @@ spring:
       host: 10.64.90.5
       port: 27017
       database: apidb
+  datasource:
+    url: jdbc:mysql://rm-bp129vuze8x7eij3ao.mysql.rds.aliyuncs.com/api_base_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: api_base
+    password: C4LMZ4b3
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: springBootHikariPool
+      maximum-pool-size: 10

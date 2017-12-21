@@ -9,7 +9,7 @@
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%clr(%5p)] [%thread] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-    <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="common" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${basePath}/common.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>${basePath}/common.%i.log.zip</fileNamePattern>
@@ -23,13 +23,31 @@
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%clr(%5p)] [%thread] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+    <appender name="quartz" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${basePath}/quartz.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${basePath}/quartz.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>3</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>1GB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%clr(%5p)] [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
     <logger name="org.springframework.core.env" level="INFO" additivity="false"/>
+
+    <logger name="org.quartz.plugins.history.LoggingJobHistoryPlugin" level="INFO" additivity="false">
+        <appender-ref ref="quartz"/>
+    </logger>
 
     <!-- enable console log only dev profile -->
     <springProfile name="!dev">
         <root level="INFO">
-            <appender-ref ref="rollingFile"/>
+            <appender-ref ref="common"/>
         </root>
     </springProfile>
 
