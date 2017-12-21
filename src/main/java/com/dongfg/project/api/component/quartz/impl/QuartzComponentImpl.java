@@ -151,13 +151,14 @@ public class QuartzComponentImpl implements QuartzComponent {
     }
 
     /**
-     * 匹配任务列表，不匹配group,name同时为空的情况
+     * 查询任务列表
      *
      * @param group 组名
      * @param name  任务名
      * @return jobKey list
      */
-    private List<JobKey> getJobKeys(String group, String name) {
+    @Override
+    public List<JobKey> getJobKeys(String group, String name) {
         List<JobKey> jobKeyList = new ArrayList<>();
 
         try {

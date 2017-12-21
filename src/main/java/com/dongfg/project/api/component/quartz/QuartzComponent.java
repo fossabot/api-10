@@ -21,6 +21,15 @@ public interface QuartzComponent {
     void submitJob(CronJob cronJob);
 
     /**
+     * 查询任务列表
+     *
+     * @param group 组名
+     * @param name  任务名(可选)
+     * @return 任务列表
+     */
+    List<JobKey> getJobKeys(String group, String name);
+
+    /**
      * 删除任务
      *
      * @param group 组名
