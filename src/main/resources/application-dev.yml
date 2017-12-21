@@ -7,9 +7,9 @@ spring:
       port: 27017
       database: apidb
   datasource:
-    url: jdbc:mysql://rm-bp129vuze8x7eij3ao.mysql.rds.aliyuncs.com/api_base_dev?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: api_base
-    password: C4LMZ4b3
+    url: jdbc:mysql://127.0.0.1/api?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: changeit
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       pool-name: springBootHikariPool
