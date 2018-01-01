@@ -28,4 +28,10 @@ public interface Constants {
          */
         int NETWORK_ERROR = 999;
     }
+
+    interface MessageLevel {
+        String INFO = "INFO";
+        String WARN = "WARN";
+        String ERROR = "ERROR";
+    }
 }

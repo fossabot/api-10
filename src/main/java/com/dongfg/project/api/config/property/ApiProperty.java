@@ -36,4 +36,14 @@ public class ApiProperty {
      * 小程序密钥
      */
     private String wechatAppSecret;
+
+    /**
+     * 信鸽推送应用
+     */
+    private long xingeAccessId;
+
+    /**
+     * 信鸽推送密钥
+     */
+    private String xingeSecret;
 }
