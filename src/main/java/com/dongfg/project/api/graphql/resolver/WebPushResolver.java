@@ -22,7 +22,7 @@ import java.security.GeneralSecurityException;
 @Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class WebPushMutationResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
+public class WebPushResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     @NonNull
     private WebPushService webPushService;

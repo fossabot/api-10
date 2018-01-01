@@ -1,0 +1,12 @@
+extend type Mutation {
+    # 推送消息
+    xingePush(otpCode: Int!, account: String!, messageInfo: MessageInfoInput!):PushResult
+}
+
+input MessageInfoInput {
+    title: String
+    content: String
+    catalog: String
+    level: String
+    time: String
+}
