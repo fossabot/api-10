@@ -1,27 +1,15 @@
 extend type Query {
     # 加载所有用户token
-    loadTokens(authToken: String!):[Token]
+    totpTokens(authToken: String!): [TotpToken]
 }
 
 extend type Mutation {
+    # 微信登录返回auth-totpToken
+    wechatLogin(code: String): SessionPayload
     # 添加token
-    addToken(authToken: String!,token:TokenInput!): Token
+    createToken(authToken: String!,input: CreateTotpTokenInput!): TotpToken
     # 更新token
-    updateToken(authToken: String!,id: String!,token:TokenInput!): Token
+    updateToken(authToken: String!,input: UpdateTotpTokenInput!): TotpToken
     # 删除token
-    removeToken(authToken: String!,id: String!): Token
-}
-
-type Token {
-    id: String
-    openId: String
-    appName: String
-    userName: String
-    secretKey: String
-}
-
-input TokenInput {
-    appName: String
-    userName: String
-    secretKey: String
+    removeToken(authToken: String!,id: String!): TotpToken
 }

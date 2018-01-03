@@ -35,20 +35,20 @@ public class QuartzResolver implements GraphQLQueryResolver, GraphQLMutationReso
      * @param name  任务名
      * @return affect jobKeys
      */
-    public List<JobKey> getJobKeys(String group, String name) {
+    public List<JobKey> jobKeys(String group, String name) {
         return quartzComponent.getJobKeys(group, name);
     }
 
     /**
      * 删除任务
      *
-     * @param otpCode 两步验证令牌
-     * @param group   组名
-     * @param name    任务名
+     * @param totpCode 两步验证令牌
+     * @param group    组名
+     * @param name     任务名
      * @return affect jobKeys
      */
-    public List<JobKey> removeJob(int otpCode, String group, String name) {
-        if (!commonService.validateOtpCode(otpCode)) {
+    public List<JobKey> removeJob(int totpCode, String group, String name) {
+        if (commonService.invalidOtpCode(totpCode)) {
             throw new RuntimeException("invalid otp code");
         }
 
@@ -58,13 +58,13 @@ public class QuartzResolver implements GraphQLQueryResolver, GraphQLMutationReso
     /**
      * 暂停任务
      *
-     * @param otpCode 两步验证令牌
-     * @param group   组名
-     * @param name    任务名
+     * @param totpCode 两步验证令牌
+     * @param group    组名
+     * @param name     任务名
      * @return affect jobKeys
      */
-    public List<JobKey> pauseJob(int otpCode, String group, String name) {
-        if (!commonService.validateOtpCode(otpCode)) {
+    public List<JobKey> pauseJob(int totpCode, String group, String name) {
+        if (commonService.invalidOtpCode(totpCode)) {
             throw new RuntimeException("invalid otp code");
         }
 
@@ -74,13 +74,13 @@ public class QuartzResolver implements GraphQLQueryResolver, GraphQLMutationReso
     /**
      * 恢复任务
      *
-     * @param otpCode 两步验证令牌
-     * @param group   组名
-     * @param name    任务名
+     * @param totpCode 两步验证令牌
+     * @param group    组名
+     * @param name     任务名
      * @return affect jobKeys
      */
-    public List<JobKey> resumeJob(int otpCode, String group, String name) {
-        if (!commonService.validateOtpCode(otpCode)) {
+    public List<JobKey> resumeJob(int totpCode, String group, String name) {
+        if (commonService.invalidOtpCode(totpCode)) {
             throw new RuntimeException("invalid otp code");
         }
 

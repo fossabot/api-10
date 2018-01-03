@@ -1,8 +1,8 @@
 package com.dongfg.project.api.component;
 
 import com.dongfg.project.api.config.property.ApiProperty;
-import com.dongfg.project.api.entity.MessageInfo;
-import com.tencent.xinge.Message;
+import com.dongfg.project.api.dto.CommonResponse;
+import com.dongfg.project.api.graphql.type.Message;
 import com.tencent.xinge.Style;
 import com.tencent.xinge.XingeApp;
 import lombok.NonNull;
@@ -37,24 +37,28 @@ public class XingeComponent {
         xingeApp = new XingeApp(apiProperty.getXingeAccessId(), apiProperty.getXingeSecret());
     }
 
-    public void sendMessage(String account, MessageInfo messageInfo) {
-        Message message = new Message();
-        message.setType(Message.TYPE_NOTIFICATION);
-        message.setTitle(messageInfo.getTitle());
-        message.setContent(messageInfo.getContent());
-        message.setCustom(buildCustom(messageInfo));
+    public CommonResponse sendMessage(Message input) {
+        com.tencent.xinge.Message message = new com.tencent.xinge.Message();
+        message.setType(com.tencent.xinge.Message.TYPE_NOTIFICATION);
+        message.setTitle(input.getTitle());
+        message.setContent(input.getContent());
+        message.setCustom(buildCustom(input));
         message.setStyle(new Style(3, 1, 0, 1, 0));
-        JSONObject pushResult = xingeApp.pushSingleAccount(0, account, message);
-        log.info("XingeComponent#sendMessage:{}",pushResult.toString());
+        JSONObject pushResult = xingeApp.pushSingleAccount(0, input.getReceiver(), message);
+        log.info("XingeComponent#sendMessage:{}", pushResult.toString());
+        return CommonResponse.builder()
+                .success(pushResult.getInt("ret_code") == 0)
+                .msg(pushResult.optString("err_msg", null))
+                .build();
     }
 
-    private Map<String, Object> buildCustom(MessageInfo messageInfo) {
-        Map<String, Object> custom = new HashMap<>();
-        custom.put("title", messageInfo.getTitle());
-        custom.put("content", messageInfo.getContent());
-        custom.put("catalog", messageInfo.getCatalog());
-        custom.put("level", messageInfo.getLevel());
-        custom.put("time", messageInfo.getTime());
+    private Map<String, Object> buildCustom(Message message) {
+        Map<String, Object> custom = new HashMap<>(5);
+        custom.put("title", message.getTitle());
+        custom.put("content", message.getContent());
+        custom.put("catalog", message.getCatalog());
+        custom.put("level", message.getLevel());
+        custom.put("time", message.getTime());
         return custom;
     }
 }

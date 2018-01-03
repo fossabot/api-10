@@ -2,11 +2,11 @@ package com.dongfg.project.api.graphql.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.dongfg.project.api.graphql.payload.MessagePayload;
 import com.dongfg.project.api.graphql.type.Message;
-import com.dongfg.project.api.graphql.type.Sms;
+import com.dongfg.project.api.graphql.type.PushSubscription;
 import com.dongfg.project.api.service.CommonService;
 import com.dongfg.project.api.service.MessageService;
-import com.dongfg.project.api.util.RamRateLimiter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,32 +14,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * 统一消息发送
+ *
  * @author dongfg
- * @date 17-11-22
+ * @date 18-1-2
  */
 @Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SmsResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
+public class MessageResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
     @NonNull
     private CommonService commonService;
 
     @NonNull
     private MessageService messageService;
 
-    public Sms sendSms(int otpCode, Sms input) {
-        if (!RamRateLimiter.acquire(RamRateLimiter.LIMIT_KEY_SMS)) {
-            throw new RuntimeException("access rate limit exceeded");
-        }
-        if (commonService.invalidOtpCode(otpCode)) {
+    /**
+     * 浏览器通知订阅(允许)
+     *
+     * @param subscription web browser subscription
+     * @return result
+     */
+    public MessagePayload savePushSubscription(PushSubscription subscription) {
+        return messageService.savePushSubscription(subscription);
+    }
+
+    public MessagePayload sendMessage(int totpCode, Message input) {
+        if (commonService.invalidOtpCode(totpCode)) {
             throw new RuntimeException("invalid otp code");
         }
 
-        Message message = Message.builder()
-                .receiver(input.getMobile())
-                .content(input.getContent())
-                .build();
-        messageService.sendMessage(message);
-        return input;
+        return messageService.sendMessage(input);
     }
+
 }

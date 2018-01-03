@@ -1,0 +1,11 @@
+# message payload
+type MessagePayload {
+    success: Boolean!
+    msg: String
+}
+
+# coolhub 登录token
+type SessionPayload {
+    code: Int
+    sessionId: String
+}

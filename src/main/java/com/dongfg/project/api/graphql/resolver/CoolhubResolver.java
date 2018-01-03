@@ -3,7 +3,8 @@ package com.dongfg.project.api.graphql.resolver;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.entity.WechatSession;
-import com.dongfg.project.api.graphql.type.Token;
+import com.dongfg.project.api.graphql.payload.SessionPayload;
+import com.dongfg.project.api.graphql.type.TotpToken;
 import com.dongfg.project.api.service.CoolhubService;
 import com.dongfg.project.api.service.WechatService;
 import com.dongfg.project.api.util.SecurityContextHolder;
@@ -30,34 +31,38 @@ public class CoolhubResolver implements GraphQLQueryResolver, GraphQLMutationRes
     @NonNull
     private CoolhubService coolhubService;
 
-    public List<Token> loadTokens(String authToken) {
+    public SessionPayload wechatLogin(String code) {
+        return wechatService.wechatLogin(code);
+    }
+
+    public List<TotpToken> totpTokens(String authToken) {
         checkSession(authToken);
         try {
-            return coolhubService.loadTokens();
+            return coolhubService.tokens();
         } finally {
             SecurityContextHolder.removeCurrent();
         }
     }
 
-    public Token addToken(String authToken, Token token) {
+    public TotpToken createToken(String authToken, TotpToken input) {
         checkSession(authToken);
         try {
-            return coolhubService.addToken(token);
+            return coolhubService.createToken(input);
         } finally {
             SecurityContextHolder.removeCurrent();
         }
     }
 
-    public Token updateToken(String authToken, String id, Token token) {
+    public TotpToken updateToken(String authToken, TotpToken input) {
         checkSession(authToken);
         try {
-            return coolhubService.updateToken(id, token);
+            return coolhubService.updateToken(input);
         } finally {
             SecurityContextHolder.removeCurrent();
         }
     }
 
-    public Token removeToken(String authToken, String id) {
+    public TotpToken removeToken(String authToken, String id) {
         checkSession(authToken);
         try {
             return coolhubService.removeToken(id);

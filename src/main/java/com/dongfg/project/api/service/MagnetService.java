@@ -1,6 +1,6 @@
 package com.dongfg.project.api.service;
 
-import com.dongfg.project.api.graphql.type.BtInfo;
+import com.dongfg.project.api.graphql.type.Magnet;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -27,14 +27,14 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
-public class BtService {
+public class MagnetService {
 
     private static final int MAX_SIZE = 5 * 1024;
     private static final String SIZE_UNIT_BG = "GB";
 
-    @Cacheable("btSearch")
-    public BtInfo btSearch(String keyWords) {
-        BtInfo btInfo = null;
+    @Cacheable("searchByKeyWords")
+    public Magnet searchByKeyWords(String keyWords) {
+        Magnet magnet = null;
 
 
         String encodeKeyWords = null;
@@ -48,9 +48,9 @@ public class BtService {
         try {
             Document doc = Jsoup.connect(url).get();
             Elements resultItems = doc.select(".search-ret-item");
-            List<BtInfo> btInfoList = new ArrayList<>();
+            List<Magnet> magnetList = new ArrayList<>();
             resultItems.stream().limit(5).forEach(item -> {
-                BtInfo info = new BtInfo();
+                Magnet info = new Magnet();
                 info.setTitle(item.select(".item-title > a").first().attr("title"));
                 info.setInfoUrl("http://btdb.to" + item.select(".item-title > a").first().attr("href"));
                 info.setMagnet(item.select(".item-meta-info > a").first().attr("href"));
@@ -66,22 +66,22 @@ public class BtService {
                     // ignore
                 }
 
-                btInfoList.add(info);
+                magnetList.add(info);
             });
-            btInfo = choose(btInfoList);
-            btInfo.setKeyWords(keyWords);
+            magnet = choose(magnetList);
+            magnet.setKeyWords(keyWords);
         } catch (IOException e) {
             log.error("Jsoup.connect exception", e);
         }
-        return btInfo;
+        return magnet;
     }
 
-    private BtInfo choose(List<BtInfo> btInfoList) {
-        if (btInfoList.isEmpty()) {
-            return new BtInfo();
+    private Magnet choose(List<Magnet> magnetList) {
+        if (magnetList.isEmpty()) {
+            return new Magnet();
         }
 
-        btInfoList.forEach(i -> {
+        magnetList.forEach(i -> {
             if (i.getSize().contains(SIZE_UNIT_BG)) {
                 i.setSize("" + Double.parseDouble(i.getSize().split(" ")[0]) * 1000);
             } else {
@@ -89,22 +89,22 @@ public class BtService {
             }
         });
 
-        Optional<BtInfo> result = btInfoList.stream().sorted(Comparator.comparing(info -> Double.valueOf(info.getSize()), Comparator.reverseOrder())).
-                filter(btInfo -> {
+        Optional<Magnet> result = magnetList.stream().sorted(Comparator.comparing(info -> Double.valueOf(info.getSize()), Comparator.reverseOrder())).
+                filter(magnet -> {
                     boolean filter = true;
                     // exclude iso format
-                    for (String f : btInfo.getFiles()) {
+                    for (String f : magnet.getFiles()) {
                         if (f.endsWith(".iso") || f.endsWith(".ISO")) {
                             filter = false;
                             break;
                         }
                     }
                     // exclude size too big
-                    if (Double.valueOf(btInfo.getSize()) > MAX_SIZE) {
+                    if (Double.valueOf(magnet.getSize()) > MAX_SIZE) {
                         filter = false;
                     }
                     return filter;
                 }).findFirst();
-        return result.orElse(new BtInfo());
+        return result.orElse(new Magnet());
     }
 }

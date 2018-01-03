@@ -1,18 +1,13 @@
 extend type Query {
     # 查询任务列表
-    getJobKeys(group: String,name: String): [JobKey]
-
-    # 删除任务
-    removeJob(otpCode: Int!, group: String,name: String): [JobKey]
-
-    # 暂停任务
-    pauseJob(otpCode: Int!, group: String,name: String): [JobKey]
-
-    # 恢复任务
-    resumeJob(otpCode: Int!, group: String,name: String): [JobKey]
+    jobKeys(group: String,name: String): [JobKey]
 }
 
-type JobKey {
-    group: String
-    name: String
+extend type Mutation {
+    # 暂停任务
+    pauseJob(totpCode: Int!, group: String,name: String): [JobKey]
+    # 恢复任务
+    resumeJob(totpCode: Int!, group: String,name: String): [JobKey]
+    # 删除任务
+    removeJob(totpCode: Int!, group: String,name: String): [JobKey]
 }

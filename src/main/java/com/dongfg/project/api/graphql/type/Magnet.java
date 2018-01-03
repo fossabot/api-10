@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2017/10/15
  */
 @Data
-public class BtInfo {
+public class Magnet {
     private String keyWords;
     private String magnet;
 

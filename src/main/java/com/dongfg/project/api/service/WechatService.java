@@ -3,7 +3,7 @@ package com.dongfg.project.api.service;
 import com.dongfg.project.api.component.WechatComponent;
 import com.dongfg.project.api.dto.Code2SessionResponse;
 import com.dongfg.project.api.entity.WechatSession;
-import com.dongfg.project.api.graphql.type.SessionResponse;
+import com.dongfg.project.api.graphql.payload.SessionPayload;
 import com.dongfg.project.api.repository.WechatSessionRepository;
 import com.dongfg.project.api.util.Constants;
 import io.undertow.server.session.SecureRandomSessionIdGenerator;
@@ -41,8 +41,8 @@ public class WechatService {
      * @param code wechat code
      * @return 3rd session
      */
-    public SessionResponse wechatLogin(String code) {
-        SessionResponse session = new SessionResponse();
+    public SessionPayload wechatLogin(String code) {
+        SessionPayload session = new SessionPayload();
         session.setCode(Constants.CodeConstants.SUCCESS);
         Optional<Code2SessionResponse> sessionOptional = wechatComponent.code2Session(code);
         if (!sessionOptional.isPresent()) {

@@ -19,10 +19,10 @@ import org.springframework.stereotype.Component;
 public class TotpResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     private static final String OTP_AUTH_FORMAT = "otpauth://totp/%s:@%s?secret=%s";
-    private static GoogleAuthenticator googleAuthenticator = new GoogleAuthenticator();
+    private static final GoogleAuthenticator GOOGLE_AUTHENTICATOR = new GoogleAuthenticator();
 
     public SecretKey createSecretKey(String site, String username) {
-        String secret = googleAuthenticator.createCredentials().getKey();
+        String secret = GOOGLE_AUTHENTICATOR.createCredentials().getKey();
         String otpAuthString = String.format(OTP_AUTH_FORMAT, site, username, secret);
         return SecretKey.builder()
                 .secret(secret)
@@ -30,6 +30,6 @@ public class TotpResolver implements GraphQLQueryResolver, GraphQLMutationResolv
     }
 
     public boolean validateCode(String secretKey, int code) {
-        return googleAuthenticator.authorize(secretKey, code);
+        return GOOGLE_AUTHENTICATOR.authorize(secretKey, code);
     }
 }

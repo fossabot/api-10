@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Builder
 @Document(collection = "token")
-public class Token {
+public class TotpToken {
     @Id
     private String id;
     private String openId;

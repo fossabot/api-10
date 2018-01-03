@@ -1,4 +1,4 @@
-package com.dongfg.project.api.graphql.type;
+package com.dongfg.project.api.graphql.payload;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  * @date 17-11-22
  */
 @Data
-public class SessionResponse {
+public class SessionPayload {
     private int code;
     private String sessionId;
 }

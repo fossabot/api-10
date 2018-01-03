@@ -1,0 +1,58 @@
+# 评论
+input CreateCommentInput {
+    # 评论内容
+    comment: String!
+    # 昵称
+    name: String!
+    # 邮件地址
+    email: String
+}
+
+# coolhub create totp Token
+input CreateTotpTokenInput {
+    # 应用名
+    appName: String!
+    # 用户名
+    userName: String
+    # totp 密钥
+    secretKey: String!
+}
+
+# coolhub update totp Token
+input UpdateTotpTokenInput {
+    # 主键ID
+    id: String!
+    # 应用名
+    appName: String
+    # 用户名
+    userName: String
+    # totp 密钥
+    secretKey: String
+}
+
+# 手机短信(废弃，查看sendMessage)
+input SmsInput {
+    # 手机号
+    mobile: String! @deprecated
+    # 内容
+    content: String!
+}
+
+# web通知订阅
+input PushSubscriptionInput {
+    endpoint: String!
+    p256dh: String!
+    auth: String!
+}
+
+# app消息推送
+input SendMessageInput {
+    # 消息接收者，WEB类型消息不传
+    receiver: String
+    type: MessageType!
+    title: String!
+    content: String!
+    catalog: String
+    level: MessageLevel
+    time: String
+}

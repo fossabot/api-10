@@ -50,7 +50,7 @@ function updateSubscriptionOnServer(subscription) {
         var auth = subscriptionJson.keys.auth;
         $.post({
             url: '/graphql',
-            data: JSON.stringify({"query":"mutation { savePushSubscription(subscription: {endpoint: \""+endpoint+"\", p256dh: \""+p256dh+"\", auth: \""+auth+"\"}) }","variables":null}),
+            data: JSON.stringify({"query":"mutation { savePushSubscription(subscription: {endpoint: \""+endpoint+"\", p256dh: \""+p256dh+"\", auth: \""+auth+"\"}){success} }","variables":null}),
             contentType: 'application/json'
         }).done(function(response) {
             console.log('SavePushSubscription:', response.data.savePushSubscription);

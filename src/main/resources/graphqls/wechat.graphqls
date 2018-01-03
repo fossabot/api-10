@@ -1,9 +1,0 @@
-extend type Mutation {
-    # 微信登录返回auth-token
-    wechatLogin(code: String): SessionResponse
-}
-
-type SessionResponse {
-    code: Int
-    sessionId: String
-}

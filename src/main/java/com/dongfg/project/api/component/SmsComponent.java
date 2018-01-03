@@ -1,8 +1,7 @@
-package com.dongfg.project.api.service;
+package com.dongfg.project.api.component;
 
 import com.dongfg.project.api.config.property.ApiProperty;
-import com.dongfg.project.api.graphql.type.Sms;
-import com.dongfg.project.api.repository.SmsRepository;
+import com.dongfg.project.api.dto.CommonResponse;
 import com.yunpian.sdk.YunpianClient;
 import com.yunpian.sdk.model.Result;
 import com.yunpian.sdk.model.SmsSingleSend;
@@ -11,10 +10,9 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,15 +21,12 @@ import java.util.stream.Collectors;
  * @author dongfg
  * @date 2017/10/15
  */
-@Service
+@Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
-public class SmsService {
+public class SmsComponent {
     @NonNull
     private ApiProperty apiProperty;
-
-    @NonNull
-    private SmsRepository smsRepository;
 
     private YunpianClient client;
 
@@ -40,15 +35,15 @@ public class SmsService {
         client = new YunpianClient(apiProperty.getYunpianApikey()).init();
     }
 
-    public Sms sendSms(Sms input) {
+    public CommonResponse sendMessage(String mobile, String content) {
         Map<String, String> param = client.newParam(2);
-        param.put(YunpianClient.MOBILE, input.getMobile());
-        param.put(YunpianClient.TEXT, input.getContent());
+        param.put(YunpianClient.MOBILE, mobile);
+        param.put(YunpianClient.TEXT, content);
         Result<SmsSingleSend> r = client.sms().single_send(param);
-
-        input.setCreateTime(new Date());
-        input.setResult(r.getMsg());
-        return smsRepository.save(input);
+        return CommonResponse.builder()
+                .success(r.isSucc())
+                .msg(r.getMsg())
+                .build();
     }
 
     public List<String> smsTplList() {
