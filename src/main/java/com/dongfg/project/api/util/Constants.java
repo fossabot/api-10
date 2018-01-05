@@ -83,4 +83,8 @@ public interface Constants {
                         "Build: %s\n" +
                         "Commit: %s";
     }
+
+    interface DateTimeFormat {
+        String ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    }
 }

@@ -30,6 +30,15 @@ public interface QuartzComponent {
     List<JobKey> getJobKeys(String group, String name);
 
     /**
+     * 检查任务是否存在
+     *
+     * @param group 组名
+     * @param name 任务名
+     * @return 任务存在true
+     */
+    boolean checkExists(String group, String name);
+
+    /**
      * 删除任务
      *
      * @param group 组名

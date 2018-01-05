@@ -51,4 +51,9 @@ public class ApiProperty {
      * app消息推送的用户
      */
     private String appPushAccount;
+
+    /**
+     * github 访问密钥
+     */
+    private String githubAccessToken;
 }

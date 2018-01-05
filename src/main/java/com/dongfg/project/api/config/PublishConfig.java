@@ -36,5 +36,4 @@ public class PublishConfig {
 
         messageService.sendMessage(message);
     }
-
 }

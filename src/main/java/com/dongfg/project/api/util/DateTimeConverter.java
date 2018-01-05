@@ -4,9 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.util.Date;
 
 /**
@@ -16,8 +14,8 @@ import java.util.Date;
 @Slf4j
 public class DateTimeConverter {
 
+    public static final String ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     private static final ZoneOffset UTC_8 = ZoneOffset.of("+8");
-
     private static final String STANDARD_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     /**
@@ -72,12 +70,37 @@ public class DateTimeConverter {
      * @return 日期
      */
     public static Date parseDate(String dateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(STANDARD_FORMAT);
+        return parseDate(dateStr, STANDARD_FORMAT);
+    }
+
+    /**
+     * 日期格式化
+     *
+     * @param dateStr 日期字符串
+     * @param format  日期格式
+     * @return 日期
+     */
+    public static Date parseDate(String dateStr, String format) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         try {
             return dateFormat.parse(dateStr);
         } catch (ParseException e) {
-            log.error("unable to parse date '{}' by format '{}'", dateStr, dateFormat);
+            log.error("unable to parse date '{}' by format '{}'", dateStr, format);
             return null;
         }
+    }
+
+    /**
+     * 判断日期是否在本周
+     *
+     * @param dateTime 日期
+     * @return 本周true
+     */
+    public static boolean currentWeek(LocalDateTime dateTime) {
+        LocalDate localDate = dateTime.toLocalDate();
+        LocalDate now = LocalDate.now();
+        LocalDate monday = now.with(DayOfWeek.MONDAY);
+
+        return localDate.compareTo(monday) >= 0;
     }
 }

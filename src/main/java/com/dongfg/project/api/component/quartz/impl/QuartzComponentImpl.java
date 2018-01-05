@@ -180,4 +180,20 @@ public class QuartzComponentImpl implements QuartzComponent {
 
         return jobKeyList;
     }
+
+    /**
+     * 检查任务是否存在
+     *
+     * @param group 组名
+     * @param name 任务名
+     * @return 任务存在true
+     */
+    @Override
+    public boolean checkExists(String group, String name) {
+        try {
+            return scheduler.checkExists(JobKey.jobKey(name, group));
+        } catch (SchedulerException ignore) {
+        }
+        return false;
+    }
 }
