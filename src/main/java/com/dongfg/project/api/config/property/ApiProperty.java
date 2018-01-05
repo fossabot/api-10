@@ -46,4 +46,9 @@ public class ApiProperty {
      * 信鸽推送密钥
      */
     private String xingeSecret;
+
+    /**
+     * app消息推送的用户
+     */
+    private String appPushAccount;
 }

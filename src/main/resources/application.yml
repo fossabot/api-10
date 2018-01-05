@@ -12,6 +12,7 @@ api:
   wechat-app-secret: ENC(dznMxUcHF379Fi9PQs46SmnRg6/ZXv8nb+KfBS/AIuVlmgKltlDXHYJ89bF3OWgi)
   xinge-access-id: ENC(D4M7rMHZcXDfxwn5chp/UZKYyQ919x0s)
   xinge-secret: ENC(Vf2bPjs2WbP5mY0dQqjyEbRoKMUFlf4YxTXgPUYF8dKLvglAMpdCnP3rkOV/wAe5)
+  app-push-account: ENC(Ek9EGeR8tWOKUn9xEVrJYA==)
 fastjson:
   charset: UTF-8
   date-format: yyyy-MM-dd HH:mm:ss

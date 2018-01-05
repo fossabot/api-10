@@ -57,7 +57,7 @@ public class XingeComponent {
         custom.put("title", message.getTitle());
         custom.put("content", message.getContent());
         custom.put("catalog", message.getCatalog());
-        custom.put("level", message.getLevel());
+        custom.put("level", message.getLevel().name());
         custom.put("time", message.getTime());
         return custom;
     }

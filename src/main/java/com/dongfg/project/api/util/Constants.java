@@ -34,4 +34,53 @@ public interface Constants {
         String WARN = "WARN";
         String ERROR = "ERROR";
     }
+
+    interface TravisStatus {
+        /**
+         * A build has been requested
+         */
+        String PENDING = "Pending";
+
+        /**
+         * The build completed successfully
+         */
+        String PASSED = "Passed";
+
+        /**
+         * The build completed successfully after a previously failed build
+         */
+        String FIXED = "Fixed";
+
+        /**
+         * The build completed in failure after a previously successful build
+         */
+        String BROKEN = "Broken";
+
+        /**
+         * The build is the first build for a new branch and has failed
+         */
+        String FAILED = "Failed";
+
+        /**
+         * The build completed in failure after a previously failed build
+         */
+        String STILL_FAILING = "Still Failing";
+
+        /**
+         * The build was canceled
+         */
+        String CANCELED = "Canceled";
+
+        /**
+         * The build has errored
+         */
+        String ERRORED = "Errored";
+    }
+
+    interface MessageTemplate {
+        String TRAVIS_CI_BUILD =
+                "Repo: %s\n" +
+                        "Build: %s\n" +
+                        "Commit: %s";
+    }
 }
