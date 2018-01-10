@@ -8,8 +8,6 @@ import com.dongfg.project.api.repository.WechatSessionRepository;
 import com.dongfg.project.api.util.Constants;
 import io.undertow.server.session.SecureRandomSessionIdGenerator;
 import io.undertow.server.session.SessionIdGenerator;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +22,14 @@ import java.util.Optional;
  */
 @Service
 @Slf4j
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WechatService {
 
     private static final SessionIdGenerator SESSION_ID_GENERATOR = new SecureRandomSessionIdGenerator();
 
-    @NonNull
+    @Autowired
     private WechatComponent wechatComponent;
 
-    @NonNull
+    @Autowired
     private WechatSessionRepository wechatSessionRepository;
 
     /**

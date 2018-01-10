@@ -15,6 +15,7 @@ import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,6 +31,7 @@ import java.util.List;
  * @date 18-1-3
  */
 @Component
+@Profile("prd")
 public class GithubCommitJob extends BaseScheduleJob implements Job {
 
     private static final String GITHUB_API = "https://api.github.com";
@@ -87,7 +89,7 @@ public class GithubCommitJob extends BaseScheduleJob implements Job {
                                 .type(MessageType.APP)
                                 .title("GitHub每周提交任务")
                                 .content(expandMessage(variables))
-                                .catalog("Github")
+                                .catalog(Constants.MessageCatalog.GITHUB)
                                 .level(MessageLevel.INFO)
                                 .time(DateTimeConverter.formatDate(new Date()))
                                 .build();

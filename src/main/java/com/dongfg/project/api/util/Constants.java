@@ -84,6 +84,11 @@ public interface Constants {
                         "Commit: %s";
     }
 
+    interface MessageCatalog {
+        String GITHUB = "GitHub";
+        String RSS = "rss";
+    }
+
     interface DateTimeFormat {
         String ISO_8601_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     }

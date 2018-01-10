@@ -4,8 +4,6 @@ import com.dongfg.project.api.graphql.type.Message;
 import com.dongfg.project.api.graphql.type.MessageLevel;
 import com.dongfg.project.api.graphql.type.MessageType;
 import com.dongfg.project.api.service.MessageService;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -18,12 +16,11 @@ import org.springframework.context.event.EventListener;
  * @date 17-11-9
  */
 @Configuration
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@Slf4j
 @Profile("prd")
+@Slf4j
 public class PublishConfig {
 
-    @NonNull
+    @Autowired
     private MessageService messageService;
 
     @EventListener(ApplicationReadyEvent.class)

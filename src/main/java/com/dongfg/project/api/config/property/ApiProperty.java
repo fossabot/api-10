@@ -1,8 +1,12 @@
 package com.dongfg.project.api.config.property;
 
+import com.dongfg.project.api.entity.AtomRssInfo;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author dongfg
@@ -56,4 +60,6 @@ public class ApiProperty {
      * github 访问密钥
      */
     private String githubAccessToken;
+
+    private List<AtomRssInfo> rssList = new ArrayList<>();
 }

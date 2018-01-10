@@ -5,9 +5,8 @@ import com.dongfg.project.api.dto.CommonResponse;
 import com.dongfg.project.api.graphql.type.Message;
 import com.tencent.xinge.Style;
 import com.tencent.xinge.XingeApp;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,11 +22,10 @@ import java.util.Map;
  * @date 2018/1/1
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class XingeComponent {
 
-    @NonNull
+    @Autowired
     private ApiProperty apiProperty;
 
     private XingeApp xingeApp;
@@ -42,6 +40,9 @@ public class XingeComponent {
         message.setType(com.tencent.xinge.Message.TYPE_NOTIFICATION);
         message.setTitle(input.getTitle());
         message.setContent(input.getContent());
+        if (StringUtils.isNotEmpty(input.getNotification())) {
+            message.setContent(input.getNotification());
+        }
         message.setCustom(buildCustom(input));
         message.setStyle(new Style(3, 1, 0, 1, 0));
         JSONObject pushResult = xingeApp.pushSingleAccount(0, input.getReceiver(), message);
@@ -60,5 +61,25 @@ public class XingeComponent {
         custom.put("level", message.getLevel().name());
         custom.put("time", message.getTime());
         return custom;
+    }
+
+    private static String cutString(String source, int len) {
+        byte[] byteArr = source.getBytes();
+        if (byteArr.length < len) {
+            return source;
+        }
+        int count = 0;
+        // 统计要截取的那部分字节中负数的个数
+        for (int i = 0; i < len; i++) {
+            if (byteArr[i] < 0) {
+                count++;
+            }
+        }
+        // 负数成对出现 则不会出现半个汉字
+        if (count % 2 == 0)
+            return new String(byteArr, 0, len);
+            // 负数个数不是偶数，则有半个汉字
+        else
+            return new String(byteArr, 0, len - 1);
     }
 }

@@ -6,8 +6,6 @@ import com.yunpian.sdk.YunpianClient;
 import com.yunpian.sdk.model.Result;
 import com.yunpian.sdk.model.SmsSingleSend;
 import com.yunpian.sdk.model.Template;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,10 +20,10 @@ import java.util.stream.Collectors;
  * @date 2017/10/15
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class SmsComponent {
-    @NonNull
+
+    @Autowired
     private ApiProperty apiProperty;
 
     private YunpianClient client;

@@ -6,8 +6,6 @@ import com.dongfg.project.api.graphql.type.Comment;
 import com.dongfg.project.api.service.CommonService;
 import graphql.schema.DataFetchingEnvironment;
 import graphql.servlet.GraphQLContext;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,11 +16,10 @@ import java.util.List;
  * @author dongfg
  * @date 17-11-22
  */
-@Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class CommonResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
-    @NonNull
+    @Autowired
     private CommonService commonService;
 
     public Comment createComment(Comment input, DataFetchingEnvironment env) {

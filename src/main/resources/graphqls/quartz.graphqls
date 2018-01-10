@@ -10,4 +10,6 @@ extend type Mutation {
     resumeJob(totpCode: Int!, group: String,name: String): [JobKey]
     # 删除任务
     removeJob(totpCode: Int!, group: String,name: String): [JobKey]
+    # 触发任务
+    triggerJob(totpCode: Int!, group: String,name: String): [JobKey]
 }

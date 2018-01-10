@@ -7,8 +7,6 @@ import com.dongfg.project.api.graphql.type.Sms;
 import com.dongfg.project.api.service.CommonService;
 import com.dongfg.project.api.service.MessageService;
 import com.dongfg.project.api.util.RamRateLimiter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,14 +15,13 @@ import org.springframework.stereotype.Component;
  * @author dongfg
  * @date 17-11-22
  */
-@Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class SmsResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
-    @NonNull
+    @Autowired
     private CommonService commonService;
 
-    @NonNull
+    @Autowired
     private MessageService messageService;
 
     public Sms sendSms(int otpCode, Sms input) {

@@ -3,8 +3,6 @@ package com.dongfg.project.api.service;
 import com.dongfg.project.api.graphql.type.TotpToken;
 import com.dongfg.project.api.repository.TokenRepository;
 import com.dongfg.project.api.util.SecurityContextHolder;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -18,13 +16,12 @@ import java.util.List;
  */
 @Service
 @Slf4j
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CoolhubService {
 
-    @NonNull
+    @Autowired
     private TokenRepository tokenRepository;
 
-    @NonNull
+    @Autowired
     private WechatService wechatService;
 
 

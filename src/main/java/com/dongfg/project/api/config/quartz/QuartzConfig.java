@@ -1,8 +1,5 @@
 package com.dongfg.project.api.config.quartz;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +15,7 @@ import java.util.Properties;
  * @date 17-12-21
  */
 @Configuration
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class QuartzConfig {
-
-    @NonNull
-    private DataSource dataSource;
 
     @Bean
     public Properties quartzProperties() throws IOException {
@@ -33,8 +26,8 @@ public class QuartzConfig {
     }
 
     @Bean
-    public SchedulerFactoryBean schedulerFactoryBean(AutowiringBeanQuartzJobFactory autowiringBeanQuartzJobFactory,
-                                                     Properties quartzProperties) {
+    public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource
+            , AutowiringBeanQuartzJobFactory autowiringBeanQuartzJobFactory, Properties quartzProperties) {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setBeanName("QuartzScheduler");
         schedulerFactoryBean.setQuartzProperties(quartzProperties);

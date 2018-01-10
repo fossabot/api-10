@@ -2,8 +2,6 @@ package com.dongfg.project.api.component.quartz.impl;
 
 import com.dongfg.project.api.component.quartz.QuartzComponent;
 import com.dongfg.project.api.component.quartz.builder.CronJob;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.*;
@@ -24,11 +22,10 @@ import java.util.stream.Collectors;
  * @date 17-12-21
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class QuartzComponentImpl implements QuartzComponent {
 
-    @NonNull
+    @Autowired
     private Scheduler scheduler;
 
     @Override
@@ -36,6 +33,10 @@ public class QuartzComponentImpl implements QuartzComponent {
 
         JobKey jobKey = JobKey.jobKey(cronJob.getName(), cronJob.getGroup());
         TriggerKey triggerKey = TriggerKey.triggerKey(cronJob.getName(), cronJob.getGroup());
+
+        if (cronJob.getJobDataMap() == null) {
+            cronJob.setJobDataMap(new JobDataMap());
+        }
 
         JobDetail job = JobBuilder.newJob(cronJob.getJobClass())
                 .withIdentity(jobKey)
@@ -185,7 +186,7 @@ public class QuartzComponentImpl implements QuartzComponent {
      * 检查任务是否存在
      *
      * @param group 组名
-     * @param name 任务名
+     * @param name  任务名
      * @return 任务存在true
      */
     @Override
@@ -195,5 +196,20 @@ public class QuartzComponentImpl implements QuartzComponent {
         } catch (SchedulerException ignore) {
         }
         return false;
+    }
+
+    @Override
+    public List<JobKey> triggerJob(@Nullable String group, @Nullable String name) {
+        List<JobKey> triggerList = new ArrayList<>();
+
+        List<JobKey> jobKeyList = getJobKeys(group, name);
+        jobKeyList.forEach(jobKey -> {
+            try {
+                scheduler.triggerJob(jobKey);
+                triggerList.add(jobKey);
+            } catch (SchedulerException ignore) {
+            }
+        });
+        return triggerList;
     }
 }

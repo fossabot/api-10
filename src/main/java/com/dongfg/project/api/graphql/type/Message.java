@@ -17,6 +17,7 @@ public class Message {
     private String receiver;
     private MessageType type;
     private String title;
+    private String notification;
     private String content;
     private String catalog;
     private MessageLevel level;

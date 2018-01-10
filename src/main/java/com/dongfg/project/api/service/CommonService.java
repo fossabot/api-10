@@ -5,8 +5,6 @@ import com.dongfg.project.api.graphql.type.Comment;
 import com.dongfg.project.api.repository.CommentRepository;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import com.warrenstrange.googleauth.GoogleAuthenticatorException;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +16,14 @@ import java.util.List;
  * @date 2017/10/15
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CommonService {
 
     private static final GoogleAuthenticator GOOGLE_AUTHENTICATOR = new GoogleAuthenticator();
 
-    @NonNull
+    @Autowired
     private CommentRepository commentRepository;
 
-    @NonNull
+    @Autowired
     private ApiProperty apiProperty;
 
     public Comment createComment(Comment input) {

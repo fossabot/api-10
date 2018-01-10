@@ -9,8 +9,6 @@ import com.dongfg.project.api.graphql.payload.MessagePayload;
 import com.dongfg.project.api.graphql.type.Message;
 import com.dongfg.project.api.graphql.type.PushSubscription;
 import com.dongfg.project.api.repository.PushSubscriptionRepository;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,20 +18,19 @@ import org.springframework.stereotype.Service;
  * @date 18-1-3
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class MessageService {
 
-    @NonNull
+    @Autowired
     private PushSubscriptionRepository pushSubscriptionRepository;
 
-    @NonNull
+    @Autowired
     private SmsComponent smsComponent;
 
-    @NonNull
+    @Autowired
     private WebPushComponent webPushComponent;
 
-    @NonNull
+    @Autowired
     private XingeComponent xingeComponent;
 
 

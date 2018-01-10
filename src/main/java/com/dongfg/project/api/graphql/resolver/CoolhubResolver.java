@@ -8,8 +8,6 @@ import com.dongfg.project.api.graphql.type.TotpToken;
 import com.dongfg.project.api.service.CoolhubService;
 import com.dongfg.project.api.service.WechatService;
 import com.dongfg.project.api.util.SecurityContextHolder;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,15 +18,14 @@ import java.util.List;
  * @author dongfg
  * @date 17-11-22
  */
-@Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class CoolhubResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    @NonNull
+    @Autowired
     private WechatService wechatService;
 
-    @NonNull
+    @Autowired
     private CoolhubService coolhubService;
 
     public SessionPayload wechatLogin(String code) {

@@ -2,8 +2,6 @@ package com.dongfg.project.api.component.webpush;
 
 import com.dongfg.project.api.config.property.ApiProperty;
 import com.dongfg.project.api.graphql.type.PushSubscription;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nl.martijndwars.webpush.Notification;
 import nl.martijndwars.webpush.Subscription;
@@ -22,7 +20,6 @@ import java.security.spec.InvalidKeySpecException;
  * @date 18-1-3
  */
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class WebPushComponent {
     private static final String VAPID_PUBLIC_KEY = "BLrIdg4o5HbVvDA7BkNqo4iXUaj0cYr9RU8/MLmPf/czBhfSElMN5LHQKeLlHBPYI77RX2nE0B56UUn92PgnnqY=";
@@ -36,7 +33,7 @@ public class WebPushComponent {
     @Value("${https.proxyPort:8118}")
     private int httpsProxyPort;
 
-    @NonNull
+    @Autowired
     private ApiProperty apiProperty;
 
     /**

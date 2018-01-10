@@ -11,8 +11,6 @@ import com.dongfg.project.api.graphql.type.MessageType;
 import com.dongfg.project.api.util.Constants;
 import com.dongfg.project.api.util.DateTimeConverter;
 import com.google.common.base.Joiner;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,14 +22,13 @@ import java.util.Date;
  * @date 18-1-5
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class WebhooksService {
 
-    @NonNull
+    @Autowired
     private MessageService messageService;
 
-    @NonNull
+    @Autowired
     private ApiProperty apiProperty;
 
     /**

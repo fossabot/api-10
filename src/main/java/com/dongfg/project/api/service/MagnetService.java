@@ -1,12 +1,10 @@
 package com.dongfg.project.api.service;
 
 import com.dongfg.project.api.graphql.type.Magnet;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +23,6 @@ import java.util.stream.Collectors;
  * @date 2017/10/15
  */
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class MagnetService {
 

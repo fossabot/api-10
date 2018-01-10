@@ -4,8 +4,6 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.component.quartz.QuartzComponent;
 import com.dongfg.project.api.service.CommonService;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobKey;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +17,12 @@ import java.util.List;
  */
 @Slf4j
 @Component
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class QuartzResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
-    @NonNull
+    @Autowired
     private CommonService commonService;
 
-    @NonNull
+    @Autowired
     private QuartzComponent quartzComponent;
 
     /**
@@ -85,5 +82,21 @@ public class QuartzResolver implements GraphQLQueryResolver, GraphQLMutationReso
         }
 
         return quartzComponent.resumeJob(group, name);
+    }
+
+    /**
+     * 触发任务
+     *
+     * @param totpCode 两步验证令牌
+     * @param group    组名
+     * @param name     任务名
+     * @return affect jobKeys
+     */
+    public List<JobKey> triggerJob(int totpCode, String group, String name) {
+        if (commonService.invalidOtpCode(totpCode)) {
+            throw new RuntimeException("invalid otp code");
+        }
+
+        return quartzComponent.triggerJob(group, name);
     }
 }
