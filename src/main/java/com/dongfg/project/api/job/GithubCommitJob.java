@@ -106,10 +106,10 @@ public class GithubCommitJob extends BaseScheduleJob implements Job {
     @Override
     List<String> messageTemplate() {
         ArrayList<String> template = new ArrayList<>();
-        template.add("当前状态：${status}");
-        template.add("最后一次提交");
-        template.add("仓库：${repo}");
-        template.add("提交日志：${commit}");
+        template.add("<p>当前状态：${status}</p>");
+        template.add("<p>最后一次提交</p>");
+        template.add("<p>仓库：${repo}</p>");
+        template.add("<p>提交日志：${commit}</p>");
         return template;
     }
 }
