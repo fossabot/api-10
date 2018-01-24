@@ -62,24 +62,4 @@ public class XingeComponent {
         custom.put("time", message.getTime());
         return custom;
     }
-
-    private static String cutString(String source, int len) {
-        byte[] byteArr = source.getBytes();
-        if (byteArr.length < len) {
-            return source;
-        }
-        int count = 0;
-        // 统计要截取的那部分字节中负数的个数
-        for (int i = 0; i < len; i++) {
-            if (byteArr[i] < 0) {
-                count++;
-            }
-        }
-        // 负数成对出现 则不会出现半个汉字
-        if (count % 2 == 0)
-            return new String(byteArr, 0, len);
-            // 负数个数不是偶数，则有半个汉字
-        else
-            return new String(byteArr, 0, len - 1);
-    }
 }

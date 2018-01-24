@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: dongfg-api
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        health-check-path: ${management.context-path}/health
+      config:
+        format: yaml
+        default-context: ${spring.application.name}
+        acl-token: ${spring.cloud.consul.discovery.acl-token}
+management:
+  security:
+    enabled: true
+  context-path: /management
+
+---
+spring:
+  profiles: dev
+  cloud:
+    consul:
+      discovery:
+        acl-token: 3014825d-5a7a-85af-c5f3-fcd18d1006a1
+---
+spring:
+  profiles: prd
+  cloud:
+    consul:
+      discovery:
+        acl-token: 0c8dc9e0-218a-8fc3-a2de-34579be0b440

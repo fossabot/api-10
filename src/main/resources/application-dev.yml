@@ -10,7 +10,7 @@ spring:
     url: ENC(7Nk66St/CEtjgX7XFKVaumYLHsXmGcRBRnoM8wMWRN71DMgcMTrNL7LZ+KFIuqdgu1DknBxBb9pQnRPCI8tWsX/SAa5/it5u2SY3xVoHxldUpfFvXx+5igms4lMbWFBkHCdZtOQcxoLPNAfvG832no5LiTpv0gKbXuuvU4QHG4xmo818nkKIWw==)
     username: ENC(jiYvQOIO+jyi+q6nx6cHH0phxsmgPzVS)
     password: ENC(RjO4gsWuiHL3q+WXfYWvEYG/vEigJj56)
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      pool-name: springBootHikariPool
-      maximum-pool-size: 10
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      max-active: 10

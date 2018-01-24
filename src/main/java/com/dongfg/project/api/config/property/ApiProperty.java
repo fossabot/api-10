@@ -3,6 +3,7 @@ package com.dongfg.project.api.config.property;
 import com.dongfg.project.api.entity.AtomRssInfo;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "api")
+@RefreshScope
 public class ApiProperty {
     /**
      * 云片短信发送
@@ -61,5 +63,13 @@ public class ApiProperty {
      */
     private String githubAccessToken;
 
+    /**
+     * atom rss list
+     */
     private List<AtomRssInfo> rssList = new ArrayList<>();
+
+    /**
+     * 后台地址
+     */
+    private String adminUrl;
 }

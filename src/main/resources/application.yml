@@ -1,27 +1,12 @@
-spring:
-  application:
-    name: dongfg-api
 graphql:
   servlet:
     mapping: /graphql
-api:
-  yunpian-apikey: ENC(SdRqyQmZvVTPouBik+ikEgvBfqFplkY+TfnGNlHSGDoq3i4cv7YG4npyRfkMjXlV)
-  private-vapid: ENC(1vVV8kAdLuKiY33Ugj1pcHATAK6va505UgwQeCoqqP05m3q2AyzxvPeKPBzo99OOBe5xTB+gy9U=)
-  otp-secret: ENC(aPFnyfbqUyNPM8hjmndCpmaL3ByYekieApYKOn3bK9A=)
-  wechat-app-id: ENC(VnefSkX9YEl7sxAGK09JnhzCHPvfkj1pJ7Q7wD4Efac=)
-  wechat-app-secret: ENC(dznMxUcHF379Fi9PQs46SmnRg6/ZXv8nb+KfBS/AIuVlmgKltlDXHYJ89bF3OWgi)
-  xinge-access-id: ENC(D4M7rMHZcXDfxwn5chp/UZKYyQ919x0s)
-  xinge-secret: ENC(Vf2bPjs2WbP5mY0dQqjyEbRoKMUFlf4YxTXgPUYF8dKLvglAMpdCnP3rkOV/wAe5)
-  app-push-account: ENC(Ek9EGeR8tWOKUn9xEVrJYA==)
-  rss-list:
-   - name: spring-boot
-     title: spring-boot release
-     url: https://github.com/spring-projects/spring-boot/releases.atom
-   - name: fastjson
-     title: fastjson release
-     url: https://github.com/alibaba/fastjson/releases.atom
 fastjson:
   charset: UTF-8
   date-format: yyyy-MM-dd HH:mm:ss
   serializer-features:
     - writedateusedateformat
+security:
+  user:
+    name: ENC(9H4p5VFHTgTbtyVfB0o0QA==)
+    password: ENC(MRBzREiLxWPJJrGo96ZjuooM6HeM8SgR)

@@ -40,6 +40,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AtomRssJob extends BaseScheduleJob implements Job {
 
+    private static final Pattern PATTERN_HTML = Pattern.compile("^.*(?<link><a.*>(?<text>.*)</a>).*$");
+
     @Autowired
     private AtomRssRepository atomRssRepository;
 
@@ -146,8 +148,7 @@ public class AtomRssJob extends BaseScheduleJob implements Job {
         StringBuilder builder = new StringBuilder();
         String[] lines = changelog.split("\n");
         for (String rawString : lines) {
-            Pattern pattern = Pattern.compile("^.*(?<link><a.*>(?<text>.*)</a>).*$");
-            Matcher matcher = pattern.matcher(rawString);
+            Matcher matcher = PATTERN_HTML.matcher(rawString);
 
             if (matcher.matches()) {
                 builder.append(rawString.replace(matcher.group("link"), matcher.group("text")));

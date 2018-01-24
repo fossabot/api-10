@@ -80,7 +80,7 @@ public class GithubCommitJob extends BaseScheduleJob implements Job {
                             , DateTimeFormatter.ofPattern(Constants.DateTimeFormat.ISO_8601_FORMAT));
                     String commitMessage = ((JSONObject) lastCommit).getJSONObject("commit").getString("message");
                     if (!DateTimeConverter.currentWeek(commitDate)) {
-                        HashMap<String, String> variables = new HashMap<>();
+                        HashMap<String, String> variables = new HashMap<>(3);
                         variables.put("status", "未完成");
                         variables.put("repo", repo);
                         variables.put("commit", commitMessage);

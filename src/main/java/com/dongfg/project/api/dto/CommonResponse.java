@@ -9,7 +9,9 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class CommonResponse {
+public class CommonResponse<T> {
     private boolean success;
     private String msg;
+
+    private T data;
 }
