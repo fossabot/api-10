@@ -1,7 +1,7 @@
 package com.dongfg.project.api.component;
 
 import com.dongfg.project.api.config.property.ApiProperty;
-import com.dongfg.project.api.dto.Code2SessionResponse;
+import com.dongfg.project.api.dto.response.Code2SessionResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

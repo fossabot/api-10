@@ -1,7 +1,7 @@
 package com.dongfg.project.api.service;
 
 import com.dongfg.project.api.component.WechatComponent;
-import com.dongfg.project.api.dto.Code2SessionResponse;
+import com.dongfg.project.api.dto.response.Code2SessionResponse;
 import com.dongfg.project.api.entity.WechatSession;
 import com.dongfg.project.api.graphql.payload.SessionPayload;
 import com.dongfg.project.api.repository.WechatSessionRepository;

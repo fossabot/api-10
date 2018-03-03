@@ -212,4 +212,29 @@ public class QuartzComponentImpl implements QuartzComponent {
         });
         return triggerList;
     }
+
+    /**
+     * 获取触发器
+     *
+     * @param group trigger 组名
+     * @param name  trigger 名
+     * @return 触发器信息
+     */
+    @Override
+    public Trigger getTrigger(String group, String name) throws SchedulerException {
+        return scheduler.getTrigger(TriggerKey.triggerKey(name, group));
+    }
+
+    /**
+     * 获取触发器状态
+     *
+     * @param group trigger 组名
+     * @param name  trigger 名
+     * @return 获取触发器状态
+     * @throws SchedulerException 获取失败
+     */
+    @Override
+    public Trigger.TriggerState getTriggerState(String group, String name) throws SchedulerException {
+        return scheduler.getTriggerState(TriggerKey.triggerKey(name, group));
+    }
 }

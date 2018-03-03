@@ -22,7 +22,7 @@ spring:
   cloud:
     consul:
       discovery:
-        acl-token: 3014825d-5a7a-85af-c5f3-fcd18d1006a1
+        acl-token: 8dadc47f-90d1-2951-f91e-f041243391a3
 ---
 spring:
   profiles: prd

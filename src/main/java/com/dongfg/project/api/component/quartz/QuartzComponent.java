@@ -2,8 +2,11 @@ package com.dongfg.project.api.component.quartz;
 
 import com.dongfg.project.api.component.quartz.builder.CronJob;
 import org.quartz.JobKey;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
 
 import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -73,4 +76,24 @@ public interface QuartzComponent {
      * @return 触发的任务
      */
     List<JobKey> triggerJob(@Nullable String group, @Nullable String name);
+
+    /**
+     * 获取触发器
+     *
+     * @param group trigger 组名
+     * @param name  trigger 名
+     * @return 触发器信息
+     * @throws SchedulerException 获取失败
+     */
+    Trigger getTrigger(@NotNull String group, @NotNull String name) throws SchedulerException;
+
+    /**
+     * 获取触发器状态
+     *
+     * @param group trigger 组名
+     * @param name  trigger 名
+     * @return 获取触发器状态
+     * @throws SchedulerException 获取失败
+     */
+    Trigger.TriggerState getTriggerState(@NotNull String group, @NotNull String name) throws SchedulerException;
 }

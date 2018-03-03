@@ -1,7 +1,6 @@
 package com.dongfg.project.api.graphql.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.graphql.type.SecretKey;
 import com.warrenstrange.googleauth.GoogleAuthenticator;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class TotpResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
+public class TotpResolver implements GraphQLMutationResolver {
 
     private static final String OTP_AUTH_FORMAT = "otpauth://totp/%s:@%s?secret=%s";
     private static final GoogleAuthenticator GOOGLE_AUTHENTICATOR = new GoogleAuthenticator();

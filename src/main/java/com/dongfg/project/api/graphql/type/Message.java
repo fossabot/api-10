@@ -17,6 +17,9 @@ public class Message {
     private String receiver;
     private MessageType type;
     private String title;
+    /**
+     * 通知栏消息
+     */
     private String notification;
     private String content;
     private String catalog;

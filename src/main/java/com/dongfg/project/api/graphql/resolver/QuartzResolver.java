@@ -15,8 +15,8 @@ import java.util.List;
  * @author dongfg
  * @date 17-12-21
  */
-@Slf4j
 @Component
+@Slf4j
 public class QuartzResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
     @Autowired

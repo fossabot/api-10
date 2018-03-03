@@ -1,7 +1,7 @@
 package com.dongfg.project.api.controller.admin;
 
 import com.dongfg.project.api.dto.CommonResponse;
-import com.dongfg.project.api.dto.ConfigRequest;
+import com.dongfg.project.api.dto.request.ConfigRequest;
 import com.ecwid.consul.v1.ConsulClient;
 import com.ecwid.consul.v1.OperationException;
 import com.ecwid.consul.v1.Response;

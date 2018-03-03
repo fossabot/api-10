@@ -1,4 +1,4 @@
-package com.dongfg.project.api.dto;
+package com.dongfg.project.api.dto.request;
 
 import lombok.Data;
 

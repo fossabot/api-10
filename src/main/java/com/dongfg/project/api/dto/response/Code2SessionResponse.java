@@ -1,4 +1,4 @@
-package com.dongfg.project.api.dto;
+package com.dongfg.project.api.dto.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

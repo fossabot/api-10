@@ -1,7 +1,6 @@
 package com.dongfg.project.api.graphql.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.graphql.type.Message;
 import com.dongfg.project.api.graphql.type.Sms;
 import com.dongfg.project.api.service.CommonService;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class SmsResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
+public class SmsResolver implements GraphQLMutationResolver {
     @Autowired
     private CommonService commonService;
 

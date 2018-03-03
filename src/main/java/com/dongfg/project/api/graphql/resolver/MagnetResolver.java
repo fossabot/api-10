@@ -1,6 +1,5 @@
 package com.dongfg.project.api.graphql.resolver;
 
-import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.dongfg.project.api.graphql.type.Magnet;
 import com.dongfg.project.api.service.MagnetService;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
  */
 @Component
 @Slf4j
-public class MagnetResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
+public class MagnetResolver implements GraphQLQueryResolver {
 
     @Autowired
     private MagnetService magnetService;

@@ -8,5 +8,5 @@ fastjson:
     - writedateusedateformat
 security:
   user:
-    name: ENC(9H4p5VFHTgTbtyVfB0o0QA==)
-    password: ENC(MRBzREiLxWPJJrGo96ZjuooM6HeM8SgR)
+    name: admin
+    password: admin@123

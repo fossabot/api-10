@@ -56,16 +56,6 @@ type JobKey {
     name: String
 }
 
-# 消息
-type Message {
-    type: MessageType
-    title: String
-    content: String
-    catalog: String
-    level: MessageLevel
-    time: String
-}
-
 # 手机短信
 type Sms {
     # 主键ID
@@ -86,4 +76,12 @@ type SecretKey {
     secret: String!
     # 二维码链接
     qrCodeUrl: String!
+}
+
+# https cert info
+type HttpsCert {
+    domain: String!
+    issueDate: Date
+    expireDate: Date
+    expireDay: Int
 }
