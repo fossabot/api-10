@@ -15,7 +15,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableEncryptableProperties
 @EnableCaching
 public class DongfgApiApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(DongfgApiApplication.class, args);
     }
