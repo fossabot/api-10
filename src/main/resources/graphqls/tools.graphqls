@@ -1,4 +1,0 @@
-extend type Query {
-    # https 证书到期倒计时
-    httpsCert(domain: String): HttpsCert!
-}

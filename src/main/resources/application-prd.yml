@@ -12,7 +12,3 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/api?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: ENC(kWYJI+O0UuB1IrhrP70Jrg==)
     password: ENC(AmqfJS8ShSIkPkhXghh7IgGkm1VxH0aC)
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initial-size: 5
-      max-active: 10

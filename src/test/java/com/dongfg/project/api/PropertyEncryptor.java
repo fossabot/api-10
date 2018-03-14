@@ -31,6 +31,9 @@ public class PropertyEncryptor {
         while (true) {
             System.out.print("Property Value:");
             String value = scanner.next();
+            if (value.equals("exit")) {
+                break;
+            }
             System.out.println(encryptor.encrypt(value));
             System.out.println();
         }
