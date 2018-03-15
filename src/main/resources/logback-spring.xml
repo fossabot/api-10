@@ -38,8 +38,6 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework.core.env" level="INFO" additivity="false"/>
-
     <logger name="org.quartz.plugins.history.LoggingJobHistoryPlugin" level="INFO" additivity="false">
         <appender-ref ref="quartz"/>
     </logger>
@@ -52,7 +50,7 @@
     </springProfile>
 
     <springProfile name="dev">
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="console"/>
         </root>
     </springProfile>
