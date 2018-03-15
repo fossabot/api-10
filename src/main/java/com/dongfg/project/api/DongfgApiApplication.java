@@ -1,6 +1,5 @@
 package com.dongfg.project.api;
 
-import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -12,7 +11,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  */
 @SpringBootApplication
 @EnableMongoRepositories
-@EnableEncryptableProperties
 @EnableCaching
 public class DongfgApiApplication {
     public static void main(String[] args) {

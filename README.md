@@ -1,3 +1,6 @@
 [api.dongfg.com](https://api.dongfg.com)
 ----------
-> 2.0 版本使用 Spring WebFlux 重构
+> code refactoring with spring boot 2.0 and jdk9
+
+#### todo
+- [ ] current lombok version is 1.16.20, wait for the release of edge version
