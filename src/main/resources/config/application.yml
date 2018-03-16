@@ -1,5 +1,0 @@
-spring:
-  quartz:
-    job-store-type: jdbc
-    jdbc:
-      initialize-schema: never
