@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner
 @ActiveProfiles("dev")
 class DongfgApiApplicationTests {
 
-	@Test
-	fun contextLoads() {
-	}
+    @Test
+    fun contextLoads() {
+    }
 
 }

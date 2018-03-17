@@ -1,4 +1,4 @@
-package com.dongfg.project.api.component.sms
+package com.dongfg.project.api.component
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,6 +27,6 @@ internal class SmsTest {
 
     @Test
     fun send() {
-        println(sms.send("12345678900","【网站通知】2018-03-16\n任务：kotlin-test\n状态：test-passed"))
+        println(sms.send("12345678900", "【网站通知】2018-03-16\n任务：kotlin-test\n状态：test-passed"))
     }
 }
