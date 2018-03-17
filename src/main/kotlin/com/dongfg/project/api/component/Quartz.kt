@@ -1,10 +1,14 @@
-package com.dongfg.project.api.component.quartz
+package com.dongfg.project.api.component
 
 import org.quartz.*
 import org.quartz.impl.matchers.GroupMatcher
 import org.quartz.impl.matchers.KeyMatcher
+import org.quartz.listeners.JobListenerSupport
+import org.quartz.listeners.SchedulerListenerSupport
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.util.*
 import java.util.stream.Collectors
 
 
@@ -14,51 +18,60 @@ import java.util.stream.Collectors
  */
 @Component
 class Quartz {
-    
+
+    companion object {
+        val log = LoggerFactory.getLogger(Quartz::class.java.name)
+    }
+
     @Autowired
     private lateinit var scheduler: Scheduler
 
-
     /**
-     * submit a [cronJob]
+     * submit job
      * @throws SchedulerException if submit failed
      */
     @Throws(SchedulerException::class)
-    fun submitJob(cronJob: CronJob) {
-        fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
-            return input?.let(callback)
-        }
+    fun submitJob(name: String,
+                  jobClass: Class<out Job>,
+                  jobDataMap: JobDataMap? = JobDataMap(),
+                  cronExpression: String,
+                  startTime: Date? = Date(),
+                  endTime: Date? = null,
+                  jobListener: JobListenerSupport? = null,
+                  schedulerListener: SchedulerListenerSupport? = null,
+                  triggerListener: TriggerListener? = null) {
 
-        val jobKey = JobKey.jobKey(cronJob.name)
-        val triggerKey = TriggerKey.triggerKey(cronJob.name)
 
-        val job = JobBuilder.newJob(cronJob.jobClass)
+        val jobKey = JobKey.jobKey(name)
+        val triggerKey = TriggerKey.triggerKey(name)
+
+        val job = JobBuilder.newJob(jobClass)
                 .withIdentity(jobKey)
-                .setJobData(cronJob.jobDataMap)
+                .setJobData(jobDataMap)
                 .requestRecovery().build()
 
         val trigger = TriggerBuilder.newTrigger()
                 .withIdentity(triggerKey)
-                .startAt(cronJob.startTime)
-                .endAt(cronJob.endTime)
+                .startAt(startTime)
+                .endAt(endTime)
                 .withSchedule(CronScheduleBuilder
-                        .cronSchedule(cronJob.cronExpression)
+                        .cronSchedule(cronExpression)
                 ).build()
 
         scheduler.scheduleJob(job, trigger)
 
         val listenerManager = scheduler.listenerManager
 
-        whenNotNull(cronJob.schedulerListener) {
-            listenerManager.addSchedulerListener(cronJob.schedulerListener)
+        whenNotNull(schedulerListener) {
+            listenerManager.addSchedulerListener(schedulerListener)
         }
 
-        whenNotNull(cronJob.jobListener) {
-            listenerManager.addJobListener(cronJob.jobListener, KeyMatcher.keyEquals(jobKey))
+        whenNotNull(jobListener) {
+            listenerManager.addJobListener(jobListener, KeyMatcher.keyEquals(jobKey))
         }
 
-        whenNotNull(cronJob.triggerListener) {
-            listenerManager.addTriggerListener(cronJob.triggerListener, KeyMatcher.keyEquals(triggerKey))
+        whenNotNull(triggerListener) {
+            listenerManager.addTriggerListener(triggerListener, KeyMatcher.keyEquals(triggerKey))
         }
     }
 
@@ -67,6 +80,14 @@ class Quartz {
      */
     fun getJobKeys(): List<JobKey> {
         return scheduler.getJobKeys(GroupMatcher.anyJobGroup()).stream().collect(Collectors.toList())
+    }
+
+    fun getTrigger(name: String): Trigger {
+        return scheduler.getTrigger(TriggerKey.triggerKey(name));
+    }
+
+    fun getTriggerState(name: String): Trigger.TriggerState {
+        return scheduler.getTriggerState(TriggerKey.triggerKey(name));
     }
 
     /**
@@ -92,7 +113,8 @@ class Quartz {
                 scheduler.pauseJob(JobKey.jobKey(name))
                 return true
             }
-        } catch (ignore: SchedulerException) {
+        } catch (e: SchedulerException) {
+            log.error("pauseJob failed", e)
         }
         return false
     }
@@ -106,7 +128,8 @@ class Quartz {
                 scheduler.resumeJob(JobKey.jobKey(name))
                 return true
             }
-        } catch (ignore: SchedulerException) {
+        } catch (e: SchedulerException) {
+            log.error("resumeJob failed", e)
         }
         return false
     }
@@ -120,10 +143,14 @@ class Quartz {
                 scheduler.resumeJob(JobKey.jobKey(name))
                 return true
             }
-        } catch (ignore: SchedulerException) {
+        } catch (e: SchedulerException) {
+            log.error("triggerJob failed", e)
         }
         return false
     }
 
+}
 
+inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
+    return input?.let(callback)
 }
