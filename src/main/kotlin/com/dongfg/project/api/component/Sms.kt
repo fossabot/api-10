@@ -1,4 +1,4 @@
-package com.dongfg.project.api.component.sms
+package com.dongfg.project.api.component
 
 import com.dongfg.project.api.common.config.ApiProperty
 import com.yunpian.sdk.YunpianClient
