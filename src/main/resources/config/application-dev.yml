@@ -1,6 +1,8 @@
 server:
   port: 20000
 spring:
+  profiles:
+    include: external
   data:
     mongodb:
       host: 127.0.0.1
@@ -10,5 +12,3 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/api?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: Zk985D4gn!2h
-  profiles:
-    include: external

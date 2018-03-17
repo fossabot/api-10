@@ -1,4 +1,4 @@
-package com.dongfg.project.api.common.config
+package com.dongfg.project.api.common.property
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration

@@ -1,6 +1,6 @@
 package com.dongfg.project.api.component
 
-import com.dongfg.project.api.common.config.ApiProperty
+import com.dongfg.project.api.common.property.ApiProperty
 import com.yunpian.sdk.YunpianClient
 import com.yunpian.sdk.model.Result
 import com.yunpian.sdk.model.SmsSingleSend
