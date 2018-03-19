@@ -20,7 +20,7 @@ import java.util.stream.Collectors
 class Quartz {
 
     companion object {
-        val log = LoggerFactory.getLogger(Quartz::class.java.name)
+        val log = LoggerFactory.getLogger(Quartz::class.java.name)!!
     }
 
     @Autowired
@@ -83,11 +83,11 @@ class Quartz {
     }
 
     fun getTrigger(name: String): Trigger {
-        return scheduler.getTrigger(TriggerKey.triggerKey(name));
+        return scheduler.getTrigger(TriggerKey.triggerKey(name))
     }
 
     fun getTriggerState(name: String): Trigger.TriggerState {
-        return scheduler.getTriggerState(TriggerKey.triggerKey(name));
+        return scheduler.getTriggerState(TriggerKey.triggerKey(name))
     }
 
     /**
