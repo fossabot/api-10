@@ -10,6 +10,7 @@ import org.springframework.http.MediaType
 import org.springframework.restdocs.JUnitRestDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
@@ -33,6 +34,7 @@ class ApiDocumentation {
     @Autowired
     private val context: WebApplicationContext? = null
 
+
     private var mockMvc: MockMvc? = null
 
     @Before
@@ -45,6 +47,7 @@ class ApiDocumentation {
     @Test
     @Throws(Exception::class)
     fun webHooksTravisci() {
+
         this.mockMvc?.perform(post("/webhooks/travisci")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .header("Travis-Repo-Slug", "dongfg/wiki")

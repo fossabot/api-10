@@ -5,6 +5,7 @@ buildscript {
     }
     repositories {
         mavenLocal()
+        jcenter()
         mavenCentral()
     }
     dependencies {
@@ -71,6 +72,7 @@ bootJar {
 
 repositories {
     mavenLocal()
+    jcenter()
     mavenCentral()
 }
 
