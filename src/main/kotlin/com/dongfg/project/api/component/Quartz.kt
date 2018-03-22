@@ -1,11 +1,12 @@
 package com.dongfg.project.api.component
 
+import com.dongfg.project.api.common.util.whenNotNull
+import mu.KLogging
 import org.quartz.*
 import org.quartz.impl.matchers.GroupMatcher
 import org.quartz.impl.matchers.KeyMatcher
 import org.quartz.listeners.JobListenerSupport
 import org.quartz.listeners.SchedulerListenerSupport
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.util.*
@@ -19,9 +20,7 @@ import java.util.stream.Collectors
 @Component
 class Quartz {
 
-    companion object {
-        val log = LoggerFactory.getLogger(Quartz::class.java.name)!!
-    }
+    companion object : KLogging()
 
     @Autowired
     private lateinit var scheduler: Scheduler
@@ -114,7 +113,7 @@ class Quartz {
                 return true
             }
         } catch (e: SchedulerException) {
-            log.error("pauseJob failed", e)
+            logger.error("pauseJob failed", e)
         }
         return false
     }
@@ -129,7 +128,7 @@ class Quartz {
                 return true
             }
         } catch (e: SchedulerException) {
-            log.error("resumeJob failed", e)
+            logger.error("resumeJob failed", e)
         }
         return false
     }
@@ -144,13 +143,9 @@ class Quartz {
                 return true
             }
         } catch (e: SchedulerException) {
-            log.error("triggerJob failed", e)
+            logger.error("triggerJob failed", e)
         }
         return false
     }
 
-}
-
-inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
-    return input?.let(callback)
 }
