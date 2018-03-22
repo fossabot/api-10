@@ -1,6 +1,6 @@
 package com.dongfg.project.api.repository
 
-import com.dongfg.project.api.web.graphql.type.Comment
+import com.dongfg.project.api.model.Comment
 import org.springframework.data.mongodb.repository.MongoRepository
 
 /**

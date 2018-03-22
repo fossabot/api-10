@@ -3,5 +3,3 @@ spring:
     job-store-type: jdbc
     jdbc:
       initialize-schema: never
-graphiql:
-  pageTitle: dongfg' graphql api

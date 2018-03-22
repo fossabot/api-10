@@ -1,5 +1,6 @@
-package com.dongfg.project.api.web.graphql.type
+package com.dongfg.project.api.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 import javax.persistence.Id
@@ -10,10 +11,10 @@ import javax.persistence.Id
  */
 @Document
 data class Comment(
-        @field: Id var id: String?,
+        @field: [Id JsonIgnore] var id: String? = null,
         var comment: String,
         var name: String,
-        var email: String?,
-        var clientIp: String?,
+        var email: String? = null,
+        @field: JsonIgnore var clientIp: String? = null,
         var createTime: LocalDateTime? = LocalDateTime.now()
 )
