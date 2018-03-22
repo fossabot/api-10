@@ -5,9 +5,6 @@ buildscript {
     }
     repositories {
         mavenLocal()
-        maven {
-            url "http://maven.aliyun.com/nexus/content/groups/public/"
-        }
         mavenCentral()
     }
     dependencies {
@@ -74,9 +71,6 @@ bootJar {
 
 repositories {
     mavenLocal()
-    maven {
-        url "http://maven.aliyun.com/nexus/content/groups/public/"
-    }
     mavenCentral()
 }
 
