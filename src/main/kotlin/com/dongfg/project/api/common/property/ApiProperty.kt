@@ -11,4 +11,5 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties(prefix = "api")
 class ApiProperty {
     lateinit var yunpianApikey: String
+    lateinit var otpSecret: String
 }
