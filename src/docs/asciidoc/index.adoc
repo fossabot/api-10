@@ -3,4 +3,40 @@
 :toc: left
 :toclevels: 3
 
-== working
+[[comment]]
+== Comment
+[[comments]]
+=== List Comment
+Example of curl command:
+
+include::{snippets}/comments/curl-request.adoc[]
+
+Example of http response:
+
+include::{snippets}/comments/http-response.adoc[]
+
+Response fields:
+
+include::{snippets}/comments/response-fields.adoc[]
+
+[[createComment]]
+=== Add Comment
+Example of curl command:
+
+include::{snippets}/createComment/curl-request.adoc[]
+
+Example of http request:
+
+include::{snippets}/createComment/http-request.adoc[]
+
+Request fields:
+
+include::{snippets}/createComment/request-fields.adoc[]
+
+Example of http response:
+
+include::{snippets}/createComment/http-response.adoc[]
+
+Response fields:
+
+include::{snippets}/createComment/response-fields.adoc[]
