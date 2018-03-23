@@ -13,11 +13,9 @@ inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
 }
 
 inline fun <T> Totp.whenInvalid(totpCode: String, callback: (String) -> T): T? {
-    if (!RamRateLimiter.acquire(Constants.RateLimitKey.MESSAGE)) {
-        return callback("rate limit exceeded")
-    } else if (!validate(totpCode)) {
-        return callback("invalid totp")
-    } else {
-        return null
+    return when {
+        !RamRateLimiter.acquire(Constants.RateLimitKey.MESSAGE) -> callback("rate limit exceeded")
+        !validate(totpCode) -> callback("invalid totp")
+        else -> null
     }
 }
