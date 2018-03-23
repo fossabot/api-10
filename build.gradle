@@ -97,6 +97,7 @@ dependencies {
     compile('io.github.microutils:kotlin-logging:1.4.9')
     compile('com.yunpian.sdk:yunpian-java-sdk:1.2.6')
     compile('com.warrenstrange:googleauth:1.1.2')
+    compile('com.google.guava:guava:24.1-jre')
 
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
