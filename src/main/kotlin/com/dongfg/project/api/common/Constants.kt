@@ -16,4 +16,8 @@ interface Constants {
     enum class RateLimitKey {
         MESSAGE,
     }
+
+    enum class JobAction {
+        PAUSE, RESUME, REMOVE, TRIGGER
+    }
 }
