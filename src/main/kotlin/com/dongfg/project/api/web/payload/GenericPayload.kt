@@ -6,5 +6,6 @@ package com.dongfg.project.api.web.payload
  */
 data class GenericPayload(
         var success: Boolean,
-        var msg: String? = null
+        var msg: String? = null,
+        var data: String? = null
 )
