@@ -2,8 +2,9 @@ package com.dongfg.project.api.web.graphql.resolver
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
 import com.coxautodev.graphql.tools.GraphQLQueryResolver
-import com.dongfg.project.api.service.CommentService
 import com.dongfg.project.api.model.Comment
+import com.dongfg.project.api.service.CommentService
+import com.dongfg.project.api.web.payload.GenericPayload
 import graphql.schema.DataFetchingEnvironment
 import graphql.servlet.GraphQLContext
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,7 +23,7 @@ class CommentResolver : GraphQLQueryResolver, GraphQLMutationResolver {
         return commentService.comments()
     }
 
-    fun createComment(input: Comment, env: DataFetchingEnvironment): Comment {
+    fun commentCreate(input: Comment, env: DataFetchingEnvironment): GenericPayload {
         val context = env.getContext<GraphQLContext>()
         input.clientIp = context.request.get().remoteAddr
         return commentService.createComment(input)

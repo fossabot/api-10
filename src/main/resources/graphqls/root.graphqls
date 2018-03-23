@@ -9,5 +9,5 @@ type Query {
 # The root query for implementing GraphQL mutations.
 type Mutation {
     # 添加评论
-    createComment(input: CreateCommentInput!): Comment
+    commentCreate(input: CommentCreateInput!): GenericPayload
 }

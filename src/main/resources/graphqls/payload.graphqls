@@ -1,0 +1,4 @@
+type GenericPayload {
+    success: Boolean!
+    msg: String
+}

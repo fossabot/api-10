@@ -1,3 +1,17 @@
+# 消息类型
+enum MessageType {
+    SMS
+    WEB
+    APP
+}
+
+# 消息级别
+enum MessageLevel {
+    INFO
+    WARN
+    ERROR
+}
+
 # 评论
 type Comment {
     # id

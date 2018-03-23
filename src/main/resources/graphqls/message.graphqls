@@ -1,0 +1,4 @@
+extend type Mutation {
+    # 消息发送
+    messageSend(totpCode: Int!, input: MessageSendInput!): GenericPayload
+}

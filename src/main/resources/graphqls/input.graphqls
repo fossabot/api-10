@@ -1,9 +1,19 @@
 # 评论
-input CreateCommentInput {
+input CommentCreateInput {
     # 评论内容
     comment: String!
     # 昵称
     name: String!
     # 邮件地址
     email: String
+}
+
+# 消息推送
+input MessageSendInput {
+    level: MessageLevel
+    type: MessageType!
+    receiver: String
+    title: String!
+    content: String!
+    catalog: String
 }
