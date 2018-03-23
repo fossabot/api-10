@@ -40,3 +40,27 @@ include::{snippets}/createComment/http-response.adoc[]
 Response fields:
 
 include::{snippets}/createComment/response-fields.adoc[]
+
+[[message]]
+== Message
+[[sendMessage]]
+=== Send Message
+Example of curl command:
+
+include::{snippets}/sendMessage/curl-request.adoc[]
+
+Example of http request:
+
+include::{snippets}/sendMessage/http-request.adoc[]
+
+Request fields:
+
+include::{snippets}/sendMessage/request-fields.adoc[]
+
+Example of http response:
+
+include::{snippets}/sendMessage/http-response.adoc[]
+
+Response fields:
+
+include::{snippets}/sendMessage/response-fields.adoc[]
