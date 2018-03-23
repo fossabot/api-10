@@ -106,46 +106,34 @@ class Quartz {
     /**
      * pause job by [name]
      */
+    @Throws(SchedulerException::class)
     fun pauseJob(name: String): Boolean {
-        try {
-            if (exists(name)) {
-                scheduler.pauseJob(JobKey.jobKey(name))
-                return true
-            }
-        } catch (e: SchedulerException) {
-            logger.error("pauseJob failed", e)
+        if (exists(name)) {
+            scheduler.pauseJob(JobKey.jobKey(name))
         }
-        return false
+        return true
     }
 
     /**
      * resume job by [name]
      */
+    @Throws(SchedulerException::class)
     fun resumeJob(name: String): Boolean {
-        try {
-            if (exists(name)) {
-                scheduler.resumeJob(JobKey.jobKey(name))
-                return true
-            }
-        } catch (e: SchedulerException) {
-            logger.error("resumeJob failed", e)
+        if (exists(name)) {
+            scheduler.resumeJob(JobKey.jobKey(name))
         }
-        return false
+        return true
     }
 
     /**
      * trigger job by [name]
      */
+    @Throws(SchedulerException::class)
     fun triggerJob(name: String): Boolean {
-        try {
-            if (exists(name)) {
-                scheduler.resumeJob(JobKey.jobKey(name))
-                return true
-            }
-        } catch (e: SchedulerException) {
-            logger.error("triggerJob failed", e)
+        if (exists(name)) {
+            scheduler.resumeJob(JobKey.jobKey(name))
         }
-        return false
+        return true
     }
 
 }

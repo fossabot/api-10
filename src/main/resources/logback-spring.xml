@@ -39,6 +39,7 @@
     </appender>
 
     <logger name="org.springframework.core.env" level="INFO" additivity="false"/>
+    <logger name="io.undertow.websockets.jsr" level="ERROR" additivity="false"/>
 
     <logger name="org.quartz.plugins.history.LoggingJobHistoryPlugin" level="INFO" additivity="false">
         <appender-ref ref="quartz"/>

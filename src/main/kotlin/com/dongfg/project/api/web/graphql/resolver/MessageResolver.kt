@@ -1,7 +1,6 @@
 package com.dongfg.project.api.web.graphql.resolver
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
-import com.coxautodev.graphql.tools.GraphQLQueryResolver
 import com.dongfg.project.api.model.Message
 import com.dongfg.project.api.service.MessageService
 import com.dongfg.project.api.web.payload.GenericPayload
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component
  * @date 2018/3/23
  */
 @Component
-class MessageResolver : GraphQLQueryResolver, GraphQLMutationResolver {
+class MessageResolver : GraphQLMutationResolver {
     @Autowired
     private lateinit var messageService: MessageService
 
