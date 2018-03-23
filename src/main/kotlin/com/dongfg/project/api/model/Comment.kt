@@ -9,7 +9,7 @@ import javax.persistence.Id
  * @author dongfg
  * @date 2018/3/19
  */
-@Document
+@Document(collection = "comment")
 data class Comment(
         @field: [Id JsonIgnore] var id: String? = null,
         var comment: String,

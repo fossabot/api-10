@@ -2,6 +2,7 @@ package com.dongfg.project.api.web.controller
 
 import com.dongfg.project.api.model.Comment
 import com.dongfg.project.api.service.CommentService
+import com.dongfg.project.api.web.payload.GenericPayload
 import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -25,7 +26,7 @@ class CommentController {
     }
 
     @PostMapping
-    fun createComment(@RequestBody input: Comment, request: HttpServletRequest): Comment {
+    fun createComment(@RequestBody input: Comment, request: HttpServletRequest): GenericPayload {
         input.clientIp = request.remoteAddr
         return commentService.createComment(input)
     }
