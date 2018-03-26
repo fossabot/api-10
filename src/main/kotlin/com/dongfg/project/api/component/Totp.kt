@@ -16,7 +16,7 @@ class Totp {
     private lateinit var apiProperty: ApiProperty
 
     fun validate(totpCode: String): Boolean {
-        return GoogleAuthenticator().authorize(apiProperty.otpSecret, totpCode.toInt())
+        return GoogleAuthenticator().authorize(apiProperty.totpSecret, totpCode.toInt())
     }
 
 }
