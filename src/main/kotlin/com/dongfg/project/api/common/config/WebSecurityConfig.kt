@@ -13,7 +13,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.servlet.http.HttpServletResponse
+
 
 /**
  * @author dongfg
@@ -32,8 +34,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
-    override fun configure(auth: AuthenticationManagerBuilder?) {
-        auth!!.inMemoryAuthentication()
+    override fun configure(auth: AuthenticationManagerBuilder) {
+        auth.inMemoryAuthentication().passwordEncoder(BCryptPasswordEncoder())
                 .withUser(username).password(password)
                 .authorities("ADMIN")
     }
@@ -41,8 +43,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         // @formatter:off
         http.authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .antMatchers("/admin/**").authenticated()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
