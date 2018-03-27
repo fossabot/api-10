@@ -39,20 +39,15 @@ compileKotlin {
         freeCompilerArgs = ["-Xjsr305=strict"]
         jvmTarget = "1.8"
     }
-}
 
-compileKotlin.doLast {
-    mkdir 'build/resources/main/META-INF/'
-    def metadata = copySpec {
-        from 'build/tmp/kapt3/classes/main/META-INF/spring-configuration-metadata.json'
-    }
-    copy {
-        with metadata
-        into 'build/resources/main/META-INF/'
-    }
-    copy {
-        with metadata
-        into 'build/classes/kotlin/main/META-INF/'
+    doLast {
+        def metadata = copySpec {
+            from 'build/tmp/kapt3/classes/main/META-INF/spring-configuration-metadata.json'
+        }
+        copy {
+            with metadata
+            into 'out/production/classes/META-INF/'
+        }
     }
 }
 
