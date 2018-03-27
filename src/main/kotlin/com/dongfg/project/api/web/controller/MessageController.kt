@@ -1,5 +1,6 @@
 package com.dongfg.project.api.web.controller
 
+import com.dongfg.project.api.common.util.EnableSwaggerDoc
 import com.dongfg.project.api.model.Message
 import com.dongfg.project.api.service.MessageService
 import com.dongfg.project.api.web.payload.GenericPayload
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*
  * @author dongfg
  * @date 2018/3/23
  */
+@EnableSwaggerDoc
 @RequestMapping("/message")
 @RestController
 class MessageController {

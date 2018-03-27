@@ -1,6 +1,7 @@
 package com.dongfg.project.api.web.controller
 
 import com.dongfg.project.api.common.Constants
+import com.dongfg.project.api.common.util.EnableSwaggerDoc
 import com.dongfg.project.api.service.JobService
 import com.dongfg.project.api.web.payload.GenericPayload
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*
  * @author dongfg
  * @date 2018/3/23
  */
+@EnableSwaggerDoc
 @RequestMapping("/job")
 @RestController
 class JobController {

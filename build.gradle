@@ -12,7 +12,6 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
-        classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
     }
 }
 
@@ -22,17 +21,12 @@ apply plugin: 'kotlin-noarg'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.asciidoctor.convert'
 
 
 group = 'com.dongfg.project'
 version = '2.0.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-ext {
-    snippetsDir = file('build/generated-snippets')
-}
 
 compileKotlin {
     kotlinOptions {
@@ -58,24 +52,16 @@ compileTestKotlin {
     }
 }
 
-test {
-    outputs.dir snippetsDir
-    include '**/ApiDocumentation.class'
-}
-
 noArg {
     annotation("org.springframework.boot.context.properties.ConfigurationProperties")
     invokeInitializers = true
 }
 
-asciidoctor {
-    inputs.dir snippetsDir
-    dependsOn test
-}
-
 bootJar {
     archiveName 'dongfg-api.jar'
 }
+
+
 
 repositories {
     mavenCentral()
@@ -101,6 +87,9 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-mongodb')
     compile('mysql:mysql-connector-java')
 
+    compile('io.springfox:springfox-swagger2:2.8.0')
+    compile('io.springfox:springfox-swagger-ui:2.8.0')
+
     compile('com.graphql-java:graphql-spring-boot-starter:4.0.0')
     compile('com.graphql-java:graphiql-spring-boot-starter:4.0.0')
     compile('com.graphql-java:graphql-java-tools:4.3.0')
@@ -113,8 +102,6 @@ dependencies {
     kapt('org.springframework.boot:spring-boot-configuration-processor')
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
     compile('javax.xml.bind:jaxb-api:2.3.0')
-    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.0.RELEASE'
-    testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.0.RELEASE'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.projectreactor:reactor-test')
 }

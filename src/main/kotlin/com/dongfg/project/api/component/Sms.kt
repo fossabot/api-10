@@ -24,7 +24,7 @@ class Sms {
 
     @PostConstruct
     fun init() {
-        client = YunpianClient(apiProperty.yunpianApikey).init()
+        client = YunpianClient(apiProperty.sms.secret).init()
     }
 
     fun templates(): List<String> {

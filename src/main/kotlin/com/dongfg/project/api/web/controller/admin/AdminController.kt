@@ -17,5 +17,5 @@ class AdminController {
     fun index(): GenericPayload {
         return GenericPayload(true)
     }
-    
+
 }

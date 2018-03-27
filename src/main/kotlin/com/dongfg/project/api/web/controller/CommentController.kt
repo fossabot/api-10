@@ -1,5 +1,6 @@
 package com.dongfg.project.api.web.controller
 
+import com.dongfg.project.api.common.util.EnableSwaggerDoc
 import com.dongfg.project.api.model.Comment
 import com.dongfg.project.api.service.CommentService
 import com.dongfg.project.api.web.payload.GenericPayload
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest
  * @author dongfg
  * @date 2018/3/22
  */
+@EnableSwaggerDoc
 @RequestMapping("/comment")
 @RestController
 class CommentController {

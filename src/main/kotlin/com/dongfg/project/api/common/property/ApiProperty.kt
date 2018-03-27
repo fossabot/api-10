@@ -12,19 +12,36 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties("api")
 class ApiProperty {
     /**
-     * yunpianApikey
+     * api version
      */
-    var yunpianApikey: String? = null
+    lateinit var version: String
     /**
-     * totpSecret
+     * base rest api path
      */
-    var totpSecret: String? = null
+    lateinit var url: String
+
     /**
-     * adminUrl
+     * sms config
      */
-    var adminUrl: String? = null
+    var sms = Sms()
+
     /**
-     * privateVapid
+     * totp config
      */
-    var privateVapid: String? = null
+    var totp = Totp()
+
+
+    inner class Sms {
+        /**
+         * sms api secret
+         */
+        lateinit var secret: String
+    }
+
+    inner class Totp {
+        /**
+         * totp validate secret
+         */
+        lateinit var secret: String
+    }
 }

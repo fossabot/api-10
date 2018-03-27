@@ -3,6 +3,7 @@ package com.dongfg.project.api.common.config
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -22,13 +23,19 @@ import javax.servlet.http.HttpServletResponse
 @Configuration
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
+    @Value("\${spring.security.user.name}")
+    private lateinit var username: String
+
+    @Value("\${spring.security.user.password}")
+    private lateinit var password: String
+
     @Autowired
     private lateinit var objectMapper: ObjectMapper
 
     override fun configure(auth: AuthenticationManagerBuilder?) {
         auth!!.inMemoryAuthentication()
-                .withUser("").password("")
-                .authorities("", "")
+                .withUser(username).password(password)
+                .authorities("ADMIN")
     }
 
     override fun configure(http: HttpSecurity) {
@@ -65,10 +72,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(web: WebSecurity) {
         web.ignoring()
-                .antMatchers("/webhooks/**")
-                .antMatchers("/rest")
-                .antMatchers("/graphql")
-                .antMatchers("/graphiql")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
     }
 
