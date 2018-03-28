@@ -36,6 +36,11 @@ class ApiProperty {
     var totp = Totp()
 
     /**
+     * wechat config
+     */
+    var wechat = Wechat()
+
+    /**
      * push account
      */
     var push = Push()
@@ -57,6 +62,18 @@ class ApiProperty {
     inner class Totp {
         /**
          * totp validate secret
+         */
+        lateinit var secret: String
+    }
+
+    inner class Wechat {
+        /**
+         * wechat mini app id
+         */
+        lateinit var appid: String
+
+        /**
+         * wechat mini app secret
          */
         lateinit var secret: String
     }

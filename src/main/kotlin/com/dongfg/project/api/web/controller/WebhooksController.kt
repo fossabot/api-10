@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController
  * @author dongfg
  * @date 2018/3/19
  */
-@RestController
 @RequestMapping("/webhooks")
+@RestController
 class WebhooksController {
     @PostMapping(value = ["/travisci"], consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
     fun travisci(@RequestHeader("Travis-Repo-Slug") repo: String, payload: String) {
