@@ -12,5 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class WebMvcConfig : WebMvcConfigurer {
     override fun addViewControllers(registry: ViewControllerRegistry) {
         registry.addRedirectViewController("/rest", "/swagger-ui.html")
+        registry.addRedirectViewController("/", "/graphiql")
     }
 }

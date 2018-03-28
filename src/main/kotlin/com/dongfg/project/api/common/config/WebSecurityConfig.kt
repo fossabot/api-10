@@ -1,5 +1,6 @@
 package com.dongfg.project.api.common.config
 
+import com.dongfg.project.api.common.property.ApiProperty
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired
@@ -30,6 +31,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Value("\${spring.security.user.password}")
     private lateinit var password: String
+
+    @Autowired
+    private lateinit var apiProperty: ApiProperty
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
@@ -80,7 +84,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     private fun sendResponse(response: HttpServletResponse, payload: GenericPayload) {
         response.status = HttpServletResponse.SC_OK
         response.addHeader("Content-type", MediaType.APPLICATION_JSON_UTF8.toString())
-        response.addHeader("Access-Control-Allow-Origin", "*")
+        response.addHeader("Access-Control-Allow-Origin", apiProperty.admin.url)
         response.addHeader("Access-Control-Allow-Credentials", "true")
         objectMapper.writeValue(response.writer, payload)
     }

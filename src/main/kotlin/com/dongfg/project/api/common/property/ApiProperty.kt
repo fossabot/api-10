@@ -21,6 +21,11 @@ class ApiProperty {
     lateinit var url: String
 
     /**
+     * admin config
+     */
+    var admin = Admin()
+
+    /**
      * sms config
      */
     var sms = Sms()
@@ -30,6 +35,17 @@ class ApiProperty {
      */
     var totp = Totp()
 
+    /**
+     * push account
+     */
+    var push = Push()
+
+    inner class Admin {
+        /**
+         * admin url
+         */
+        lateinit var url: String
+    }
 
     inner class Sms {
         /**
@@ -43,5 +59,17 @@ class ApiProperty {
          * totp validate secret
          */
         lateinit var secret: String
+    }
+
+    inner class Push {
+        /**
+         * push mobile
+         */
+        lateinit var mobile: String
+
+        /**
+         * push email
+         */
+        lateinit var email: String
     }
 }
