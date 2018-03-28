@@ -5,3 +5,11 @@ spring:
       initialize-schema: never
   jpa:
     open-in-view: false
+management:
+  endpoint:
+    health:
+      show-details: when_authorized
+server:
+  servlet:
+    session:
+      timeout: 10h

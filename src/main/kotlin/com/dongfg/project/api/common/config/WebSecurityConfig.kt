@@ -37,7 +37,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication().passwordEncoder(BCryptPasswordEncoder())
                 .withUser(username).password(password)
-                .authorities("ADMIN")
+                .authorities("USER", "ACTUATOR")
     }
 
     override fun configure(http: HttpSecurity) {
