@@ -1,5 +1,6 @@
 package com.dongfg.project.api
 
+import io.undertow.server.session.SecureRandomSessionIdGenerator
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,6 +14,12 @@ class DongfgApiApplicationTests {
 
     @Test
     fun contextLoads() {
+        val g = SecureRandomSessionIdGenerator()
+        println(g.createSessionId())
+        println(g.createSessionId())
+        println(g.createSessionId())
+        println(g.createSessionId())
+        println(g.createSessionId())
     }
 
 }

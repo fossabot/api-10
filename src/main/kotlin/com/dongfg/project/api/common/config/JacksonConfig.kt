@@ -9,6 +9,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -34,5 +35,10 @@ class JacksonConfig {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
 
         return objectMapper
+    }
+
+    @Bean
+    fun jackson2ObjectMapperFactoryBean(): Jackson2ObjectMapperFactoryBean {
+        return Jackson2ObjectMapperFactoryBean()
     }
 }

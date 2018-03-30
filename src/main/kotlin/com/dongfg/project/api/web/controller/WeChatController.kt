@@ -1,6 +1,8 @@
 package com.dongfg.project.api.web.controller
 
+import com.dongfg.project.api.model.WeChatAuthy
 import com.dongfg.project.api.service.WeChatService
+import com.dongfg.project.api.web.payload.GenericPayload
 import com.dongfg.project.api.web.payload.WeChatLoginPayload
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,5 +24,15 @@ class WeChatController {
     @PostMapping("/login")
     fun login(code: String): WeChatLoginPayload {
         return weChatService.login(code)
+    }
+
+    @GetMapping("/authy")
+    fun listAuthy(): List<WeChatAuthy> {
+        return weChatService.listAuthy()
+    }
+
+    @PostMapping("/authy")
+    fun save(authy: WeChatAuthy): GenericPayload {
+        return weChatService.saveOrUpdateAuthy(authy)
     }
 }

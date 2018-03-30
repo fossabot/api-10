@@ -25,27 +25,27 @@ class JobController {
     }
 
     @GetMapping("/state")
-    fun jobState(@RequestHeader("totp-auth-token") totpCode: String, name: String): GenericPayload {
+    fun jobState(@RequestHeader("x-auth-totp") totpCode: String, name: String): GenericPayload {
         return jobService.jobState(totpCode, name)
     }
 
     @PostMapping("/pause")
-    fun jobPause(@RequestHeader("totp-auth-token") totpCode: String, name: String): GenericPayload {
+    fun jobPause(@RequestHeader("x-auth-totp") totpCode: String, name: String): GenericPayload {
         return jobService.jobOperate(totpCode, name, Constants.JobAction.PAUSE)
     }
 
     @PostMapping("/resume")
-    fun jobResume(@RequestHeader("totp-auth-token") totpCode: String, name: String): GenericPayload {
+    fun jobResume(@RequestHeader("x-auth-totp") totpCode: String, name: String): GenericPayload {
         return jobService.jobOperate(totpCode, name, Constants.JobAction.RESUME)
     }
 
     @PostMapping("/remove")
-    fun jobRemove(@RequestHeader("totp-auth-token") totpCode: String, name: String): GenericPayload {
+    fun jobRemove(@RequestHeader("x-auth-totp") totpCode: String, name: String): GenericPayload {
         return jobService.jobOperate(totpCode, name, Constants.JobAction.REMOVE)
     }
 
     @PostMapping("/trigger")
-    fun jobTrigger(@RequestHeader("totp-auth-token") totpCode: String, name: String): GenericPayload {
+    fun jobTrigger(@RequestHeader("x-auth-totp") totpCode: String, name: String): GenericPayload {
         return jobService.jobOperate(totpCode, name, Constants.JobAction.TRIGGER)
     }
 }

@@ -1,5 +1,6 @@
 package com.dongfg.project.api.web.controller
 
+import com.dongfg.project.api.common.Constants
 import com.dongfg.project.api.common.util.EnableSwaggerDoc
 import com.dongfg.project.api.model.Message
 import com.dongfg.project.api.service.MessageService
@@ -22,7 +23,7 @@ class MessageController {
     private lateinit var messageService: MessageService
 
     @PostMapping
-    fun sendMessage(@RequestHeader("totp-auth-token") totpCode: String, @RequestBody message: Message): GenericPayload {
+    fun sendMessage(@RequestHeader(Constants.AuthHeader.TOTP) totpCode: String, @RequestBody message: Message): GenericPayload {
         return messageService.sendMessage(totpCode, message)
     }
 }
