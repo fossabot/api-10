@@ -54,4 +54,11 @@ class JacksonConfig {
         converter.supportedMediaTypes = arrayListOf(MediaType.ALL)
         return converter
     }
+
+    @Bean
+    fun mappingJackson2HttpMessageConverter(objectMapper: ObjectMapper): MappingJackson2HttpMessageConverter {
+        val converter = MappingJackson2HttpMessageConverter(objectMapper)
+        converter.supportedMediaTypes = arrayListOf(MediaType.ALL)
+        return converter
+    }
 }
