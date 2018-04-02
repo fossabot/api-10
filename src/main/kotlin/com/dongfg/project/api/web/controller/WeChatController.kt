@@ -5,14 +5,14 @@ import com.dongfg.project.api.service.WeChatService
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.dongfg.project.api.web.payload.WeChatLoginPayload
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 /**
+ * filter by WeChatFilter
+ *
  * @author dongfg
  * @date 2018/3/28
+ * @see com.dongfg.project.api.web.filter.WeChatFilter
  */
 @RequestMapping("/wechat")
 @RestController
@@ -32,7 +32,12 @@ class WeChatController {
     }
 
     @PostMapping("/authy")
-    fun save(authy: WeChatAuthy): GenericPayload {
+    fun saveAuthy(@RequestBody authy: WeChatAuthy): GenericPayload {
         return weChatService.saveOrUpdateAuthy(authy)
+    }
+
+    @DeleteMapping("/authy")
+    fun deleteAuthy(id: String): GenericPayload {
+        return weChatService.deleteAuthy(id)
     }
 }

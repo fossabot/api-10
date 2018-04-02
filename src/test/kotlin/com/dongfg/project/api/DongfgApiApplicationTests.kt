@@ -14,12 +14,11 @@ class DongfgApiApplicationTests {
 
     @Test
     fun contextLoads() {
-        val g = SecureRandomSessionIdGenerator()
-        println(g.createSessionId())
-        println(g.createSessionId())
-        println(g.createSessionId())
-        println(g.createSessionId())
-        println(g.createSessionId())
+        val name = "日"
+        val sendName = String(name.toByteArray(charset("UTF-8")), charset("GBK"))
+        println(sendName)
+        val recvName = String(sendName.toByteArray(charset("GBK")), charset("UTF-8"))
+        println(recvName)
     }
 
 }

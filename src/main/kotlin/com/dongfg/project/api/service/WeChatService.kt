@@ -53,8 +53,23 @@ class WeChatService {
     }
 
     fun saveOrUpdateAuthy(authy: WeChatAuthy): GenericPayload {
-        weChatAuthyRepository.save(authy)
+        if (authy.id.isNullOrEmpty()) {
+            weChatAuthyRepository.findById(authy.id!!).ifPresent {
+                it.site = authy.site
+                it.account = authy.account
+                it.secret = authy.secret
+                weChatAuthyRepository.save(it)
+            }
+        } else {
+            authy.openId = WeChatUserHolder.getCurrent().openId
+            weChatAuthyRepository.save(authy)
+        }
         return GenericPayload(true, data = authy.id)
+    }
+
+    fun deleteAuthy(id: String): GenericPayload {
+        weChatAuthyRepository.deleteById(id)
+        return GenericPayload(true)
     }
 
     fun findUser(token: String): Optional<WeChatUser> {

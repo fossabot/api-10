@@ -1,5 +1,6 @@
 package com.dongfg.project.api.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 import javax.persistence.Id
@@ -11,10 +12,10 @@ import javax.persistence.Id
 @Document(collection = "wechat_authy")
 data class WeChatAuthy(
         @field: Id var id: String? = null,
-        var openId: String,
+        @field: JsonIgnore var openId: String? = null,
         var site: String? = null,
         var account: String? = null,
         var secret: String,
-        var createTime: LocalDateTime,
-        var updateTime: LocalDateTime
+        var createTime: LocalDateTime? = null,
+        var updateTime: LocalDateTime = LocalDateTime.now()
 )
