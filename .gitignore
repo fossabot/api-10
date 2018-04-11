@@ -28,4 +28,5 @@ deploy_key
 
 .DS_Store
 application-external.yml
+application-dev.yml
 application-prd.yml
