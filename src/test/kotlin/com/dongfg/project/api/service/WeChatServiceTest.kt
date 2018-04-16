@@ -23,7 +23,7 @@ class WeChatServiceTest {
     @Test
     fun login() {
         val code = ""
-        val (success, msg, token) = weChatService.login(code)
+        val (success, _, token) = weChatService.login(code)
 
         Assert.assertTrue(success)
         Assert.assertNotNull(token)

@@ -42,7 +42,7 @@ class WebMvcConfig : WebMvcConfigurer {
     }
 
     @Bean
-    fun filterRegistrationBean(): FilterRegistrationBean<WeChatFilter> {
+    fun weChatFilter(): FilterRegistrationBean<WeChatFilter> {
         val registrationBean = FilterRegistrationBean<WeChatFilter>()
         registrationBean.filter = WeChatFilter(weChatService, objectMapper)
         registrationBean.addUrlPatterns("/wechat/authy")

@@ -3,6 +3,7 @@ package com.dongfg.project.api.common.config
 import com.dongfg.project.api.common.property.ApiProperty
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.fasterxml.jackson.databind.ObjectMapper
+import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest
@@ -15,6 +16,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.jwt.JwtHelper
+import org.springframework.security.jwt.crypto.sign.MacSigner
 import javax.servlet.http.HttpServletResponse
 
 
@@ -25,6 +28,7 @@ import javax.servlet.http.HttpServletResponse
 @EnableWebSecurity
 @Configuration
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+    companion object : KLogging()
 
     @Value("\${spring.security.user.name}")
     private lateinit var username: String
@@ -55,8 +59,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     .loginPage("/admin/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
-                    .successHandler { _, response, _ ->
-                        sendResponse(response, GenericPayload(true)) }
+                    .successHandler { _, response, authentication ->
+                        val token = JwtHelper.encode(authentication.name, MacSigner(apiProperty.jwt.secret)).encoded
+                        sendResponse(response, GenericPayload(true, data = token)) }
                     .failureHandler { _, response, e ->
                         sendResponse(response, GenericPayload(false, e.localizedMessage)) }
                     .permitAll()

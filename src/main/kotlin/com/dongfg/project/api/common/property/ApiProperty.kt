@@ -45,6 +45,11 @@ class ApiProperty {
      */
     var push = Push()
 
+    /**
+     * jwt config
+     */
+    var jwt = Jwt()
+
     inner class Admin {
         /**
          * admin url
@@ -88,5 +93,12 @@ class ApiProperty {
          * push email
          */
         lateinit var email: String
+    }
+
+    inner class Jwt {
+        /**
+         * jwt secret
+         */
+        lateinit var secret: String
     }
 }
