@@ -70,7 +70,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .and()
                 .exceptionHandling()
                     .authenticationEntryPoint { _, response, e ->
-                        sendResponse(response, GenericPayload(false, e.localizedMessage)) }
+                        sendResponse(response, GenericPayload(false, e.localizedMessage), status = HttpServletResponse.SC_FORBIDDEN) }
                 .and()
                 .csrf().disable()
         // @formatter:on
@@ -81,8 +81,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
     }
 
-    private fun sendResponse(response: HttpServletResponse, payload: GenericPayload) {
-        response.status = HttpServletResponse.SC_OK
+    private fun sendResponse(response: HttpServletResponse, payload: GenericPayload, status: Int = HttpServletResponse.SC_OK) {
+        response.status = status
         response.addHeader("Content-type", MediaType.APPLICATION_JSON_UTF8.toString())
         response.addHeader("Access-Control-Allow-Origin", apiProperty.admin.url)
         response.addHeader("Access-Control-Allow-Credentials", "true")
