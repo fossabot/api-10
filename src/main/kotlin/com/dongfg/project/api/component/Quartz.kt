@@ -32,6 +32,7 @@ class Quartz {
     @Throws(SchedulerException::class)
     fun submitJob(name: String,
                   jobClass: Class<out Job>,
+                  desc: String? = null,
                   jobDataMap: JobDataMap? = JobDataMap(),
                   cronExpression: String,
                   startTime: Date? = Date(),
@@ -45,6 +46,7 @@ class Quartz {
         val triggerKey = TriggerKey.triggerKey(name)
 
         val job = JobBuilder.newJob(jobClass)
+                .withDescription(desc)
                 .withIdentity(jobKey)
                 .setJobData(jobDataMap)
                 .requestRecovery().build()

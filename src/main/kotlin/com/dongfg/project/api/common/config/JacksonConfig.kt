@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Primary
 import org.springframework.http.MediaType
 import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -23,7 +24,9 @@ import java.time.format.DateTimeFormatter
 @Configuration
 class JacksonConfig {
 
-    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    private final val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+    private final val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
     @Primary
     @Bean
@@ -34,6 +37,8 @@ class JacksonConfig {
         javaTimeModule.addSerializer(LocalDateTime::class.java, LocalDateTimeSerializer(formatter))
         javaTimeModule.addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer(formatter))
         objectMapper.registerModule(javaTimeModule)
+
+        objectMapper.dateFormat = dateFormat
 
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)

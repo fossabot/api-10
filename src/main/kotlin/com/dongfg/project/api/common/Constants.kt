@@ -25,6 +25,13 @@ interface Constants {
         companion object {
             const val TOTP = "x-auth-totp"
             const val WECHAT = "x-auth-wechat"
+            const val ADMIN = "x-auth-admin"
         }
+    }
+
+    enum class PayloadCode(val code: Int, val msg: String) {
+        SUCCESS(0, "成功"),
+        FAILURE(1, "失败"),
+        NOT_LOGIN(999, "登录失效"),
     }
 }

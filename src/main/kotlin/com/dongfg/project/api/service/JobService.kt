@@ -2,9 +2,9 @@ package com.dongfg.project.api.service
 
 import com.dongfg.project.api.common.Constants.JobAction
 import com.dongfg.project.api.common.Constants.JobAction.*
-import com.dongfg.project.api.common.util.whenInvalid
 import com.dongfg.project.api.component.Quartz
 import com.dongfg.project.api.component.Totp
+import com.dongfg.project.api.model.JobInfo
 import com.dongfg.project.api.web.payload.GenericPayload
 import mu.KLogging
 import org.quartz.JobKey
@@ -31,12 +31,18 @@ class JobService {
         return quartz.getJobKeys().stream().map(JobKey::getName).collect(Collectors.toList())
     }
 
-    fun jobState(totpCode: String, name: String): GenericPayload {
+    fun jobsDetails(): List<JobInfo> {
+        return quartz.getJobKeys().stream().map {
+            val jobInfo = JobInfo(it.name)
+            jobInfo.state = quartz.getTriggerState(it.name).name
+            jobInfo.prevTime = quartz.getTrigger(it.name).previousFireTime
+            jobInfo.nextTime = quartz.getTrigger(it.name).nextFireTime
+            jobInfo
+        }.collect(Collectors.toList())
+    }
+
+    fun jobState(name: String): GenericPayload {
         val payload = GenericPayload(false)
-        totp.whenInvalid(totpCode) {
-            payload.msg = it
-            return payload
-        }
         try {
             payload.success = true
             payload.data = quartz.getTriggerState(name).name
@@ -47,12 +53,8 @@ class JobService {
         return payload
     }
 
-    fun jobOperate(totpCode: String, name: String, action: JobAction): GenericPayload {
+    fun jobOperate(name: String, action: JobAction): GenericPayload {
         val payload = GenericPayload(false)
-        totp.whenInvalid(totpCode) {
-            payload.msg = it
-            return payload
-        }
         try {
             payload.success = true
             when (action) {

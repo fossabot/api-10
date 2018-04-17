@@ -6,12 +6,6 @@ extend type Query {
 }
 
 extend type Mutation {
-    # 暂停任务
-    jobPause(totpCode: String!, name: String!): GenericPayload
-    # 恢复任务
-    jobResume(totpCode: String!, name: String!): GenericPayload
-    # 删除任务
-    jobRemove(totpCode: String!, name: String!): GenericPayload
-    # 触发任务
-    jobTrigger(totpCode: String!, name: String!): GenericPayload
+    # 定时任务操作
+    jobOperate(totpCode: String!, name: String!, action: JobAction): GenericPayload
 }

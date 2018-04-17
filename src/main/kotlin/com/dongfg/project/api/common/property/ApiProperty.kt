@@ -1,7 +1,10 @@
 package com.dongfg.project.api.common.property
 
 import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.boot.convert.DurationUnit
 import org.springframework.context.annotation.Configuration
+import java.time.Duration
+import java.time.temporal.ChronoUnit
 
 
 /**
@@ -100,5 +103,8 @@ class ApiProperty {
          * jwt secret
          */
         lateinit var secret: String
+
+        @DurationUnit(ChronoUnit.MINUTES)
+        var timeout = Duration.ofHours(2)
     }
 }

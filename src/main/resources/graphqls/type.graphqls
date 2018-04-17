@@ -12,6 +12,14 @@ enum MessageLevel {
     ERROR
 }
 
+# 定时任务操作
+enum JobAction {
+    PAUSE
+    RESUME
+    REMOVE
+    TRIGGER
+}
+
 # 评论
 type Comment {
     # id

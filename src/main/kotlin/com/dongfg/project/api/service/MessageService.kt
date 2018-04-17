@@ -26,7 +26,7 @@ class MessageService {
 
     fun sendMessage(totpCode: String, message: Message): GenericPayload {
         totp.whenInvalid(totpCode) {
-            return GenericPayload(false, it)
+            return GenericPayload(false, msg = it)
         }
 
         val payload = GenericPayload(true)
