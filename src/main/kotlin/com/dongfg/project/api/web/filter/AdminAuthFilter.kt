@@ -34,16 +34,14 @@ class AdminAuthFilter constructor(
                 val claims = Jwts.parser().setSigningKey(apiProperty.jwt.secret).parseClaimsJws(authHeader).body
                 val user = userDetailsService.loadUserByUsername(claims.subject)
                 SecurityContextHolder.getContext().authentication = AdminUserToken(user.username, user.authorities)
-                filterChain.doFilter(request, response)
             } catch (e: JwtException) {
                 if (e is ExpiredJwtException) {
                     writeUnauthorizedResponse(response, code = PayloadCode.NOT_LOGIN)
                 }
                 writeUnauthorizedResponse(response)
             }
-        } else {
-            writeUnauthorizedResponse(response)
         }
+        filterChain.doFilter(request, response)
 
     }
 
