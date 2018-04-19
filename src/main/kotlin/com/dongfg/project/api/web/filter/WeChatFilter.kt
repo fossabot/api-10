@@ -26,14 +26,13 @@ class WeChatFilter constructor(
             val user = weChatService.findUser(authHeader)
             if (user.isPresent) {
                 WeChatUserHolder.set(user.get())
+                filterChain.doFilter(request, response)
             } else {
                 writeUnauthorizedResponse(response)
             }
         } else {
             writeUnauthorizedResponse(response)
         }
-
-        filterChain.doFilter(request, response)
     }
 
     private fun writeUnauthorizedResponse(response: HttpServletResponse) {
