@@ -1,5 +1,5 @@
 [api.dongfg.com](https://api.dongfg.com)
-----------
-> code refactoring with spring boot 2.0 and kotlin
+========
+[![Build Status](https://travis-ci.org/dongfg/dongfg-api.svg?branch=master)](https://travis-ci.org/dongfg/dongfg-api)
 
-#### todo
+> build with spring boot 2.0 and kotlin

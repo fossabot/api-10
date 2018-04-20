@@ -11,7 +11,7 @@ before_install:
 install:
   - wget https://raw.githubusercontent.com/dongfg/python-script/master/qiniu_rsync.py
 script:
-- ./gradlew -x test bootjar
+- ./gradlew -x test clean bootjar
 after_success:
 - chmod 600 deploy_key
 - mkdir deploy && cp build/libs/*.jar deploy/

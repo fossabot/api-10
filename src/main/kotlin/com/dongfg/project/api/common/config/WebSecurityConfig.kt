@@ -38,7 +38,7 @@ import javax.servlet.http.HttpServletResponse
  * @author dongfg
  * @date 2018/3/17
  */
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 @Configuration
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     companion object : KLogging()
