@@ -36,10 +36,8 @@ class WeChatFilter constructor(
     }
 
     private fun writeUnauthorizedResponse(response: HttpServletResponse) {
-        response.status = HttpServletResponse.SC_UNAUTHORIZED
+        response.status = HttpServletResponse.SC_OK
         response.addHeader("Content-type", MediaType.APPLICATION_JSON_UTF8.toString())
-        response.addHeader("Access-Control-Allow-Origin", "*")
-        response.addHeader("Access-Control-Allow-Credentials", "true")
         objectMapper.writeValue(response.writer, GenericPayload(false, msg = "Unauthorized"))
     }
 }

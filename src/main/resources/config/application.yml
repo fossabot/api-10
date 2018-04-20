@@ -9,7 +9,10 @@ management:
   endpoint:
     health:
       show-details: when_authorized
-server:
-  servlet:
-    session:
-      timeout: 10h
+  endpoints:
+    web:
+      cors:
+        allow-credentials: true
+        allowed-headers: "*"
+        allowed-methods: "*"
+        allowed-origins: "*"

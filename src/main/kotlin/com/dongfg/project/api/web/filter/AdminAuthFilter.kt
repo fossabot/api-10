@@ -39,17 +39,15 @@ class AdminAuthFilter constructor(
                     writeUnauthorizedResponse(response, code = PayloadCode.NOT_LOGIN)
                 }
                 writeUnauthorizedResponse(response)
+                return
             }
         }
         filterChain.doFilter(request, response)
-
     }
 
     private fun writeUnauthorizedResponse(response: HttpServletResponse, code: PayloadCode = PayloadCode.FAILURE) {
-        response.status = HttpServletResponse.SC_UNAUTHORIZED
+        response.status = HttpServletResponse.SC_OK
         response.addHeader("Content-type", MediaType.APPLICATION_JSON_UTF8.toString())
-        response.addHeader("Access-Control-Allow-Origin", "*")
-        response.addHeader("Access-Control-Allow-Credentials", "true")
         objectMapper.writeValue(response.writer, GenericPayload(false, code = code.code, msg = code.msg))
     }
 }
