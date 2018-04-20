@@ -1,4 +1,6 @@
 spring:
+  application:
+      name: dongfg-api
   quartz:
     job-store-type: jdbc
     jdbc:

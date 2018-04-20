@@ -59,9 +59,8 @@ noArg {
 
 bootJar {
     archiveName 'dongfg-api.jar'
+    launchScript()
 }
-
-
 
 repositories {
     mavenCentral()
