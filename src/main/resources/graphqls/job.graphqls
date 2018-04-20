@@ -1,0 +1,11 @@
+extend type Query {
+    # 查询任务列表
+    jobs: [String]
+    # 任务状态
+    jobState(totpCode: String!, name: String!): GenericPayload
+}
+
+extend type Mutation {
+    # 定时任务操作
+    jobOperate(totpCode: String!, name: String!, action: JobAction): GenericPayload
+}

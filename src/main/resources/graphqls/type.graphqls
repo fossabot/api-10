@@ -1,0 +1,35 @@
+# 消息类型
+enum MessageType {
+    SMS
+    WEB
+    APP
+}
+
+# 消息级别
+enum MessageLevel {
+    INFO
+    WARN
+    ERROR
+}
+
+# 定时任务操作
+enum JobAction {
+    PAUSE
+    RESUME
+    REMOVE
+    TRIGGER
+}
+
+# 评论
+type Comment {
+    # id
+    id: String!
+    # 评论内容
+    comment: String!
+    # 昵称
+    name: String!
+    # 邮件地址
+    email: String
+    # 创建时间
+    createTime: LocalDateTime
+}

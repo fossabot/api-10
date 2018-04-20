@@ -1,4 +1,0 @@
-extend type Query {
-    # Magnet & Torrent search
-    magnets(keyWords: [String]!): [Magnet]
-}

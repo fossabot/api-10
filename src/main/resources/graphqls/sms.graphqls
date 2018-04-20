@@ -1,4 +1,0 @@
-extend type Mutation {
-    # 发送短信
-    sendSms(otpCode: Int!, sms: SmsInput!): Sms!
-}

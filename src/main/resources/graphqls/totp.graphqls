@@ -1,6 +1,0 @@
-extend type Mutation {
-    # 生成凭证
-    createSecretKey(site: String!,username: String!): SecretKey!
-    # 验证TOTP code
-    validateCode(secretKey: String!,code: Int): Boolean
-}

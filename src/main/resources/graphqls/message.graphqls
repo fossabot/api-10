@@ -1,7 +1,4 @@
 extend type Mutation {
-    # 发送消息
-    sendMessage(totpCode: Int!, input: SendMessageInput!): MessagePayload
-
-    # 保存WEB订阅信息
-    savePushSubscription(subscription: PushSubscriptionInput!): MessagePayload
+    # 消息发送
+    messageSend(totpCode: Int!, input: MessageSendInput!): GenericPayload
 }

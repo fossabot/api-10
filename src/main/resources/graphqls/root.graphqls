@@ -1,0 +1,13 @@
+scalar LocalDateTime
+
+# The query root of dongfg's GraphQL interface.
+type Query {
+    # 查看所有评论
+    comments: [Comment]
+}
+
+# The root query for implementing GraphQL mutations.
+type Mutation {
+    # 添加评论
+    commentCreate(input: CommentCreateInput!): GenericPayload
+}
