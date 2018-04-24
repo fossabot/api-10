@@ -49,11 +49,11 @@ class WeChatService {
     }
 
     fun listAuthy(): List<WeChatAuthy> {
-        return weChatAuthyRepository.findByOpenId(WeChatUserHolder.getCurrent().openId, Sort.by(Sort.Order.asc("createTime")))
+        return weChatAuthyRepository.findByOpenId(WeChatUserHolder.getCurrent().openId, Sort.by(Sort.Order.desc("createTime")))
     }
 
     fun saveOrUpdateAuthy(authy: WeChatAuthy): GenericPayload {
-        if (authy.id.isNullOrEmpty()) {
+        if (!authy.id.isNullOrEmpty()) {
             weChatAuthyRepository.findById(authy.id!!).ifPresent {
                 it.site = authy.site
                 it.account = authy.account
