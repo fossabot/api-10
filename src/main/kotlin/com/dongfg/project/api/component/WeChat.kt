@@ -49,7 +49,7 @@ class WeChat {
     fun message(accessToken: String, data: String): WeChatResponse {
         val url = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token={accessToken}"
         return try {
-            restTemplate.postForObject(url, data, WeChatResponse::class.java)!!
+            restTemplate.postForObject(url, data, WeChatResponse::class.java, accessToken)!!
         } catch (e: RestClientException) {
             logger.error("send message RestClientException", e)
             val response = WeChatResponse()

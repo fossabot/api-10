@@ -26,7 +26,7 @@ class WeChatTemplateService {
     fun scheduleReminder(openId: String, data: ScheduleReminderData): GenericPayload {
         val payload = GenericPayload(true)
 
-        val formIdResponse = getFormId()
+        val formIdResponse = getFormId(openId)
         if (!formIdResponse.success) {
             payload.success = false
             payload.msg = formIdResponse.msg
@@ -37,7 +37,7 @@ class WeChatTemplateService {
 
         var accessToken = stringRedisTemplate.opsForValue().get(Constants.RedisKey.WECHAT_ACCESS_TOKEN)
 
-        accessToken?.let {
+        if (accessToken == null) {
             val accessTokenResponse = weChat.accessToken()
             if (accessTokenResponse.errCode != Constants.PayloadCode.SUCCESS.code) {
                 payload.success = false
@@ -49,7 +49,7 @@ class WeChatTemplateService {
             stringRedisTemplate.opsForValue().set(Constants.RedisKey.WECHAT_ACCESS_TOKEN, accessToken!!)
         }
 
-        val wechatResponse = weChat.message(accessToken!!, objectMapper.writeValueAsString(message))
+        val wechatResponse = weChat.message(accessToken, objectMapper.writeValueAsString(message))
 
         payload.code = wechatResponse.errCode
         payload.msg = wechatResponse.errMsg
@@ -63,13 +63,14 @@ class WeChatTemplateService {
         return GenericPayload(true)
     }
 
-    fun getFormId(): GenericPayload {
-        val openId = WeChatUserHolder.getCurrent().openId
+    fun getFormId(openId: String): GenericPayload {
         val formId = stringRedisTemplate.opsForList().rightPop(Constants.RedisKey.WECHAT_FORM_ID + openId)
         val payload = GenericPayload(true)
         if (formId.isNullOrEmpty()) {
             payload.success = false
             payload.msg = "formId not found"
+        } else {
+            payload.data = formId
         }
 
         return payload

@@ -20,14 +20,19 @@ interface WeChatTemplate {
 
     ) {
         data class ScheduleReminderData(
+                @JsonProperty("keyword1")
                 @JsonSerialize(using = KeywordSerializer::class)
                 var topic: String,
+                @JsonProperty("keyword2")
                 @JsonSerialize(using = KeywordSerializer::class)
                 var time: String,
+                @JsonProperty("keyword3")
                 @JsonSerialize(using = KeywordSerializer::class)
                 var location: String,
+                @JsonProperty("keyword4")
                 @JsonSerialize(using = KeywordSerializer::class)
                 var desc: String,
+                @JsonProperty("keyword5")
                 @JsonSerialize(using = KeywordSerializer::class)
                 var level: String
         )
