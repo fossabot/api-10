@@ -34,10 +34,6 @@ import java.util.*
 import javax.servlet.http.HttpServletResponse
 
 
-/**
- * @author dongfg
- * @date 2018/3/17
- */
 @EnableWebSecurity
 @Configuration
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
@@ -121,6 +117,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         val registrationBean = FilterRegistrationBean<WeChatFilter>()
         registrationBean.filter = WeChatFilter(weChatService, objectMapper)
         registrationBean.addUrlPatterns("/wechat/authy")
+        registrationBean.addUrlPatterns("/wechat/formId/*")
+        registrationBean.addUrlPatterns("/wechat/userInfo")
         return registrationBean
     }
 

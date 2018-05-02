@@ -11,10 +11,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-/**
- * @author dongfg
- * @date 2018/3/17
- */
 @Configuration
 class GraphqlConfig {
 

@@ -7,10 +7,6 @@ import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-/**
- * @author dongfg
- * @date 2018/3/22
- */
 @Service
 class CommentService {
     companion object : KLogging()

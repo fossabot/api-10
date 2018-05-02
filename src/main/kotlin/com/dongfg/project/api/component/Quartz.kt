@@ -13,10 +13,6 @@ import java.util.*
 import java.util.stream.Collectors
 
 
-/**
- * @author dongfg
- * @date 2018/3/16
- */
 @Component
 class Quartz {
 
@@ -25,10 +21,6 @@ class Quartz {
     @Autowired
     private lateinit var scheduler: Scheduler
 
-    /**
-     * submit job
-     * @throws SchedulerException if submit failed
-     */
     @Throws(SchedulerException::class)
     fun submitJob(name: String,
                   jobClass: Class<out Job>,
@@ -40,7 +32,6 @@ class Quartz {
                   jobListener: JobListenerSupport? = null,
                   schedulerListener: SchedulerListenerSupport? = null,
                   triggerListener: TriggerListener? = null) {
-
 
         val jobKey = JobKey.jobKey(name)
         val triggerKey = TriggerKey.triggerKey(name)
@@ -76,9 +67,6 @@ class Quartz {
         }
     }
 
-    /**
-     * get all job list
-     */
     fun getJobKeys(): List<JobKey> {
         return scheduler.getJobKeys(GroupMatcher.anyJobGroup()).stream().collect(Collectors.toList())
     }
@@ -91,23 +79,14 @@ class Quartz {
         return scheduler.getTriggerState(TriggerKey.triggerKey(name))
     }
 
-    /**
-     * check job exist by [name]
-     */
     fun exists(name: String): Boolean {
         return scheduler.checkExists(JobKey.jobKey(name))
     }
 
-    /**
-     * remove job by [name]
-     */
     fun removeJob(name: String): Boolean {
         return scheduler.deleteJob(JobKey.jobKey(name))
     }
 
-    /**
-     * pause job by [name]
-     */
     @Throws(SchedulerException::class)
     fun pauseJob(name: String): Boolean {
         if (exists(name)) {
@@ -116,9 +95,6 @@ class Quartz {
         return true
     }
 
-    /**
-     * resume job by [name]
-     */
     @Throws(SchedulerException::class)
     fun resumeJob(name: String): Boolean {
         if (exists(name)) {
@@ -127,9 +103,6 @@ class Quartz {
         return true
     }
 
-    /**
-     * trigger job by [name]
-     */
     @Throws(SchedulerException::class)
     fun triggerJob(name: String): Boolean {
         if (exists(name)) {

@@ -12,10 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 
-/**
- * @author dongfg
- * @date 2018/3/17
- */
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @ActiveProfiles("dev")

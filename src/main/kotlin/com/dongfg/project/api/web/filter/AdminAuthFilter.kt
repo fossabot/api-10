@@ -18,10 +18,6 @@ import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-/**
- * @author dongfg
- * @date 2018/4/17
- */
 class AdminAuthFilter constructor(
         private val apiProperty: ApiProperty,
         private val objectMapper: ObjectMapper,

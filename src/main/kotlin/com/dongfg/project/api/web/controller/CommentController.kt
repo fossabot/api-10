@@ -9,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 
-/**
- * @author dongfg
- * @date 2018/3/22
- */
 @EnableSwaggerDoc
 @RequestMapping("/comment")
 @RestController

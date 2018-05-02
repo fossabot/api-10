@@ -6,10 +6,6 @@ import graphql.ExceptionWhileDataFetching
 import graphql.execution.ExecutionPath
 import graphql.language.SourceLocation
 
-/**
- * @author dongfg
- * @date 2018/3/23
- */
 class ExceptionWhileDataFetchingWrapper(path: ExecutionPath?, exception: Throwable?, sourceLocation: SourceLocation?)
     : ExceptionWhileDataFetching(path, exception, sourceLocation) {
 

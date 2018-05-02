@@ -15,10 +15,6 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 import java.time.LocalDateTime
 
-/**
- * @author dongfg
- * @date 2018/3/27
- */
 @EnableSwagger2
 @Configuration
 class SwaggerConfig {

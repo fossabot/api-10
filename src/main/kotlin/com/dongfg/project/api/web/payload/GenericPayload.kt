@@ -4,10 +4,6 @@ import com.dongfg.project.api.common.Constants.PayloadCode
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
-/**
- * @author dongfg
- * @date 2018/3/23
- */
 @ApiModel
 class GenericPayload constructor(
         @ApiModelProperty("success flag")

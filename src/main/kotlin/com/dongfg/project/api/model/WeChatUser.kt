@@ -1,17 +1,22 @@
 package com.dongfg.project.api.model
 
-import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
+import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
+import javax.persistence.Transient
 
-/**
- * @author dongfg
- * @date 2018/3/28
- */
-@Document(collection = "wechat_user")
+@Table(name = "wechat_user")
+@Entity
 data class WeChatUser(
         @field: Id var openId: String,
         var sessionKey: String,
         var token: String,
-        var updateTime: LocalDateTime
+        var updateTime: LocalDateTime,
+        @Transient
+        var expireTime: LocalDateTime? = null,
+        @Transient
+        var userInfo: WeChatUserInfo? = null,
+        @Transient
+        var pushCount: Int? = 0
 )

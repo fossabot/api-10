@@ -1,17 +1,20 @@
 package com.dongfg.project.api.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.springframework.data.mongodb.core.mapping.Document
+import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.Table
 
-/**
- * @author dongfg
- * @date 2018/3/29
- */
-@Document(collection = "wechat_authy")
+@Table(name = "wechat_authy")
+@Entity
 data class WeChatAuthy(
-        @field: Id var id: String? = null,
+        @Id
+        @GeneratedValue(generator = "UUID")
+        @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+        var id: String? = null,
         @field: JsonIgnore var openId: String? = null,
         var site: String? = null,
         var account: String? = null,

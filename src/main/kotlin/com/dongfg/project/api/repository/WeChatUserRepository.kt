@@ -1,13 +1,9 @@
 package com.dongfg.project.api.repository
 
 import com.dongfg.project.api.model.WeChatUser
-import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
-/**
- * @author dongfg
- * @date 2018/3/28
- */
-interface WeChatUserRepository : MongoRepository<WeChatUser, String> {
+interface WeChatUserRepository : JpaRepository<WeChatUser, String> {
     fun findByToken(token: String): Optional<WeChatUser>
 }

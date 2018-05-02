@@ -11,10 +11,6 @@ import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-/**
- * @author dongfg
- * @date 2018/3/23
- */
 @Component
 class JobResolver : GraphQLQueryResolver, GraphQLMutationResolver {
     companion object : KLogging()

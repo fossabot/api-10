@@ -10,10 +10,6 @@ import graphql.servlet.GraphQLContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-/**
- * @author dongfg
- * @date 2018/3/19
- */
 @Component
 class CommentResolver : GraphQLQueryResolver, GraphQLMutationResolver {
     @Autowired

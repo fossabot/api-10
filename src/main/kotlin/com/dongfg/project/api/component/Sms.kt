@@ -10,10 +10,6 @@ import org.springframework.stereotype.Component
 import java.util.stream.Collectors
 import javax.annotation.PostConstruct
 
-/**
- * @author dongfg
- * @date 2018/3/16
- */
 @Component
 class Sms {
 

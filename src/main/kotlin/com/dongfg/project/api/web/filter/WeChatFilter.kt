@@ -12,10 +12,6 @@ import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-/**
- * @author dongfg
- * @date 2018/3/29
- */
 class WeChatFilter constructor(
         private val weChatService: WeChatService,
         private val objectMapper: ObjectMapper

@@ -17,10 +17,6 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-/**
- * @author dongfg
- * @date 2018/3/22
- */
 @Configuration
 class JacksonConfig {
 

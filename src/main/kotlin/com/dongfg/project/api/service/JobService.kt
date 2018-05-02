@@ -13,10 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.stream.Collectors
 
-/**
- * @author dongfg
- * @date 2018/3/23
- */
 @Service
 class JobService {
     companion object : KLogging()

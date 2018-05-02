@@ -6,10 +6,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.event.EventListener
 
-/**
- * @author dongfg
- * @date 2018/4/17
- */
 @Configuration
 class JobInitConfig {
     @Autowired(required = false)

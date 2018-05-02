@@ -5,10 +5,6 @@ import com.warrenstrange.googleauth.GoogleAuthenticator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-/**
- * @author dongfg
- * @date 2018/3/22
- */
 @Component
 class Totp {
 

@@ -7,10 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 import javax.persistence.Id
 
-/**
- * @author dongfg
- * @date 2018/3/19
- */
 @ApiModel
 @Document(collection = "comment")
 data class Comment(

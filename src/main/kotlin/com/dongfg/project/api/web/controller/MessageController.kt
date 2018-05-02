@@ -9,10 +9,6 @@ import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
-/**
- * @author dongfg
- * @date 2018/3/23
- */
 @EnableSwaggerDoc
 @RequestMapping("/message")
 @RestController

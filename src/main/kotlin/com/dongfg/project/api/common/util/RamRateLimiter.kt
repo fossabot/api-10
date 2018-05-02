@@ -4,10 +4,6 @@ import com.dongfg.project.api.common.Constants.RateLimitKey
 import com.google.common.util.concurrent.RateLimiter
 import java.util.concurrent.ConcurrentHashMap
 
-/**
- * @author dongfg
- * @date 2018/3/23
- */
 class RamRateLimiter {
     companion object {
         private val limiterMap = ConcurrentHashMap<RateLimitKey, RateLimiter>()

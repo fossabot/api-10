@@ -8,10 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 import javax.persistence.Id
 
-/**
- * @author dongfg
- * @date 2018/3/22
- */
 @ApiModel
 @Document(collection = "message")
 data class Message(

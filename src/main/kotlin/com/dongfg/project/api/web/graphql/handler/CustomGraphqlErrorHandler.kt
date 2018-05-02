@@ -10,10 +10,6 @@ import org.springframework.util.CollectionUtils
 import java.util.stream.Collectors
 
 
-/**
- * @author dongfg
- * @date 2018/3/23
- */
 @Component
 class CustomGraphqlErrorHandler : DefaultGraphQLErrorHandler() {
     override fun filterGraphQLErrors(errors: List<GraphQLError>): List<GraphQLError> {
