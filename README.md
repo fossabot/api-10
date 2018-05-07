@@ -1,6 +1,6 @@
 # [api.dongfg.com](https://api.dongfg.com)
-[![Build Status](https://travis-ci.org/dongfg/dongfg-api.svg?branch=master)](https://travis-ci.org/dongfg/dongfg-api)
-[![CircleCI](https://circleci.com/gh/dongfg/dongfg-api.svg?style=svg)](https://circleci.com/gh/dongfg/dongfg-api)
+[![Build Status](https://travis-ci.org/dongfg/api.svg?branch=master)](https://travis-ci.org/dongfg/api)
+[![CircleCI](https://circleci.com/gh/dongfg/api.svg?style=svg)](https://circleci.com/gh/dongfg/api)
 
 my personal api build with spring boot 2 and kotlin
 
@@ -9,7 +9,7 @@ my personal api build with spring boot 2 and kotlin
 For security, i did not commit all config files. This is my config structure:
 ```shell
 $ pwd
-~/Projects/java/dongfg-api/src/main/resources
+~/Projects/java/api/src/main/resources
 
 $ tree -L 1 config
 config
@@ -31,7 +31,7 @@ Explanation:
 ## How to run
 This is a springboot gradle project, just:
 ```shell
-git clone https://github.com/dongfg/dongfg-api.git && cd dongfg-api
+git clone https://github.com/dongfg/api.git && cd api
 SPRING_PROFILES_ACTIVE=dev ./gradlew bootRun
 ```
 
