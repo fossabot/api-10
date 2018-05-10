@@ -15,7 +15,7 @@ data class Comment(
         var comment: String,
         @ApiModelProperty("your nickname")
         var name: String,
-        @ApiModelProperty("your email", allowEmptyValue = true)
+        @ApiModelProperty("your email")
         var email: String? = null,
         @field: JsonIgnore var clientIp: String? = null,
         @ApiModelProperty(hidden = true)

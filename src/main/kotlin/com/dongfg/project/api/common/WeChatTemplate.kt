@@ -37,4 +37,35 @@ interface WeChatTemplate {
                 var level: String
         )
     }
+
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    data class TaskNotify(
+            var touser: String,
+            @JsonProperty("template_id")
+            var id: String = "tile8v1AdvWNwBKbdDPSsyksVsKDZvdA2lbbnQk8pgQ",
+            var page: String? = null,
+            @JsonProperty("form_id")
+            var formId: String,
+            var data: TaskNotifyData,
+            @JsonProperty("emphasis_keyword")
+            var emphasisKeyword: String? = null
+    ) {
+        data class TaskNotifyData(
+                @JsonProperty("keyword1")
+                @JsonSerialize(using = KeywordSerializer::class)
+                var time: String,
+                @JsonProperty("keyword2")
+                @JsonSerialize(using = KeywordSerializer::class)
+                var name: String,
+                @JsonProperty("keyword3")
+                @JsonSerialize(using = KeywordSerializer::class)
+                var type: String,
+                @JsonProperty("keyword4")
+                @JsonSerialize(using = KeywordSerializer::class)
+                var status: String,
+                @JsonProperty("keyword5")
+                @JsonSerialize(using = KeywordSerializer::class)
+                var desc: String
+        )
+    }
 }
