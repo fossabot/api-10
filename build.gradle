@@ -103,6 +103,8 @@ dependencies {
 
     compile('org.bouncycastle:bcprov-jdk15on:1.59')
 
+    compile('org.dom4j:dom4j:2.1.0')
+
     kapt('org.springframework.boot:spring-boot-configuration-processor')
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
     compile('javax.xml.bind:jaxb-api:2.3.0')
