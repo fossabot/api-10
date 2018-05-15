@@ -11,10 +11,11 @@ cache:
     - $HOME/.gradle/wrapper/
 
 script:
-- ./gradlew -x test clean bootjar
+  - ./gradlew -x test clean bootjar
 
 before_cache:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 after_success:
 - mkdir deploy && cp build/libs/*.jar deploy/
@@ -29,6 +30,7 @@ deploy:
 - provider: s3
   access_key_id: ${S3_AK}
   secret_access_key: ${S3_SK}
+  region: ap-northeast-1
   bucket: "dongfg"
   skip_cleanup: true
   local_dir: deploy
