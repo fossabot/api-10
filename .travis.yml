@@ -21,6 +21,7 @@ after_success:
 
 before_deploy:
   - openssl aes-256-cbc -K $encrypted_96cca6b14f03_key -iv $encrypted_96cca6b14f03_iv -in deploy_key.enc -out deploy_key -d
+  - chmod 600 deploy_key
   - sudo apt-get -y install python3-pip python-dev
   - sudo pip3 install qiniu
   - wget https://raw.githubusercontent.com/dongfg/python-script/master/qiniu_rsync.py
