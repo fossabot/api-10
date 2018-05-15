@@ -27,3 +27,6 @@ deploy:
 - provider: script
   skip_cleanup: true
   script: QINIU_AK=${QINIU_AK} QINIU_SK=${QINIU_SK} python3 qiniu_rsync.py dongfg deploy/
+- provider: script
+  skip_cleanup: true
+  script: ssh -o StrictHostKeyChecking=no -i deploy_key -p ${DEPLOY_PORT} ${DEPLOY_USER}@${DEPLOY_HOST} '${PUBLISH_SCRIPT}'
