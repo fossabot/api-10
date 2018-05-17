@@ -5,6 +5,9 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
+install:
+  - sudo apt-get --yes install wget unzip
+
 script:
   - ./gradlew -x test clean bootjar
 
@@ -13,16 +16,18 @@ before_cache:
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 after_success:
-- mkdir deploy && cp build/libs/*.jar deploy/
+  - mkdir deploy && cp build/libs/*.jar deploy/
+
+before_deploy:
+  - wget http://devtools.qiniu.com/qshell-v2.1.8.zip && unzip qshell-v2.1.8.zip && chmod +x qshell-linux-x64
+  - qshell-linux-x64 account ${QINIU_AK} ${QINIU_SK}
 
 deploy:
-- provider: s3
-  access_key_id: ${S3_AK}
-  secret_access_key: ${S3_SK}
-  region: ap-northeast-1
-  bucket: "dongfg"
-  skip_cleanup: true
-  local_dir: deploy
+  - provider: script
+    skip_cleanup: true
+    script: qshell-linux-x64 fput dongfg dongfg-api.jar deploy/dongfg-api.jar true "application/java-archive" "http://up-na0.qiniu.com"
+    on:
+      branch: master
 
 notifications:
   webhooks: http://webhook.dongfg.com/travis
