@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlinVersion = '1.2.40'
-        springBootVersion = '2.0.1.RELEASE'
+        springBootVersion = '2.0.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -107,5 +107,4 @@ dependencies {
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
     compile('javax.xml.bind:jaxb-api:2.3.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('io.projectreactor:reactor-test')
 }
