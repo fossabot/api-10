@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.40'
-        springBootVersion = '2.0.1.RELEASE'
+        kotlinVersion = '1.2.41'
+        springBootVersion = '2.0.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -68,8 +68,8 @@ repositories {
 }
 
 dependencies {
+    compile("com.fasterxml.jackson.module:jackson-modules-java8:2.9.5")
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
-    compile("com.fasterxml.jackson.module:jackson-modules-java8:2.9.4")
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compile("org.jetbrains.kotlin:kotlin-reflect")
 
@@ -77,18 +77,16 @@ dependencies {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     }
     compile('org.springframework.boot:spring-boot-starter-undertow')
-    compile('org.springframework.boot:spring-boot-starter-quartz') {
-        exclude group: 'com.zaxxer', module: 'HikariCP-java6'
-    }
+    compile('org.springframework.boot:spring-boot-starter-quartz')
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-security')
-    compile('io.jsonwebtoken:jjwt:0.9.0')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-    compile('mysql:mysql-connector-java')
-    compile('org.springframework.session:spring-session-data-mongodb')
     compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+    compile('org.springframework.session:spring-session-data-mongodb')
 
+    compile('mysql:mysql-connector-java')
+    compile('io.jsonwebtoken:jjwt:0.9.0')
     compile('io.springfox:springfox-swagger2:2.8.0')
     compile('io.springfox:springfox-swagger-ui:2.8.0')
 
@@ -96,10 +94,10 @@ dependencies {
     compile('com.graphql-java:graphiql-spring-boot-starter:4.0.0')
     compile('com.graphql-java:graphql-java-tools:4.3.0')
 
-    compile('io.github.microutils:kotlin-logging:1.4.9')
-    compile('com.yunpian.sdk:yunpian-java-sdk:1.2.6')
-    compile('com.warrenstrange:googleauth:1.1.2')
-    compile('com.google.guava:guava:24.1-jre')
+    compile('io.github.microutils:kotlin-logging:1.5.4')
+    compile('com.yunpian.sdk:yunpian-java-sdk:1.2.7')
+    compile('com.warrenstrange:googleauth:1.1.5')
+    compile('com.google.guava:guava:25.0-jre')
 
     compile('org.bouncycastle:bcprov-jdk15on:1.59')
 
@@ -107,5 +105,4 @@ dependencies {
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
     compile('javax.xml.bind:jaxb-api:2.3.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile('io.projectreactor:reactor-test')
 }
