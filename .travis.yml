@@ -20,12 +20,12 @@ after_success:
 
 before_deploy:
   - wget http://devtools.qiniu.com/qshell-v2.1.8.zip && unzip qshell-v2.1.8.zip && chmod +x qshell-linux-x64
-  - qshell-linux-x64 account ${QINIU_AK} ${QINIU_SK}
+  - ./qshell-linux-x64 account ${QINIU_AK} ${QINIU_SK}
 
 deploy:
   - provider: script
     skip_cleanup: true
-    script: qshell-linux-x64 fput dongfg dongfg-api.jar deploy/dongfg-api.jar true "application/java-archive" "http://up-na0.qiniu.com"
+    script: ./qshell-linux-x64 fput dongfg dongfg-api.jar deploy/dongfg-api.jar true "application/java-archive" "http://up-na0.qiniu.com"
     on:
       branch: master
 
