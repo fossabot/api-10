@@ -25,7 +25,7 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: ./qshell-linux-x64 fput dongfg dongfg-api.jar deploy/dongfg-api.jar true "application/java-archive" "http://up-na0.qiniu.com"
+    script: ./qshell-linux-x64 fput dongfg dongfg-api.jar deploy/dongfg-api.jar true "application/java-archive" "http://up-z0.qiniup.com"
     on:
       branch: master
 
