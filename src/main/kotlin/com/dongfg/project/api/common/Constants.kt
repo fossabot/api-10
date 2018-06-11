@@ -35,6 +35,7 @@ interface Constants {
         companion object {
             const val WECHAT_ACCESS_TOKEN = "WECHAT_ACCESS_TOKEN"
             const val WECHAT_FORM_ID = "WECHAT_FORM_ID_"
+            const val RSS_SESSION_ID = "RSS_SESSION_ID"
         }
     }
 }

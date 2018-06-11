@@ -2,7 +2,7 @@ package com.dongfg.project.api.common.util
 
 import com.dongfg.project.api.common.Constants
 import com.dongfg.project.api.component.Totp
-import org.springframework.boot.configurationprocessor.json.JSONObject
+import org.json.JSONObject
 
 
 inline fun <T : Any, R> whenNotNull(input: T?, callback: (T) -> R): R? {
@@ -22,7 +22,7 @@ class Json() : JSONObject() {
         this.init()
     }
 
-    infix fun <T> String.To(value: T) {
+    infix fun <T> String.to(value: T) {
         put(this, value)
     }
 }
