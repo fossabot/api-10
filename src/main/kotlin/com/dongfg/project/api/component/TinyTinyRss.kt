@@ -102,6 +102,6 @@ class TinyTinyRss {
         println(responseJson.toString())
     }
 
-    data class Category(val id: String, val title: String, val unread: Int)
+    data class Category(val id: String, var title: String, val unread: Int, var feeds: List<Feed>? = null)
     data class Feed(val id: String, val title: String, val unread: Int, @JsonProperty("feed_url") val url: String)
 }

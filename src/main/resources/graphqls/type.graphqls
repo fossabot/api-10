@@ -33,3 +33,27 @@ type Comment {
     # 创建时间
     createTime: LocalDateTime
 }
+
+# rss 分类
+type Category {
+    # category id
+    id: String
+    # 分类名称
+    title: String
+    # 未读数量
+    unread: Int
+    # 订阅列表
+    feeds: [Feed]
+}
+
+# rss 订阅源
+type Feed {
+    # Feed id
+    id: String
+    # 订阅源名称
+    title: String
+    # 未读数量
+    unread: Int
+    # 订阅源地址
+    url: String
+}
