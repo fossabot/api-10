@@ -27,6 +27,8 @@ class ApiProperty {
 
     var jwt = Jwt()
 
+    var rss = Rss()
+
     inner class Admin {
 
         lateinit var url: String
@@ -64,5 +66,11 @@ class ApiProperty {
 
         @DurationUnit(ChronoUnit.MINUTES)
         var timeout: Duration = Duration.ofHours(2)
+    }
+
+    inner class Rss {
+        lateinit var user: String
+        lateinit var password: String
+        lateinit var apiUrl: String
     }
 }

@@ -62,4 +62,9 @@ class WeChatController {
     fun countFormId(): Int {
         return weChatTemplateService.countFormId()
     }
+
+    @GetMapping("/feeds")
+    fun listFeed() {
+
+    }
 }

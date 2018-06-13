@@ -3,6 +3,7 @@ package com.dongfg.project.api.common.config
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
@@ -33,6 +34,8 @@ class JacksonConfig {
         javaTimeModule.addSerializer(LocalDateTime::class.java, LocalDateTimeSerializer(formatter))
         javaTimeModule.addDeserializer(LocalDateTime::class.java, LocalDateTimeDeserializer(formatter))
         objectMapper.registerModule(javaTimeModule)
+
+        objectMapper.registerModule(JsonOrgModule())
 
         objectMapper.dateFormat = dateFormat
 

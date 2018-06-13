@@ -69,7 +69,9 @@ repositories {
 
 dependencies {
     compile("com.fasterxml.jackson.module:jackson-modules-java8:2.9.5")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-json-org:2.9.5")
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+    compile('org.json:json:20180130')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compile("org.jetbrains.kotlin:kotlin-reflect")
 

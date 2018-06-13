@@ -1,0 +1,4 @@
+extend type Query {
+    # 任务状态
+    feeds: [Category]
+}
