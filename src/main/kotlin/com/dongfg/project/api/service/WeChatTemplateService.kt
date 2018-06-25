@@ -5,7 +5,6 @@ import com.dongfg.project.api.common.WeChatTemplate
 import com.dongfg.project.api.common.WeChatTemplate.ScheduleReminder
 import com.dongfg.project.api.common.WeChatTemplate.ScheduleReminder.ScheduleReminderData
 import com.dongfg.project.api.common.WeChatTemplate.TaskNotify.TaskNotifyData
-import com.dongfg.project.api.common.util.WeChatUserHolder
 import com.dongfg.project.api.component.WeChat
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -88,12 +87,6 @@ class WeChatTemplateService {
         return payload
     }
 
-    fun addFormId(formId: String): GenericPayload {
-        val openId = WeChatUserHolder.getCurrent().openId
-        stringRedisTemplate.opsForList().leftPush(Constants.RedisKey.WECHAT_FORM_ID + openId, formId)
-        return GenericPayload(true)
-    }
-
     private fun getFormId(openId: String): GenericPayload {
         val formId = stringRedisTemplate.opsForList().rightPop(Constants.RedisKey.WECHAT_FORM_ID + openId)
         val payload = GenericPayload(true)
@@ -105,14 +98,5 @@ class WeChatTemplateService {
         }
 
         return payload
-    }
-
-    fun countFormId(openId: String? = WeChatUserHolder.getCurrent().openId): Int {
-        val list = stringRedisTemplate.opsForList().range(Constants.RedisKey.WECHAT_FORM_ID + openId, 0, -1)
-        var count = 0
-        list?.let {
-            count = it.size
-        }
-        return count
     }
 }

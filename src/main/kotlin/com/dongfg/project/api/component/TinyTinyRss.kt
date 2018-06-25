@@ -6,6 +6,7 @@ import com.dongfg.project.api.common.util.Json
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
+import mu.KLogging
 import org.aspectj.lang.annotation.Aspect
 import org.json.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,6 +18,8 @@ import org.springframework.web.client.RestTemplate
 @Aspect
 @Component
 class TinyTinyRss {
+
+    companion object : KLogging()
 
     @Autowired
     private lateinit var apiProperty: ApiProperty
@@ -48,7 +51,7 @@ class TinyTinyRss {
     }
 
     fun getCategories(): List<Category> {
-        val sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+        val sessionId = getSessionId()
         val requestJson = Json {
             "op" to "getCategories"
             "sid" to sessionId
@@ -56,13 +59,14 @@ class TinyTinyRss {
 
         val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
                 ?: return emptyList()
+        logger.info(responseJson.toString())
 
         return objectMapper.convertValue<List<Category>>(responseJson.getJSONArray("content"),
                 object : TypeReference<List<Category>>() {})!!.filter { it.id != "-1" }
     }
 
     fun getFeeds(categoryId: String): List<Feed> {
-        val sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+        val sessionId = getSessionId()
         val requestJson = Json {
             "op" to "getFeeds"
             "sid" to sessionId
@@ -76,7 +80,7 @@ class TinyTinyRss {
     }
 
     fun subscribeToFeed(url: String, categoryId: String) {
-        val sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+        val sessionId = getSessionId()
         val requestJson = Json {
             "op" to "subscribeToFeed"
             "sid" to sessionId
@@ -90,7 +94,7 @@ class TinyTinyRss {
     }
 
     fun unsubscribeFeed(feedId: String) {
-        val sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+        val sessionId = getSessionId()
         val requestJson = Json {
             "op" to "unsubscribeFeed"
             "sid" to sessionId
@@ -100,6 +104,24 @@ class TinyTinyRss {
         val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
 
         println(responseJson.toString())
+    }
+
+    fun getSessionId(): String {
+        var sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+        val requestJson = Json {
+            "op" to "isLoggedIn"
+            "sid" to sessionId
+        }
+
+        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
+        val isLoggedIn = responseJson!!.getJSONObject("content").getBoolean("status")
+
+        if (!isLoggedIn) {
+            login()
+            sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+        }
+
+        return sessionId!!
     }
 
     data class Category(val id: String, var title: String, val unread: Int, var feeds: List<Feed>? = null)

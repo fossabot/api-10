@@ -1,9 +1,7 @@
 package com.dongfg.project.api.common.config
 
 import com.dongfg.project.api.common.property.ApiProperty
-import com.dongfg.project.api.service.WeChatService
 import com.dongfg.project.api.web.filter.AdminAuthFilter
-import com.dongfg.project.api.web.filter.WeChatFilter
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.Jwts
@@ -13,7 +11,6 @@ import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest
-import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -50,9 +47,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
-
-    @Autowired
-    private lateinit var weChatService: WeChatService
 
     @Autowired
     private lateinit var userDetailsService: UserDetailsService
@@ -110,16 +104,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(web: WebSecurity) {
         web.ignoring()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
-    }
-
-    @Bean
-    fun weChatFilter(): FilterRegistrationBean<WeChatFilter> {
-        val registrationBean = FilterRegistrationBean<WeChatFilter>()
-        registrationBean.filter = WeChatFilter(weChatService, objectMapper)
-        registrationBean.addUrlPatterns("/wechat/authy")
-        registrationBean.addUrlPatterns("/wechat/formId/*")
-        registrationBean.addUrlPatterns("/wechat/userInfo")
-        return registrationBean
     }
 
     @Bean
