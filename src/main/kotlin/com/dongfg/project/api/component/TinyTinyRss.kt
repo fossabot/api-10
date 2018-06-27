@@ -36,7 +36,7 @@ class TinyTinyRss {
     /**
      * login for sessionId
      */
-    fun login() {
+    fun login(): String {
         val requestJson = Json {
             "op" to "login"
             "user" to apiProperty.rss.user
@@ -48,6 +48,7 @@ class TinyTinyRss {
 
         val sessionId = responseJson.getJSONObject("content").getString("session_id")
         stringRedisTemplate.opsForValue().set(Constants.RedisKey.RSS_SESSION_ID, sessionId)
+        return sessionId
     }
 
     fun getCategories(): List<Category> {
@@ -61,8 +62,10 @@ class TinyTinyRss {
                 ?: return emptyList()
         logger.info(responseJson.toString())
 
-        return objectMapper.convertValue<List<Category>>(responseJson.getJSONArray("content"),
-                object : TypeReference<List<Category>>() {})!!.filter { it.id != "-1" }
+        val categories = objectMapper.convertValue<List<Category>>(responseJson.getJSONArray("content"),
+                object : TypeReference<List<Category>>() {}) ?: return emptyList()
+
+        return categories.filter { it.id != "-1" }
     }
 
     fun getFeeds(categoryId: String): List<Feed> {
@@ -75,8 +78,10 @@ class TinyTinyRss {
 
         val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
                 ?: return emptyList()
+        logger.info(responseJson.toString())
 
-        return objectMapper.convertValue<List<Feed>>(responseJson.getJSONArray("content"), object : TypeReference<List<Feed>>() {})!!
+        return objectMapper.convertValue<List<Feed>>(responseJson.getJSONArray("content"),
+                object : TypeReference<List<Feed>>() {}) ?: return emptyList()
     }
 
     fun subscribeToFeed(url: String, categoryId: String) {
@@ -107,7 +112,7 @@ class TinyTinyRss {
     }
 
     fun getSessionId(): String {
-        var sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+        val sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
         val requestJson = Json {
             "op" to "isLoggedIn"
             "sid" to sessionId
@@ -117,8 +122,7 @@ class TinyTinyRss {
         val isLoggedIn = responseJson!!.getJSONObject("content").getBoolean("status")
 
         if (!isLoggedIn) {
-            login()
-            sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
+            return login()
         }
 
         return sessionId!!
