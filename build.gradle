@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.41'
+        kotlinVersion = '1.2.50'
         springBootVersion = '2.0.2.RELEASE'
     }
     repositories {
@@ -102,6 +102,7 @@ dependencies {
     compile('com.google.guava:guava:25.0-jre')
 
     compile('org.bouncycastle:bcprov-jdk15on:1.59')
+    compile('org.jsoup:jsoup:1.11.3')
 
     kapt('org.springframework.boot:spring-boot-configuration-processor')
     compileOnly('org.springframework.boot:spring-boot-configuration-processor')
