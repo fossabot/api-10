@@ -1,0 +1,4 @@
+extend type Query {
+    # 剧集搜索
+    resources(keyword: String!): [ResourceInfo]
+}

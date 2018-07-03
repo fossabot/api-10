@@ -57,3 +57,19 @@ type Feed {
     # 订阅源地址
     url: String
 }
+
+# 剧集信息
+type ResourceInfo {
+    # 剧集ID
+    id: String
+    # 剧集名称
+    name: String
+    # 剧集链接
+    link: String
+    # 封面图片
+    poster: String
+    # 发布时间
+    publishTime: LocalDateTime
+    # 更新时间
+    updateTime: LocalDateTime
+}
