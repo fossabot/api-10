@@ -10,6 +10,7 @@ class RamRateLimiter {
 
         init {
             limiterMap[RateLimitKey.MESSAGE] = RateLimiter.create(0.1)
+            limiterMap[RateLimitKey.RESOURCE] = RateLimiter.create(0.1)
         }
 
         @JvmStatic
