@@ -73,3 +73,23 @@ type ResourceInfo {
     # 更新时间
     updateTime: LocalDateTime
 }
+
+# 剧集信息详情
+type ResourceDetail {
+    # rss地址
+    rssLink: String
+    # 译名
+    cnName: String
+    # 原名
+    enName: String
+    # 连载状态
+    playStatus: String
+    # 地区
+    area: String
+    # 类型
+    category: String
+    # 评分人数
+    scoreCount: Int
+    # 评分详情(从5到1)
+    scoreDetail: [Int]
+}
