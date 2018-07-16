@@ -93,3 +93,23 @@ type ResourceDetail {
     # 评分详情(从5到1)
     scoreDetail: [Int]
 }
+
+# 单集剧集信息
+type ResourceEpisode {
+    # 单集剧集ID
+    id: String
+    # 剧集ID
+    resourceId: String
+    # 剧集名称
+    name: String
+    # 季
+    season: Int
+    # 集
+    episode: Int
+    # 电驴下载地址
+    ed2k: String
+    # 磁力下载地址
+    magnet: String
+    # 发布时间
+    publishTime: LocalDateTime
+}

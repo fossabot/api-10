@@ -3,7 +3,9 @@ package com.dongfg.project.api.web.controller
 import com.dongfg.project.api.common.util.EnableSwaggerDoc
 import com.dongfg.project.api.component.ZiMuZu
 import com.dongfg.project.api.model.ResourceDetail
+import com.dongfg.project.api.model.ResourceEpisode
 import com.dongfg.project.api.model.ResourceInfo
+import com.dongfg.project.api.service.ResourceService
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,6 +20,9 @@ class ResourceController {
     @Autowired
     private lateinit var ziMuZu: ZiMuZu
 
+    @Autowired
+    private lateinit var resourceService: ResourceService
+
     @GetMapping("/{keyword}")
     @ApiOperation("剧集搜索")
     fun resources(@PathVariable keyword: String): List<ResourceInfo> {
@@ -28,5 +33,11 @@ class ResourceController {
     @ApiOperation("剧集详情查看")
     fun resourceDetail(@PathVariable resourceId: String): ResourceDetail {
         return ziMuZu.detail(resourceId)
+    }
+
+    @GetMapping("/episodes/{resourceId}")
+    @ApiOperation("剧集分集链接")
+    fun episodes(@PathVariable resourceId: String): List<ResourceEpisode> {
+        return resourceService.episodes(resourceId)
     }
 }

@@ -4,4 +4,7 @@ extend type Query {
 
     # 剧集详情
     resourceDetail(resourceId: String!): ResourceDetail
+
+    # 剧集分集链接
+    episodes(resourceId: String!): [ResourceEpisode]
 }

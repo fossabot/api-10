@@ -24,10 +24,29 @@ class ResourceService {
 
     /**
      * rule1: 选择中文字幕的资源
-     * rule2: 选择更高清的资源
+     * rule2: 选择更高清的资源(TODO)
      */
     private fun chooseEpisode(episodes: List<ResourceEpisode>): ResourceEpisode {
-        // TODO
-        return episodes[0]
+        val filteredEpisodes = episodes.filter { containsChinese(it.name) }
+        var theChosenOne = episodes[0]
+        if (filteredEpisodes.size > 1) {
+            theChosenOne = filteredEpisodes[0]
+            logger.info("Multi Resource Found After Filter: ${theChosenOne.resourceId}")
+            filteredEpisodes.forEach {
+                logger.info("${theChosenOne.resourceId} - ${it.name}")
+            }
+        } else if (filteredEpisodes.size == 1) {
+            theChosenOne = filteredEpisodes[0]
+        }
+        return theChosenOne
+    }
+
+    private fun containsChinese(str: String): Boolean {
+        str.toCharArray().forEach {
+            if (it >= 0x4E00.toChar() && it <= 0x9FA5.toChar()) {
+                return true
+            }
+        }
+        return false
     }
 }
