@@ -122,9 +122,15 @@ class ZiMuZu {
             val id = episodeElement.elementTextTrim("guid")
             val name = episodeElement.elementTextTrim("title")
 
-            val meta = """[Ss](\d{1,3})[Ee](\d{1,3})""".toRegex().find(name)!!.groupValues
-            val season = meta[1].toInt()
-            val episode = meta[2].toInt()
+            var season = 1
+            var episode = 1
+            try {
+                val meta = """[Ss](\d{1,3})[Ee](\d{1,3})""".toRegex().find(name)!!.groupValues
+                season = meta[1].toInt()
+                episode = meta[2].toInt()
+            } catch (ex: KotlinNullPointerException) {
+                logger.error("can not determine 'season' and 'episode' from $name")
+            }
 
             // eg. Mon, 29 May 2017 21:50:32 +0800
             val formatter = DateTimeFormatter.ofPattern("EEE, d MMM y HH:mm:ss Z", Locale.ENGLISH)
