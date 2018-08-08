@@ -29,13 +29,13 @@ class ZiMuZu {
 
     companion object : KLogging()
 
-    private val host = "http://www.zimuzu.tv"
+    private val host = "http://www.zimuzu.io"
 
     @Autowired
     private lateinit var restTemplate: RestTemplate
 
     fun search(keyword: String): List<ResourceInfo> {
-        val url = "http://www.zimuzu.tv/search/api?keyword=$keyword&type=resource"
+        val url = "http://www.zimuzu.io/search/api?keyword=$keyword&type=resource"
         val responseJson = restTemplate.getForObject(url, JSONObject::class.java)
 
         val dataList = responseJson!!.optJSONArray("data") ?: return emptyList()
@@ -75,7 +75,7 @@ class ZiMuZu {
 
     fun detail(resourceId: String): ResourceDetail {
         val detailDataFuture = CompletableFuture.supplyAsync {
-            val url = "http://www.zimuzu.tv/resource/index_json/rid/$resourceId/channel/tv"
+            val url = "http://www.zimuzu.io/resource/index_json/rid/$resourceId/channel/tv"
             val responseData = restTemplate.getForObject(url, String::class.java)
 
             // "var index_info={..." => "{..."
@@ -83,13 +83,13 @@ class ZiMuZu {
         }
 
         val scoreDataFuture = CompletableFuture.supplyAsync {
-            val url = "http://www.zimuzu.tv/resource/getScore"
+            val url = "http://www.zimuzu.io/resource/getScore"
             val formMap = LinkedMultiValueMap<String, String>()
             formMap.add("rid", resourceId)
             restTemplate.postForObject(url, HttpEntity(formMap, HttpHeaders()), JSONObject::class.java)
         }
 
-        val doc = Jsoup.connect("http://www.zimuzu.tv/resource/$resourceId").get()
+        val doc = Jsoup.connect("http://www.zimuzu.io/resource/$resourceId").get()
         val rssLink = doc.select(".resource-tit h2 a").attr("href")
         val cnName = StringUtils.substringBefore(doc.select(".resource-tit h2").html(), "<")
         val enName = doc.select(".resource-con .fl-info li")[0].select("strong").text()
