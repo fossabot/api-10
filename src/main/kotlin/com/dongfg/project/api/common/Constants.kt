@@ -10,7 +10,7 @@ interface Constants {
     }
 
     enum class RateLimitKey {
-        MESSAGE,RESOURCE
+        MESSAGE, RESOURCE
     }
 
     enum class JobAction {
