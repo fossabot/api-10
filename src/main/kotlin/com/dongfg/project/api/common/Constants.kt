@@ -13,15 +13,9 @@ interface Constants {
         MESSAGE, RESOURCE
     }
 
-    enum class JobAction {
-        PAUSE, RESUME, REMOVE, TRIGGER
-    }
-
     class AuthHeader {
         companion object {
-            const val TOTP = "x-auth-totp"
-            const val WECHAT = "x-auth-wechat"
-            const val ADMIN = "x-auth-admin"
+            const val TOTP = "X-Auth-Totp"
         }
     }
 

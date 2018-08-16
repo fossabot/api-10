@@ -1,6 +1,7 @@
 package com.dongfg.project.api.common.config
 
 import com.dongfg.project.api.common.property.ApiProperty
+import com.dongfg.project.api.web.filter.TotpAuthFilter
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.fasterxml.jackson.databind.ObjectMapper
 import mu.KLogging
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -49,6 +51,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     .antMatchers(HttpMethod.OPTIONS).permitAll()
                     .anyRequest().permitAll()
                 .and()
+                    .addFilterBefore(TotpAuthFilter(objectMapper), FilterSecurityInterceptor::class.java)
                     .exceptionHandling()
                     .authenticationEntryPoint { _, response, _ ->
                         sendResponse(response, GenericPayload(false, msg = "未授权的访问"), status = HttpServletResponse.SC_FORBIDDEN) }
