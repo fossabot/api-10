@@ -8,13 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
-import org.springframework.session.data.mongo.config.annotation.web.http.EnableMongoHttpSession
 
 @EnableJpaRepositories(basePackages = ["com.dongfg.project.api.repository"],
         includeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = [(JpaRepository::class)])])
 @EnableMongoRepositories(basePackages = ["com.dongfg.project.api.repository"],
         includeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = [(MongoRepository::class)])])
-@EnableMongoHttpSession
 @SpringBootApplication
 class DongfgApiApplication
 
