@@ -1,6 +1,7 @@
 package com.dongfg.project.api.web.graphql.resolver
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver
+import com.dongfg.project.api.component.Totp
 import com.dongfg.project.api.model.Message
 import com.dongfg.project.api.service.MessageService
 import com.dongfg.project.api.web.payload.GenericPayload
@@ -13,6 +14,10 @@ class MessageResolver : GraphQLMutationResolver {
     private lateinit var messageService: MessageService
 
     fun messageSend(totpCode: String, message: Message): GenericPayload {
-        return messageService.sendMessage(totpCode, message)
+        Totp.validate(totpCode) {
+            return@validate GenericPayload(false, msg = it)
+        }
+
+        return messageService.sendMessage(message)
     }
 }
