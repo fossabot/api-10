@@ -38,7 +38,7 @@ SPRING_PROFILES_ACTIVE=dev ./gradlew bootRun
 ## Built With
 * [Kotlin](https://kotlinlang.org/) - kotlin programming language
 * [Spring Boot](https://projects.spring.io/spring-boot/) - The base framework
-* [Graphql SPec](https://graphql.org/), [Graphql-java](https://github.com/graphql-java/graphql-java)  - API framework
+* [Graphql Spec](https://graphql.org/), [Graphql-java](https://github.com/graphql-java/graphql-java)  - API framework
 
 ## License
 The MIT License (MIT)
