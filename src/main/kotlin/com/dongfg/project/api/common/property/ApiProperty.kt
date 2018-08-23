@@ -21,8 +21,6 @@ class ApiProperty {
 
     var totp = Totp()
 
-    var wechat = Wechat()
-
     var push = Push()
 
     var jwt = Jwt()
@@ -40,13 +38,6 @@ class ApiProperty {
     }
 
     inner class Totp {
-
-        lateinit var secret: String
-    }
-
-    inner class Wechat {
-
-        lateinit var appid: String
 
         lateinit var secret: String
     }
