@@ -3,7 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <springProperty scope="context" name="appName" source="spring.application.name"/>
-    <property name="basePath" value="/tmp/logs/${appName}"/>
+    <property name="basePath" value="/var/log/apps/${appName}"/>
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%clr(%5p)] [%thread] %logger{36} - %msg%n</pattern>
