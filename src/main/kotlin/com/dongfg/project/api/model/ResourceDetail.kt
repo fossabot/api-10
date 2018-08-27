@@ -12,21 +12,21 @@ data class ResourceDetail(
         @ApiModelProperty("剧集ID")
         val id: String,
         @ApiModelProperty("封面图片")
-        val poster: String,
+        var poster: String? = null,
         @ApiModelProperty("rss地址")
-        val rssLink: String,
+        var rssLink: String? = null,
         @ApiModelProperty("译名")
-        val cnName: String,
+        var cnName: String? = null,
         @ApiModelProperty("原名")
-        val enName: String,
+        var enName: String? = null,
         @ApiModelProperty("连载状态")
-        val playStatus: String,
+        var playStatus: String? = null,
         @ApiModelProperty("地区")
-        val area: String,
+        var area: String? = null,
         @ApiModelProperty("类型")
-        val category: String,
+        var category: String? = null,
         @ApiModelProperty("评分人数")
-        val scoreCount: Int,
+        var scoreCount: Int? = null,
         @ApiModelProperty("评分详情(从5到1)")
-        val scoreDetail: List<Int>
+        var scoreDetail: List<Int>? = null
 )

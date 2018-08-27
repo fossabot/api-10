@@ -17,13 +17,13 @@ data class ResourceEpisode(
         @ApiModelProperty("剧集名称")
         val name: String,
         @ApiModelProperty("季")
-        val season: Int,
+        var season: Int? = null,
         @ApiModelProperty("集")
-        val episode: Int,
+        var episode: Int? = null,
         @ApiModelProperty("电驴下载地址")
-        val ed2k: String?,
+        var ed2k: String? = null,
         @ApiModelProperty("磁力下载地址")
-        val magnet: String?,
+        var magnet: String? = null,
         @ApiModelProperty("发布时间")
-        val publishTime: LocalDateTime
+        var publishTime: LocalDateTime? = null
 )

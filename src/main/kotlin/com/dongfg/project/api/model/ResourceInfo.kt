@@ -11,15 +11,15 @@ import java.time.LocalDateTime
 data class ResourceInfo(
         @Id
         @ApiModelProperty("剧集ID")
-        val id: String,
+        var id: String? = null,
         @ApiModelProperty("剧集名称")
-        val name: String,
+        var name: String? = null,
         @ApiModelProperty("剧集链接")
-        val link: String,
+        var link: String? = null,
         @ApiModelProperty("封面图片")
-        val poster: String,
+        var poster: String? = null,
         @ApiModelProperty("发布时间")
-        val publishTime: LocalDateTime,
+        var publishTime: LocalDateTime? = null,
         @ApiModelProperty("更新时间")
-        val updateTime: LocalDateTime
+        var updateTime: LocalDateTime? = null
 )
