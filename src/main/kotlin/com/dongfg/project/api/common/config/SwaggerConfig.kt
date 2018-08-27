@@ -39,9 +39,9 @@ class SwaggerConfig {
 
     private fun apiInfo(): ApiInfo {
         return ApiInfoBuilder()
-                .title("dongfg's rest api")
-                .contact(Contact("dongfg", "https://dongfg.com", "mail#dongfg.com"))
-                .version(apiProperty.version)
-                .build()
+            .title("dongfg's rest api")
+            .contact(Contact("dongfg", "https://dongfg.com", "mail#dongfg.com"))
+            .version(apiProperty.version)
+            .build()
     }
 }

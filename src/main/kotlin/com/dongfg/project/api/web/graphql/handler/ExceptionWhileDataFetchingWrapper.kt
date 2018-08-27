@@ -6,8 +6,8 @@ import graphql.ExceptionWhileDataFetching
 import graphql.execution.ExecutionPath
 import graphql.language.SourceLocation
 
-class ExceptionWhileDataFetchingWrapper(path: ExecutionPath?, exception: Throwable?, sourceLocation: SourceLocation?)
-    : ExceptionWhileDataFetching(path, exception, sourceLocation) {
+class ExceptionWhileDataFetchingWrapper(path: ExecutionPath?, exception: Throwable?, sourceLocation: SourceLocation?) :
+    ExceptionWhileDataFetching(path, exception, sourceLocation) {
 
     @JsonIgnore
     override fun getErrorType(): ErrorType {

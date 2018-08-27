@@ -55,7 +55,7 @@ class TinyTinyRss {
         })
 
         val categories = objectMapper.convertValue<List<Category>>(responseJson?.getJSONArray("content"),
-                object : TypeReference<List<Category>>() {})
+            object : TypeReference<List<Category>>() {})
 
         return categories.filter { it.id != "-1" }
     }
@@ -68,7 +68,7 @@ class TinyTinyRss {
         })
 
         return objectMapper.convertValue<List<Feed>>(responseJson?.getJSONArray("content"),
-                object : TypeReference<List<Feed>>() {})
+            object : TypeReference<List<Feed>>() {})
     }
 
     fun subscribeToFeed(url: String, categoryId: String): JSONObject? {
@@ -95,7 +95,8 @@ class TinyTinyRss {
             "sid" to sessionId
         }
 
-        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
+        val responseJson =
+            restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
         val isLoggedIn = responseJson!!.getJSONObject("content").getBoolean("status")
 
         if (!isLoggedIn) {
@@ -106,7 +107,8 @@ class TinyTinyRss {
     }
 
     private fun getJsonResponse(requestJson: Json): JSONObject? {
-        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
+        val responseJson =
+            restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
         logger.info(responseJson.toString())
         return responseJson
     }

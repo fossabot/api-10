@@ -23,29 +23,30 @@ class GraphqlConfig {
         return GraphqlDate()
     }
 
-    inner class GraphqlDate : GraphQLScalarType("LocalDateTime", "Java8 DateTime Type", object : Coercing<LocalDateTime, String> {
-        override fun serialize(dataFetcherResult: Any): String {
-            if (dataFetcherResult is LocalDateTime) {
-                return DateTimeFormatter.ofPattern(DATE_TIME_FORMAT).format(dataFetcherResult)
-            }
-            throw CoercingSerializeException("Invalid value '$dataFetcherResult' for LocalDateTime")
-        }
-
-        override fun parseValue(input: Any): LocalDateTime? {
-            if (input is String) {
-                val date = LocalDateTime.parse(input, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT))
-                if (date != null) {
-                    return date
+    inner class GraphqlDate :
+        GraphQLScalarType("LocalDateTime", "Java8 DateTime Type", object : Coercing<LocalDateTime, String> {
+            override fun serialize(dataFetcherResult: Any): String {
+                if (dataFetcherResult is LocalDateTime) {
+                    return DateTimeFormatter.ofPattern(DATE_TIME_FORMAT).format(dataFetcherResult)
                 }
+                throw CoercingSerializeException("Invalid value '$dataFetcherResult' for LocalDateTime")
             }
-            throw CoercingParseValueException("Invalid value '$input' for LocalDateTime")
-        }
 
-        override fun parseLiteral(input: Any): LocalDateTime? {
-            if (input !is StringValue) {
-                return null
+            override fun parseValue(input: Any): LocalDateTime? {
+                if (input is String) {
+                    val date = LocalDateTime.parse(input, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT))
+                    if (date != null) {
+                        return date
+                    }
+                }
+                throw CoercingParseValueException("Invalid value '$input' for LocalDateTime")
             }
-            return LocalDateTime.parse(input.value, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT))
-        }
-    })
+
+            override fun parseLiteral(input: Any): LocalDateTime? {
+                if (input !is StringValue) {
+                    return null
+                }
+                return LocalDateTime.parse(input.value, DateTimeFormatter.ofPattern(DATE_TIME_FORMAT))
+            }
+        })
 }

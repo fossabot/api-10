@@ -48,9 +48,11 @@ class ZiMuZu {
                 id = item["itemid"].toString()
                 link = "$host/resource/$id"
                 val publishTimeStr = item["pubtime"].toString()
-                publishTime = Instant.ofEpochMilli(publishTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                publishTime = Instant.ofEpochMilli(publishTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
                 val updateTimeStr = item["uptime"].toString()
-                updateTime = Instant.ofEpochMilli(updateTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                updateTime = Instant.ofEpochMilli(updateTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
             }
         }.collect(Collectors.toList())
     }
@@ -66,9 +68,11 @@ class ZiMuZu {
                 // /resource/33701 -> 33701
                 id = link!!.substring(9)
                 val publishTimeStr = it.select(".fl-info .f4").text()
-                publishTime = Instant.ofEpochMilli(publishTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                publishTime = Instant.ofEpochMilli(publishTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
                 val updateTimeStr = it.select(".fl-info .f1").text()
-                updateTime = Instant.ofEpochMilli(updateTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                updateTime = Instant.ofEpochMilli(updateTimeStr.toLong() * 1000).atZone(ZoneId.systemDefault())
+                    .toLocalDateTime()
             }
         }.collect(Collectors.toList())
     }
@@ -104,7 +108,9 @@ class ZiMuZu {
 
             val scoreData = scoreDataFuture.get()
             scoreCount = scoreData!!.getInt("score_counts")
-            scoreDetail = scoreData.getJSONObject("score_detail").toMap().toSortedMap(reverseOrder()).values.map { it as Int }.toList()
+            scoreDetail =
+                    scoreData.getJSONObject("score_detail").toMap().toSortedMap(reverseOrder()).values.map { it as Int }
+                        .toList()
         }
     }
 

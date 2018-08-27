@@ -14,9 +14,9 @@ import java.util.stream.Collectors
 class CustomGraphqlErrorHandler : DefaultGraphQLErrorHandler() {
     override fun filterGraphQLErrors(errors: List<GraphQLError>): List<GraphQLError> {
         return errors.stream()
-                .filter { e -> e is ExceptionWhileDataFetching || super.isClientError(e) }
-                .map { e -> if (e is ExceptionWhileDataFetching) wrapError(e) else e }
-                .collect(Collectors.toList())
+            .filter { e -> e is ExceptionWhileDataFetching || super.isClientError(e) }
+            .map { e -> if (e is ExceptionWhileDataFetching) wrapError(e) else e }
+            .collect(Collectors.toList())
     }
 
     private fun wrapError(error: GraphQLError): ExceptionWhileDataFetchingWrapper {

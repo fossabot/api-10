@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse
 class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     companion object : KLogging() {
         val AUTH_URL_LIST = arrayOf(
-                "/message/**"
+            "/message/**"
         )
     }
 
@@ -64,7 +64,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(web: WebSecurity) {
         web.ignoring()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
     }
 
     @Bean
@@ -80,7 +80,11 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         return configurationSource
     }
 
-    private fun sendResponse(response: HttpServletResponse, payload: GenericPayload, status: Int = HttpServletResponse.SC_OK) {
+    private fun sendResponse(
+        response: HttpServletResponse,
+        payload: GenericPayload,
+        status: Int = HttpServletResponse.SC_OK
+    ) {
         response.status = status
         response.addHeader("Content-type", MediaType.APPLICATION_JSON_UTF8.toString())
         objectMapper.writeValue(response.writer, payload)

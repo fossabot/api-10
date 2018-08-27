@@ -14,9 +14,13 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class TotpAuthFilter constructor(
-        private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper
 ) : OncePerRequestFilter() {
-    override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
+    override fun doFilterInternal(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain
+    ) {
         val authHeader = request.getHeader(Constants.AuthHeader.TOTP)
         if (!authHeader.isNullOrEmpty()) {
             if (Totp.validate(authHeader)) {

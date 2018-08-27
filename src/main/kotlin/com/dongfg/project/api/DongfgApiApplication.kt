@@ -9,10 +9,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
-@EnableJpaRepositories(basePackages = ["com.dongfg.project.api.repository"],
-        includeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = [(JpaRepository::class)])])
-@EnableMongoRepositories(basePackages = ["com.dongfg.project.api.repository"],
-        includeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = [(MongoRepository::class)])])
+@EnableJpaRepositories(
+    basePackages = ["com.dongfg.project.api.repository"],
+    includeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = [(JpaRepository::class)])]
+)
+@EnableMongoRepositories(
+    basePackages = ["com.dongfg.project.api.repository"],
+    includeFilters = [ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = [(MongoRepository::class)])]
+)
 @SpringBootApplication
 class DongfgApiApplication
 
