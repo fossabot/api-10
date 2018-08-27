@@ -1,6 +1,6 @@
 # [api.dongfg.com](https://api.dongfg.com)
 [![Build Status](https://travis-ci.org/dongfg/api.svg?branch=master)](https://travis-ci.org/dongfg/api)
-[![CircleCI](https://circleci.com/gh/dongfg/api.svg?style=svg)](https://circleci.com/gh/dongfg/api)
+[![codebeat badge](https://codebeat.co/badges/cf340d66-a053-4e3e-aac7-9d973d46ed63)](https://codebeat.co/projects/github-com-dongfg-api-master)
 
 my personal api build with spring boot 2 and kotlin
 
