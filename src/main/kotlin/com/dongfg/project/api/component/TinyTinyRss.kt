@@ -37,81 +37,58 @@ class TinyTinyRss {
      * login for sessionId
      */
     fun login(): String {
-        val requestJson = Json {
+        val responseJson = getJsonResponse(Json {
             "op" to "login"
             "user" to apiProperty.rss.user
             "password" to apiProperty.rss.password
-        }
+        })
 
-        val responseStr = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), String::class.java)
-        val responseJson = JSONObject(responseStr)
-
-        val sessionId = responseJson.getJSONObject("content").getString("session_id")
+        val sessionId = responseJson!!.getJSONObject("content").getString("session_id")
         stringRedisTemplate.opsForValue().set(Constants.RedisKey.RSS_SESSION_ID, sessionId)
         return sessionId
     }
 
     fun getCategories(): List<Category> {
-        val sessionId = getSessionId()
-        val requestJson = Json {
+        val responseJson = getJsonResponse(Json {
             "op" to "getCategories"
-            "sid" to sessionId
-        }
+            "sid" to getSessionId()
+        })
 
-        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
-                ?: return emptyList()
-        logger.info(responseJson.toString())
-
-        val categories = objectMapper.convertValue<List<Category>>(responseJson.getJSONArray("content"),
-                object : TypeReference<List<Category>>() {}) ?: return emptyList()
+        val categories = objectMapper.convertValue<List<Category>>(responseJson?.getJSONArray("content"),
+                object : TypeReference<List<Category>>() {})
 
         return categories.filter { it.id != "-1" }
     }
 
     fun getFeeds(categoryId: String): List<Feed> {
-        val sessionId = getSessionId()
-        val requestJson = Json {
+        val responseJson = getJsonResponse(Json {
             "op" to "getFeeds"
-            "sid" to sessionId
+            "sid" to getSessionId()
             "cat_id" to categoryId
-        }
+        })
 
-        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
-                ?: return emptyList()
-        logger.info(responseJson.toString())
-
-        return objectMapper.convertValue<List<Feed>>(responseJson.getJSONArray("content"),
-                object : TypeReference<List<Feed>>() {}) ?: return emptyList()
+        return objectMapper.convertValue<List<Feed>>(responseJson?.getJSONArray("content"),
+                object : TypeReference<List<Feed>>() {})
     }
 
-    fun subscribeToFeed(url: String, categoryId: String) {
-        val sessionId = getSessionId()
-        val requestJson = Json {
+    fun subscribeToFeed(url: String, categoryId: String): JSONObject? {
+        return getJsonResponse(Json {
             "op" to "subscribeToFeed"
-            "sid" to sessionId
+            "sid" to getSessionId()
             "feed_url" to url
             "category_id" to categoryId
-        }
-
-        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
-
-        println(responseJson.toString())
+        })
     }
 
-    fun unsubscribeFeed(feedId: String) {
-        val sessionId = getSessionId()
-        val requestJson = Json {
+    fun unsubscribeFeed(feedId: String): JSONObject? {
+        return getJsonResponse(Json {
             "op" to "unsubscribeFeed"
-            "sid" to sessionId
+            "sid" to getSessionId()
             "feed_id" to feedId
-        }
-
-        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
-
-        println(responseJson.toString())
+        })
     }
 
-    fun getSessionId(): String {
+    private fun getSessionId(): String {
         val sessionId = stringRedisTemplate.opsForValue().get(Constants.RedisKey.RSS_SESSION_ID)
         val requestJson = Json {
             "op" to "isLoggedIn"
@@ -126,6 +103,12 @@ class TinyTinyRss {
         }
 
         return sessionId!!
+    }
+
+    private fun getJsonResponse(requestJson: Json): JSONObject? {
+        val responseJson = restTemplate.postForObject(apiProperty.rss.apiUrl, requestJson.toString(), JSONObject::class.java)
+        logger.info(responseJson.toString())
+        return responseJson
     }
 
     data class Category(val id: String, var title: String, val unread: Int, var feeds: List<Feed>? = null)
