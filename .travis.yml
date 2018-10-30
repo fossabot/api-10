@@ -2,32 +2,33 @@ language: java
 
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
 
 install:
-  - sudo apt-get --yes install wget unzip
+- sudo apt-get --yes install wget unzip
 
 script:
-  - ./gradlew -x test clean bootjar
+- ./gradlew -x test clean bootjar
 
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 after_success:
-  - mkdir deploy && cp build/libs/*.jar deploy/
+- mkdir deploy && cp build/libs/*.jar deploy/
 
 before_deploy:
-  - wget http://devtools.qiniu.com/qshell-v2.1.8.zip && unzip qshell-v2.1.8.zip && chmod +x qshell-linux-x64
-  - ./qshell-linux-x64 account ${QINIU_AK} ${QINIU_SK}
+- wget https://github.com/dongfg/admin-api/releases/download/v1.0/qshell && chmod +x qshell
+- ./qshell account ${QINIU_AK} ${QINIU_SK}
 
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: ./qshell-linux-x64 fput dongfg dongfg-api.jar deploy/dongfg-api.jar true "application/java-archive" "http://up-z0.qiniup.com"
-    on:
-      branch: master
+- provider: script
+  skip_cleanup: true
+  script: ./qshell fput dongfg dongfg-api.jar deploy/dongfg-api.jar true "application/java-archive" "http://up-z0.qiniup.com"
+  on:
+    branch: master
 
 notifications:
-  webhooks: http://webhook.dongfg.com/travis
+  webhooks:
+  - http://webhook.dongfg.com/travis
