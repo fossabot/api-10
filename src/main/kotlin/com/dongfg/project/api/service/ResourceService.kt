@@ -1,7 +1,9 @@
 package com.dongfg.project.api.service
 
 import com.dongfg.project.api.component.ZiMuZu
+import com.dongfg.project.api.model.ResourceDetail
 import com.dongfg.project.api.model.ResourceEpisode
+import com.dongfg.project.api.model.ResourceInfo
 import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,6 +14,14 @@ class ResourceService {
 
     @Autowired
     private lateinit var ziMuZu: ZiMuZu
+
+    fun search(keyword: String): List<ResourceInfo> {
+        return ziMuZu.search(keyword)
+    }
+
+    fun detail(resourceId: String): ResourceDetail {
+        return ziMuZu.detail(resourceId)
+    }
 
     fun episodes(resourceId: String): List<ResourceEpisode> {
         // season+episode to list
