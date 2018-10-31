@@ -6,27 +6,13 @@ my personal api build with spring boot 2 and kotlin
 
 
 ## Prerequisites
-For security, i did not commit all config files. This is my config structure:
-```shell
-$ pwd
-~/Projects/java/api/src/main/resources
+Spring Cloud Config or you can put config under `resources`
+Config File :
+- add datasource config
+- add mongodb config
+- add redis config
+- add `api` config, structure must match `com.dongfg.project.api.common.property.ApiProperty`
 
-$ tree -L 1 config
-config
-├── application-dev.yml
-├── application-external.yml
-├── application-prd.yml
-└── application.yml
-
-0 directories, 4 files
-
-```
-Explanation: 
-* application.yml - common config
-* application-dev/prd.yml - mysql, redis, mongo config
-* application-external.yml - secret config (ApiProperty and spring security user)
-
-> **ddl.sql located in doc folder**
 
 ## How to run
 This is a springboot gradle project, just:

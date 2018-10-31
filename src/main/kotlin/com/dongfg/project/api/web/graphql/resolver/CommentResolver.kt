@@ -21,7 +21,7 @@ class CommentResolver : GraphQLQueryResolver, GraphQLMutationResolver {
 
     fun commentCreate(input: Comment, env: DataFetchingEnvironment): GenericPayload {
         val context = env.getContext<GraphQLContext>()
-        input.clientIp = context.request.get().remoteAddr
+        input.clientIp = context.httpServletRequest.get().remoteAddr
         return commentService.createComment(input)
     }
 }

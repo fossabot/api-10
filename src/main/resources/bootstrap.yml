@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: dongfg-api
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      profile: dev
+      uri: https://config.dongfg.com
+      username: ${CONFIG_SERVER_USERNAME}
+      password: ${CONFIG_SERVER_PASSWORD}
+
+---
+spring:
+  profiles: prd
+  cloud:
+    config:
+      profile: prd
+      uri: https://config.dongfg.com
+      username: ${CONFIG_SERVER_USERNAME}
+      password: ${CONFIG_SERVER_PASSWORD}

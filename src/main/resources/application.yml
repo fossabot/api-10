@@ -1,12 +1,3 @@
-spring:
-  application:
-      name: dongfg-api
-  quartz:
-    job-store-type: jdbc
-    jdbc:
-      initialize-schema: never
-  jpa:
-    open-in-view: false
 management:
   endpoint:
     health:
