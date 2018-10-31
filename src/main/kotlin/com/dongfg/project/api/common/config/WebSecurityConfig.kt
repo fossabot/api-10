@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
@@ -38,9 +37,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
-
-    @Autowired
-    private lateinit var userDetailsService: UserDetailsService
 
     override fun configure(http: HttpSecurity) {
         // @formatter:off
@@ -76,7 +72,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         configuration.allowedOrigins = arrayListOf(apiProperty.admin.url)
 
         val configurationSource = UrlBasedCorsConfigurationSource()
-        configurationSource.registerCorsConfiguration("/admin/**", configuration)
+        configurationSource.registerCorsConfiguration("/**", configuration)
         return configurationSource
     }
 
