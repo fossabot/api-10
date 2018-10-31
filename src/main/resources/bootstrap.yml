@@ -15,6 +15,12 @@ spring:
 
 ---
 spring:
+  profiles: test
+  cloud:
+    config:
+      enabled: false
+---
+spring:
   profiles: prd
   cloud:
     config:
