@@ -81,7 +81,6 @@ dependencies {
     compile("com.fasterxml.jackson.module:jackson-modules-java8:2.9.7")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-json-org:2.9.7")
     compile('com.fasterxml.jackson.module:jackson-module-kotlin')
-    compile('org.json:json:20180813')
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compile("org.jetbrains.kotlin:kotlin-reflect")
 
@@ -112,5 +111,7 @@ dependencies {
 
     kapt('org.springframework.boot:spring-boot-configuration-processor')
 
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'com.vaadin.external.google', module: 'android-json'
+    }
 }
