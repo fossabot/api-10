@@ -114,4 +114,5 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'com.vaadin.external.google', module: 'android-json'
     }
+    testCompile('io.mockk:mockk:1.8.10.kotlin13')
 }
