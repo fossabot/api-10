@@ -1,6 +1,5 @@
 package com.dongfg.project.api.common.config
 
-import com.dongfg.project.api.common.property.ApiProperty
 import com.dongfg.project.api.web.filter.TotpAuthFilter
 import com.dongfg.project.api.web.payload.GenericPayload
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -31,9 +30,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             "/message/**"
         )
     }
-
-    @Autowired
-    private lateinit var apiProperty: ApiProperty
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
@@ -69,7 +65,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         configuration.allowCredentials = true
         configuration.allowedMethods = arrayListOf("*")
         configuration.allowedHeaders = arrayListOf("*")
-        configuration.allowedOrigins = arrayListOf(apiProperty.admin.url)
+        configuration.allowedOrigins = arrayListOf("*")
 
         val configurationSource = UrlBasedCorsConfigurationSource()
         configurationSource.registerCorsConfiguration("/**", configuration)
