@@ -1,6 +1,6 @@
 package com.dongfg.project.api.repository
 
-import com.dongfg.project.api.MongoTestConfig
+import com.dongfg.project.api.TestConfig
 import com.dongfg.project.api.model.Comment
 import graphql.Assert
 import org.junit.Test
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @DataMongoTest
-@Import(MongoTestConfig::class)
+@Import(TestConfig::class)
 @ActiveProfiles("test")
 class CommentRepositoryTest {
     @Autowired

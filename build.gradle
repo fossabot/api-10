@@ -117,4 +117,5 @@ dependencies {
     testCompile('io.mockk:mockk:1.8.10.kotlin13')
     testCompile('com.h2database:h2')
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
+    testCompile('com.github.kstyrc:embedded-redis:0.6')
 }

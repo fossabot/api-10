@@ -11,18 +11,12 @@ class ApiProperty {
 
     lateinit var url: String
 
-    var admin = Admin()
-
     var sms = Sms()
 
     var totp = Totp()
 
     var rss = Rss()
-
-    inner class Admin {
-        lateinit var url: String
-    }
-
+    
     inner class Sms {
         lateinit var secret: String
     }
