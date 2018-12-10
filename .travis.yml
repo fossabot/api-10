@@ -16,7 +16,7 @@ before_cache:
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 
 after_success:
-- mkdir deploy && cp build/libs/*.jar deploy/
+- mkdir deploy && cp build/libs/*.jar deploy/dongfg-api.jar
 
 before_deploy:
 - wget https://github.com/dongfg/admin-api/releases/download/v1.0/qshell && chmod +x qshell
