@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  admin-api:
+    image: registry-vpc.cn-hangzhou.aliyuncs.com/dongfg/dongfg-api
+    container_name: dongfg-api
+    restart: always
+    env_file:
+      - ../config-server.env
+    environment:
+      - SPRING_PROFILES_ACTIVE=prd
+    ports:
+      - 20000:20000
+    volumes:
+      - ./logs:/var/log/apps/dongfg-api
