@@ -24,7 +24,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.github.ben-manes.versions'
 
 group = 'com.dongfg.project'
-version = '2.1.2'
+version = '2.1.3'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
