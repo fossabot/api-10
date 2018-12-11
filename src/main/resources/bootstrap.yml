@@ -19,6 +19,17 @@ spring:
   cloud:
     config:
       enabled: false
+
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      profile: docker
+      uri: https://config.dongfg.com
+      username: ${CONFIG_SERVER_USERNAME}
+      password: ${CONFIG_SERVER_PASSWORD}
+
 ---
 spring:
   profiles: prd
