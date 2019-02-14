@@ -1,6 +1,7 @@
 # [api.dongfg.com](https://api.dongfg.com)
 [![Build Status](https://travis-ci.org/dongfg/api.svg?branch=master)](https://travis-ci.org/dongfg/api)
 [![codebeat badge](https://codebeat.co/badges/cf340d66-a053-4e3e-aac7-9d973d46ed63)](https://codebeat.co/projects/github-com-dongfg-api-master)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdongfg%2Fapi.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdongfg%2Fapi?ref=badge_shield)
 
 my personal api build with spring boot 2 and kotlin
 
@@ -48,3 +49,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdongfg%2Fapi.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdongfg%2Fapi?ref=badge_large)
